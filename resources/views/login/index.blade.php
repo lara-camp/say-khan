@@ -1,6 +1,3 @@
-<!-- @extends('layouts.master') -->
-
-<!-- @section('content') -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,7 +80,7 @@
             <div class="w-full h-14 bg-purple bg-transparent border-2 border-white p-4 pl-20  tracking-widest rounded-xl ">
                 Sign In With Facebook
             </div>
-            <!-- <input type="none" placeholder="Sign In With Facebook"  class="w-full h-14 bg-purple bg-transparent border-2 border-white p-4 pl-20  tracking-widest rounded-xl focus:border-black placeholder-white"> -->
+            <input type="none" placeholder="Sign In With Facebook"  class="w-full h-14 bg-purple bg-transparent border-2 border-white p-4 pl-20  tracking-widest rounded-xl focus:border-black placeholder-white">
           </div>
           
         </div>
@@ -92,5 +89,6 @@
             <a href="" class="text-b2">Create One</a>
         </div>
       </div>
-
-<!-- @endsection -->
+  </div>
+</body>
+</html>
