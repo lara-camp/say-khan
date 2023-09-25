@@ -12,7 +12,7 @@
     <div class="flex w-full h-screen justify-center bg-purple flex-col items-center">
         <div class=" max-w-md w-auto min-w-fit">
             <div class="flex justify-center">
-                <h1 class="font-bold text-h1 py-2 text-white ">Welcome</h1>
+                <h1 class="font-bold text-h0 py-2 text-white ">Welcome</h1>
             </div>
             <div class="w-80  mb-5 min-w-fit">
                 <div class="py-2">
@@ -25,7 +25,7 @@
                         </svg>
                     </div>
                     <input type="text" placeholder="Username"
-                        class="w-full h-12 bg-purple bg-transparent border-2 border-white p-4 pl-20 text-b1  tracking-widest rounded-xl focus:border-black placeholder-white">
+                        class="w-full h-12 bg-purple bg-transparent border-2 font-thin border-white p-4 pl-20 text-b1  tracking-widest rounded-xl focus:border-black placeholder-white">
                 </div>
                 <div class="py-2">
                     <div class="absolute">
@@ -44,7 +44,7 @@
                         </svg>
                     </div>
                     <input type="password" placeholder="Password"
-                        class="w-full h-12 bg-purple bg-transparent border-2 border-white p-4 pl-20 text-b1 tracking-widest rounded-xl focus:border-black placeholder-white">
+                        class="w-full h-12 bg-purple bg-transparent  border-2 border-white p-4 pl-20 text-b1 tracking-widest rounded-xl focus:border-black placeholder-white">
                 </div>
                 <div class="py-2">
                     <button
@@ -54,7 +54,7 @@
                     <h1 class="float-right text-white text-b2">Forgot Password?</h1>
                 </div>
             </div>
-            <div class=" bg-white h-1 ">
+            <div class=" bg-white h-0.5 ">
             </div>
             <div class=" my-1">
                 <div class="py-2">
@@ -82,8 +82,10 @@
                             </defs>
                         </svg>
                     </div>
-                    <input type="text" placeholder="Sign In With Google"
-                        class="w-full h-14 bg-purple bg-transparent border-2 border-white p-4 pl-20  tracking-widest rounded-xl focus:border-black placeholder-white">
+                    <div
+                        class="w-full h-14 bg-purple bg-transparent border-2 border-white p-4 pl-20 text-b1  tracking-widest rounded-xl text-white cursor-pointer">
+                        Sign In With Google
+                    </div>
                 </div>
                 <div class="py-2">
                     <div class="absolute">
@@ -102,10 +104,9 @@
                         </svg>
                     </div>
                     <div
-                        class="w-full h-14 bg-purple bg-transparent border-2 border-white p-4 pl-20  tracking-widest rounded-xl ">
+                        class="w-full h-14 bg-purple bg-transparent border-2 border-white p-4 pl-20 text-b1 text-white  tracking-widest rounded-xl cursor-pointer">
                         Sign In With Facebook
                     </div>
-                    <!-- <input type="none" placeholder="Sign In With Facebook"  class="w-full h-14 bg-purple bg-transparent border-2 border-white p-4 pl-20  tracking-widest rounded-xl focus:border-black placeholder-white"> -->
                 </div>
 
             </div>
