@@ -12,7 +12,8 @@
     <div class="flex bg-white h-screen justify-between items-center p-20 w-full   ">
         <div class="flex items-start  justify-around w-full">
             <div class="w-1/3 bg-white flex justify-center items-center flex-col">
-                <div class="w-72 h-72 bg-purple rounded-full"></div>
+                <div class="w-72 h-72 bg-purple rounded-full">
+                </div>
                 <div class="p-5 font-bold text-b1 tracking-widest text-gray">Upload Profile Picture</div>
             </div>
             <div class="w-2/3 ">
