@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.master')
+@section('title', 'Login')
+@section('content')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
+<form class="login-form"  action="{{route('user.create')}}"  method="POST">
+    @csrf
     <div class="flex w-full h-screen justify-center bg-purple flex-col items-center">
         <div class=" max-w-md w-auto min-w-fit">
             <div class="flex justify-center">
@@ -24,7 +19,7 @@
                                 fill="#EEEEEE" />
                         </svg>
                     </div>
-                    <input type="text" placeholder="Username"
+                    <input type="email" name="email"  value="{{old("email")}}" placeholder="Email" required
                         class="w-full h-12 bg-purple bg-transparent border-2 font-thin border-white p-4 pl-20 text-b1  tracking-widest rounded-xl focus:border-black placeholder-white">
                 </div>
                 <div class="py-2">
@@ -43,17 +38,25 @@
                             </defs>
                         </svg>
                     </div>
-                    <input type="password" placeholder="Password"
+                    <input type="password" placeholder="Password" name="password" required
                         class="w-full h-12 bg-purple bg-transparent  border-2 border-white p-4 pl-20 text-b1 tracking-widest rounded-xl focus:border-black placeholder-white">
                 </div>
                 <div class="py-2">
                     <button
                         class="w-full h-12  bg-blue text-white text-b4 font-bold rounded-xl focus:border-black">Login</button>
                 </div>
-                <div class="py-1  ">
+                {{-- <div class="py-1  ">
                     <h1 class="float-right text-white text-b2">Forgot Password?</h1>
+                </div> --}}
+                  
+                <div class="py-1">
+                    <p>
+                        Don't you have account?
+                        <a href="{{route('user#register')}}">Sign Up Here</a>
+                    </p>
                 </div>
             </div>
+
             <div class=" bg-white h-0.5 ">
             </div>
             <div class=" my-1">
@@ -84,7 +87,7 @@
                     </div>
                     <div
                         class="w-full h-14 bg-purple bg-transparent border-2 border-white p-4 pl-20 text-b1  tracking-widest rounded-xl text-white cursor-pointer">
-                        Sign In With Google
+                            <a href="{{ route('user#roleSelect', ['provider' => 'google']) }}">Google</a>
                     </div>
                 </div>
                 <div class="py-2">
@@ -105,16 +108,16 @@
                     </div>
                     <div
                         class="w-full h-14 bg-purple bg-transparent border-2 border-white p-4 pl-20 text-b1 text-white  tracking-widest rounded-xl cursor-pointer">
-                        Sign In With Facebook
+                        <a href="{{ route('user#roleSelect', ['provider' => 'facebook']) }}"> Facebook</a></button>
                     </div>
                 </div>
 
             </div>
-            <div class="py-1 flex justify-center items-center gap-2 ">
+        </form> 
+            {{-- <div class="py-1 flex justify-center items-center gap-2 ">
                 <h1 class=" text-gray text-b2 ">No Account? </h1>
                 <a href="" class="text-b2">Create One</a>
-            </div>
+            </div> --}}
         </div>
-</body>
+        @endsection
 
-</html>
