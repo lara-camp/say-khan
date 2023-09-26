@@ -2,6 +2,14 @@
 @section('title', 'Login')
 @section('content')
 
+
+@if (session('error'))
+<p style="color: red">{{ session('error') }}</p>
+@endif
+@if (session('success'))
+<p style="color:green">{{ session('success') }}</p>
+@endif
+
 <form class="login-form"  action="{{route('user.create')}}"  method="POST">
     @csrf
     <div class="flex w-full h-screen justify-center bg-purple flex-col items-center">
@@ -21,7 +29,10 @@
                     </div>
                     <input type="email" name="email"  value="{{old("email")}}" placeholder="Email" required
                         class="w-full h-12 bg-purple bg-transparent border-2 font-thin border-white p-4 pl-20 text-b1  tracking-widest rounded-xl focus:border-black placeholder-white">
-                </div>
+                        @error('email')
+                        <small style="color: red">{{ $message }}</small>
+                         @enderror
+                    </div>
                 <div class="py-2">
                     <div class="absolute">
                         <svg xmlns="http://www.w3.org/2000/svg" width="41" height="42" viewBox="0 0 41 42"
@@ -40,19 +51,24 @@
                     </div>
                     <input type="password" placeholder="Password" name="password" required
                         class="w-full h-12 bg-purple bg-transparent  border-2 border-white p-4 pl-20 text-b1 tracking-widest rounded-xl focus:border-black placeholder-white">
-                </div>
+                        @error('password')
+                        <small style="color: red">{{ $message }}</small>
+                         @enderror
+                    </div>
                 <div class="py-2">
                     <button
                         class="w-full h-12  bg-blue text-white text-b4 font-bold rounded-xl focus:border-black">Login</button>
                 </div>
                 {{-- <div class="py-1  ">
-                    <h1 class="float-right text-white text-b2">Forgot Password?</h1>
+                    <h1  @error('password_confirmation')
+                        <small style="color: red">{{ $message }}</small>
+                         @enderror>Forgot Password?</h1>
                 </div> --}}
                   
                 <div class="py-1">
                     <p>
                         Don't you have account?
-                        <a href="{{route('user#register')}}">Sign Up Here</a>
+                        <a href="">Sign Up Here</a>
                     </p>
                 </div>
             </div>
@@ -120,4 +136,6 @@
             </div> --}}
         </div>
         @endsection
+
+
 
