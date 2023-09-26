@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Route;
 //login
 Route::get('/',[LoginController::class, 'login'])->name('user.login');
 Route::post('/login',[LoginController::class, 'create'])->name('user.create');
-// //register
+// // //register
 // Route::get('register', [RegisterController::class, 'register'])->name('user#register');
 // Route::post('register', [RegisterController::class, 'create'])->name('user#create');
 
-// Route::get('register/{provider}/role', [SocialController::class, 'roleSelect'])->name('user#roleSelect');
-// Route::get('register/social', [SocialController::class, 'socialPage'])->name('user#socialPage');
-// Route::get('register/{provider}/callback', [SocialController::class, 'socialCallBack'])->name('user#socialCallBack');
+Route::get('login/{provider}/role', [SocialController::class, 'roleSelect'])->name('user#roleSelect');
+Route::get('login/social', [SocialController::class, 'socialPage'])->name('user#socialPage');
+Route::get('login/{provider}/callback', [SocialController::class, 'socialCallBack'])->name('user#socialCallBack');
