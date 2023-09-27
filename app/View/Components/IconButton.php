@@ -12,13 +12,15 @@ class IconButton extends Component
      * @return void
      */
 
+    public $action;
     public $icon;
     public $text;
     public $bgColor;
     public $textColor;
 
-    public function __construct($icon, $text, $bgColor, $textColor)
+    public function __construct($action, $icon, $text, $bgColor, $textColor)
     {
+        $this->action = $action;
         $this->icon = $icon;
         $this->text = $text;
         $this->bgColor = $bgColor;
