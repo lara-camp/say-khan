@@ -24,6 +24,10 @@
                         <a class="nav-link" href="{{ route('admin.clinicList') }}">Clinic</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('role.index') }}">Role</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="#">Subscription</a>
                     </li>
                 </ul>
