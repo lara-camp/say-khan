@@ -9,4 +9,8 @@ interface ClinicInterface
     public function all();
 
     public function store(Request $request);
+
+    public function edit($id);
+
+    public function delete($id);
 }

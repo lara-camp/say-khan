@@ -21,7 +21,19 @@ class ClinicRepository implements ClinicInterface
     {
         $this->validateCreateData($request);
         $data = $this->getCreateData($request);
-        dd($data);
+        return Clinic::create($data);
+    }
+
+    public function edit($id)
+    {
+        $decryptId = decrypt($id);
+        dd($decryptId);
+    }
+
+    public function delete($id)
+    {
+        $decryptId = decrypt($id);
+        return Clinic::find($decryptId)->delete();
     }
 
     // exported function

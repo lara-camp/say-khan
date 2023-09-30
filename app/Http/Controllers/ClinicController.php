@@ -24,4 +24,22 @@ class ClinicController extends Controller
     {
         return view("Admin.clinic.create");
     }
+
+    public function store(Request $request)
+    {
+        $this->clinic->store($request);
+
+        return redirect()->route('admin.clinicList')->with(['success' => 'Clinic Was Successfully Created.']);
+    }
+
+    public function edit($id)
+    {
+        $this->clinic->edit($id);
+    }
+
+    public function delete($id)
+    {
+        $this->clinic->delete($id);
+        return back()->with(['success' => 'Item was Deleted.']);
+    }
 }

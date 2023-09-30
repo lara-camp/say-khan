@@ -4,7 +4,15 @@
 
 @section('content')
 <div class="container ">
-    <h1 class="text-center my-5">Clinic Lists</h1>
+    <h1 class="text-center mt-2">Clinic Lists</h1>
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ session('success') }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+
+    @endif
     <div class="pb-3">
         <a href="{{ route('admin.clinicCreate') }}"><button class="btn btn-primary">Create Clinic</button></a>
     </div>
@@ -18,25 +26,19 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($clinics as $clinic)
             <tr>
-                <td>John Doe</td>
-                <td>123 Main St</td>
-                <td>2023-09-30</td>
+                <td>{{ $clinic->name }}</td>
+                <td>{{ $clinic->address }}</td>
+                <td>{{ $clinic->created_at->diffForHumans() }}</td>
                 <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-primary"><a href="{{ route('admin.clinicEdit',encrypt($clinic->id)) }}" class="text-white text-decoration-none">Edit</a></button>
+                    <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')"><a href="{{ route('admin.clinicDelete',encrypt($clinic->id)) }}" class="text-white text-decoration-none">Delete</a></button>
+
                 </td>
             </tr>
-            <tr>
-                <td>Jane Smith</td>
-                <td>456 Elm St</td>
-                <td>2023-09-29</td>
-                <td>
-                    <button class="btn btn-primary">Edit</button>
-                    <button class="btn btn-danger">Delete</button>
-                </td>
-            </tr>
-            <!-- Add more rows as needed -->
+
+            @endforeach
         </tbody>
 
     </table>
