@@ -23,10 +23,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.clinicList') }}">Clinic</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('role.index') }}">Role</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Choose One</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('role.index') }}">Role</a>
+                            <a class="dropdown-item" href="{{ route('admin.PermissionIndex') }}">Permission</a>
+                            <a class="dropdown-item" href="{{ route('rolePermission.list') }}">Role Permission</a>
+                        </div>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.subIndex') }}">Subscription</a>
                     </li>
