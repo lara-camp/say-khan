@@ -34,12 +34,19 @@ class ClinicController extends Controller
 
     public function edit($id)
     {
-        $this->clinic->edit($id);
+        $data = $this->clinic->edit($id);
+        return view('Admin.clinic.edit', compact('data'));
     }
 
     public function delete($id)
     {
         $this->clinic->delete($id);
         return back()->with(['success' => 'Item was Deleted.']);
+    }
+
+    public function update($id, Request $request)
+    {
+        $this->clinic->update($id, $request);
+        return redirect()->route('admin.clinicList')->with(['success' => 'Clinic was Sucessfully Updated']);
     }
 }

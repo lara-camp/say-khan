@@ -27,13 +27,21 @@ class ClinicRepository implements ClinicInterface
     public function edit($id)
     {
         $decryptId = decrypt($id);
-        dd($decryptId);
+        return Clinic::find($decryptId)->first();
     }
 
     public function delete($id)
     {
         $decryptId = decrypt($id);
         return Clinic::find($decryptId)->delete();
+    }
+
+    public function update($id, Request $request)
+    {
+        $decryptId = decrypt($id);
+        $this->validateCreateData($request);
+        $data = $this->getCreateData($request);
+        return Clinic::find($decryptId)->update($data);
     }
 
     // exported function

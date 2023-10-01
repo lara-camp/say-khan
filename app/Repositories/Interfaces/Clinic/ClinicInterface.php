@@ -12,5 +12,7 @@ interface ClinicInterface
 
     public function edit($id);
 
+    public function update($id, Request $request);
+
     public function delete($id);
 }
