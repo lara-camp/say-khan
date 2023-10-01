@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\Route;
 //login
 Route::get('/',[LoginController::class, 'login'])->name('user.login');
 Route::post('/login',[LoginController::class, 'create'])->name('user.create');
+Route::post('/logout',[LoginController::class, 'logout'])->name('user.logout');
 
 //register
-Route::get('register', [RegisterController::class, 'register'])->name('user#register');
-Route::post('register', [RegisterController::class, 'create'])->name('user#create');
+Route::get('register', [RegisterController::class, 'register'])->name('user.register');
+Route::post('register', [RegisterController::class, 'create'])->name('user.create');
+
 
 Route::get('login/{provider}/role', [SocialController::class, 'roleSelect'])->name('user#roleSelect');
 Route::get('login/social', [SocialController::class, 'socialPage'])->name('user#socialPage');

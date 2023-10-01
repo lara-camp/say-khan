@@ -13,8 +13,10 @@ use App\Repositories\Interfaces\Doctor\DoctorInterface;
 use App\Repositories\Interfaces\Assistant\AssistantInterface;
 use App\Repositories\Interfaces\Patient\PatientDetailInterface;
 use App\Repositories\Interfaces\Patient\PatientInterface;
+use App\Repositories\Interfaces\Role\RoleInterface;
 use App\Repositories\Patient\PatientDetailRepository;
 use App\Repositories\Patient\PatientRepository;
+use App\Repositories\RoleRepository\RoleRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -28,8 +30,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ClinicInterface::class, ClinicRepository::class);
         $this->app->bind(DoctorInterface::class, DoctorRepository::class);
         $this->app->bind(AssistantInterface::class, AssistantRepository::class);
+        $this->app->bind(RoleInterface::class, RoleRepository::class);
         $this->app->bind(PatientInterface::class, PatientRepository::class);
         $this->app->bind(PatientDetailInterface::class, PatientDetailRepository::class);
+      
     }
 
     /**

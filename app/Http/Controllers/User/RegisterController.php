@@ -14,12 +14,12 @@ use Illuminate\Validation\Rules\Password;
 class RegisterController extends Controller
 {
     public function register()
-    {
+    { 
         $roles = Role::all();
-  
-        return view('user.register', compact('roles'));
-    }
+    // dd($roles);
 
+        return view('user.register',compact('roles'));
+    }
     public function create(Request $request)
     {
         // dd($request->all());
