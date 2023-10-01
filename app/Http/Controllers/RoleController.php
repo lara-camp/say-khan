@@ -16,13 +16,13 @@ class RoleController extends Controller
     public function index()
     {
         $roles = $this->role->all();
-        return view('Admin.role.index', compact('roles'));
+        return view('pages.dashboard.role.role', compact('roles'));
     }
 
     // create a new role
     public function create()
     {
-        return view('Admin.role.create');
+        return view('pages.dashboard.role.role-register');
     }
 
     // store the role
