@@ -5,24 +5,28 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Repositories\ClinicRepository\ClinicRepository;
-use App\Repositories\DoctorRepository\DoctorRepository;
-use App\Repositories\AssistantRepository\AssistantRepository;
-use App\Repositories\Interfaces\Clinic\ClinicInterface;
-use App\Repositories\Interfaces\Doctor\DoctorInterface;
-use App\Repositories\Interfaces\Assistant\AssistantInterface;
-use App\Repositories\Interfaces\Patient\PatientDetailInterface;
-use App\Repositories\Interfaces\Patient\PatientInterface;
-use App\Repositories\Interfaces\Permission\PermissionInterface;
-use App\Repositories\Patient\PatientDetailRepository;
 use App\Repositories\Patient\PatientRepository;
 use App\Repositories\Interfaces\Role\RoleInterface;
-use App\Repositories\Interfaces\RolePermission\RolePermissionInterface;
-use App\Repositories\Interfaces\Subscription\SubscriptionInterface;
-use App\Repositories\PermissionRepository\PermissionRepository;
-use App\Repositories\RolePermissionRepository\RolePermissionRepository;
 use App\Repositories\RoleRepository\RoleRepository;
+use App\Repositories\Patient\PatientDetailRepository;
+use App\Repositories\ClinicRepository\ClinicRepository;
+use App\Repositories\DoctorRepository\DoctorRepository;
+use App\Repositories\Interfaces\Clinic\ClinicInterface;
+use App\Repositories\Interfaces\Doctor\DoctorInterface;
+use App\Repositories\ClinicDoctorRepository\ClinicDoctorRepository;
+use App\Repositories\Interfaces\Patient\PatientInterface;
+use App\Repositories\FeedBackRepository\FeedBackRepository;
+use App\Repositories\Interfaces\Feedback\FeedBackInterface;
+use App\Repositories\AssistantRepository\AssistantRepository;
+use App\Repositories\Interfaces\Assistant\AssistantInterface;
+use App\Repositories\Interfaces\Patient\PatientDetailInterface;
+use App\Repositories\Interfaces\Permission\PermissionInterface;
+use App\Repositories\PermissionRepository\PermissionRepository;
+use App\Repositories\Interfaces\ClinicDoctor\ClinicDoctorInterface;
+use App\Repositories\Interfaces\Subscription\SubscriptionInterface;
 use App\Repositories\SubscriptionRepository\SubscriptionRepository;
+use App\Repositories\Interfaces\RolePermission\RolePermissionInterface;
+use App\Repositories\RolePermissionRepository\RolePermissionRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -43,6 +47,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SubscriptionInterface::class, SubscriptionRepository::class);
         $this->app->bind(PermissionInterface::class, PermissionRepository::class);
         $this->app->bind(RolePermissionInterface::class, RolePermissionRepository::class);
+        $this->app->bind(ClinicDoctorInterface::class, ClinicDoctorRepository::class);
+        $this->app->bind(FeedBackInterface::class, FeedBackRepository::class);
     }
 
     /**

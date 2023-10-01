@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FeedBack extends Model
+class ClinicDoctor extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
-    protected $table = 'feed_backs';
-    protected $fillable = ['remark','description','status','clinic_id','doctor_id'];
+    protected $fillable = ['clinic_id','doctor_id','status'];
 
     public function clinic()
     {

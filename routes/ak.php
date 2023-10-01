@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\FeedBackController;
 use App\Http\Controllers\AssistantController;
+use App\Http\Controllers\ClinicDoctorController;
 
 
 // Start of Doctor routes
 Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor.index');
-Route::get('/doctor/create', [DoctorController::class, 'create'])->name('doctor.create')->middleware('doctor.auth');
+Route::get('/doctor/create', [DoctorController::class, 'create'])->name('doctor.create');
 Route::post('/doctor', [DoctorController::class, 'store'])->name('doctor.store');
 Route::get('/doctor/edit/{id}', [DoctorController::class, 'edit'])->name('doctor.edit');
 Route::put('/doctor/{id}', [DoctorController::class, 'update'])->name('doctor.update');
@@ -23,3 +25,22 @@ Route::get('/assistant/{id}/edit', [AssistantController::class, 'edit'])->name('
 Route::put('/assistant/{id}', [AssistantController::class, 'update'])->name('assistant.update');
 Route::delete('/assistant/{id}', [AssistantController::class, 'destroy'])->name('assistant.destroy');
 // End of Assistant routes
+
+// Start of ClinicDoctor routes
+
+Route::get('/admin/clinic-doctor', [ClinicDoctorController::class, 'index'])->name('clinic_doctor_index');
+Route::get('/admin/clinic-doctor/create', [ClinicDoctorController::class, 'create'])->name('clinic_doctor_create');
+Route::post('/admin/clinic-doctor/create', [ClinicDoctorController::class, 'clinic_doctor_register'])->name('clinic_doctor_register');
+Route::get('/admin/clinic-doctor/edit/{id}', [ClinicDoctorController::class, 'show_edit_clinic_doctor'])->name('clinic_doctor_edit');
+Route::put('/admin/clinic-doctor/edit/{id}', [ClinicDoctorController::class, 'update_clinic_doctor'])->name('clinic_doctor_update');
+Route::delete('/admin/clinic-doctor/{id}', [ClinicDoctorController::class, 'delete_clinic_doctor'])->name('clinic_doctor_delete');
+
+// End of ClinicDoctor routes
+
+// Start of Feedback routes
+
+Route::get('/feedback/create/{id}', [FeedBackController::class, 'create'])->name('feedback_create');
+Route::post('/feedback/create', [FeedBackController::class, 'feedback_register'])->name('feedback_register');
+Route::get('/feedback/show', [FeedBackController::class, 'show_feedback'])->name('feedback_show');
+
+// End of Feedback routes
