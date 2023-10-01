@@ -3,16 +3,23 @@
 
 namespace App\Repositories\Interfaces\Doctor;
 
-Interface DoctorInterface{
-    public function all();
-    
-    public function store($data);
+use Illuminate\Http\Request;
 
-    public function show($id);
-        
+Interface DoctorInterface{
+    
+    public function store();
+
     public function edit($id);
-    
-    public function update($data,$id);
-    
-    public function delete($id);
+
+    public function update($data, $id);
+
+    Public function delete($id);
+
+    public function get_buy_subscription_data($id);
+
+    public function decrypt_doctor_id($id);
+
+    public function register_validation($id);
+
+    public function update_validation(Request $request);
 }
