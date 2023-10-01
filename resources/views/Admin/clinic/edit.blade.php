@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <h2 class="card-title">Create Clinic</h2>
+            <h2 class="card-title">Edit Clinic</h2>
             <form action="{{ route('admin.clinicUpdate',encrypt($data->id)) }}" method="POST">
                 @csrf
                 <div class="mb-3">

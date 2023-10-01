@@ -12,7 +12,9 @@ use App\Repositories\Interfaces\Clinic\ClinicInterface;
 use App\Repositories\Interfaces\Doctor\DoctorInterface;
 use App\Repositories\Interfaces\Assistant\AssistantInterface;
 use App\Repositories\Interfaces\Role\RoleInterface;
+use App\Repositories\Interfaces\Subscription\SubscriptionInterface;
 use App\Repositories\RoleRepository\RoleRepository;
+use App\Repositories\SubscriptionRepository\SubscriptionRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(DoctorInterface::class, DoctorRepository::class);
         $this->app->bind(AssistantInterface::class, AssistantRepository::class);
         $this->app->bind(RoleInterface::class, RoleRepository::class);
+        $this->app->bind(SubscriptionInterface::class, SubscriptionRepository::class);
     }
 
     /**
