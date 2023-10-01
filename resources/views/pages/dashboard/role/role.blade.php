@@ -20,46 +20,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="divide-x-8 divide-[#DED9E2]">
-                                    <td
-                                        class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-800 dark:text-gray-200">
-                                        role1
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-800 dark:text-gray-200">
-                                        role1
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a class="text-blue-500 hover:text-blue-700" href="#">Delete</a>
-                                    </td>
-                                </tr>
-
-                                <tr class="divide-x-8 divide-[#DED9E2]">
-                                    <td
-                                        class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-800 dark:text-gray-200">
-                                        role2
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-800 dark:text-gray-200">
-                                        role2
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a class="text-blue-500 hover:text-blue-700" href="#">Delete</a>
-                                    </td>
-                                </tr>
-
-                                <tr class="divide-x-8 divide-[#DED9E2]">
-                                    <td
-                                        class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-800 dark:text-gray-200">
-                                        role3
-                                    </td>
-                                    <td
-                                        class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-800 dark:text-gray-200">
-                                        role3adfasdf</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a class="text-blue-500 hover:text-blue-700" href="#">Delete</a>
-                                    </td>
-                                </tr>
+                                @if ($roles->count() > 0)
+                                    @foreach ($roles as $role)
+                                        <tr class="divide-x-8 divide-[#DED9E2]">
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-800 dark:text-gray-200">
+                                                {{ $role->name }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-800 dark:text-gray-200">
+                                                {{ $role->type }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                <form method="post"
+                                                    action="{{ route('role.destroy', encrypt($role->id)) }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-primary"
+                                                        onclick="return confirm('i want to delete this')"
+                                                        alt="">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td class="text-center" colspan="3">
+                                            There is no role
+                                        </td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -67,7 +57,7 @@
             </div>
         </div>
         <a class="absolute bottom-24 right-10 bg-purple text-white p-3 rounded-xl hover:bg-green"
-            href="{{ url('/role/register') }}">Register
+            href="{{ url('/admin/role/create') }}">Register
             Role</a>
     </div>
 @endsection
