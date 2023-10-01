@@ -1,20 +1,25 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
+use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\Assistant;
+use App\Models\Doctor;
+use App\Models\Role;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
 
-class LoginController extends Controller
+class loginController extends Controller
 {
     public function login(){
-        return view('user.login');
+        // $roles = Role::all();
+        return view('user.login' );
     }
-    
-    public function create(Request $request){
 
+    public function create(Request $request){
+        // dd($request->all());
         $data = $request->validate([
             'email' => ['required','email'],
             'password' => [
@@ -26,16 +31,25 @@ class LoginController extends Controller
                     ->symbols(),
             ],
         ]);
+
+        $doctor = Doctor::all();
+        $assistant = Assistant::all();
+       
+        $doctor = Doctor::where('email', $data['email'])->first();
+        $assistant = Assistant::where('email', $data['email'])->first();
+        // dd($doctor);
+        if ($doctor && Hash::check($data['password'],$doctor->password)) {
+            return redirect()->route('doctor.create')->with('success', 'You have Successfully logged in');
+        }elseif ($assistant && Hash::check($data['password'],$assistant->password)) {
+            return redirect()->route('assistant.create')->with('success', 'You have Successfully logged in');
+        }else{
+            return back()->with(['error' =>'Wrong password']);
+        }
+    }
       
-        if (!Auth::attempt($data)) {
-                return redirect()->route('doctor.create')->with('success', 'You have Successfully logged in' );
-                }
-                return redirect()->route('user.login')->withErrors(['error' => 'Invalid email or password.']);
-            }
-            
         public function logout()
-        {
+        { 
             Auth::logout();
             return redirect()->route('user.login')->with('success', 'You have been logged out.');
         }
-}
+    }

@@ -38,9 +38,9 @@
                             <small style="color: red">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="py-1 w-full">
+                    {{-- <div class="py-1 w-full">
                         <a class="text-gray float-right text-b2" href="">Forgot password?</a>
-                    </div>
+                    </div> --}}
                     <button class="w-full h-12 my-2 bg-blue text-white text-h1 font-semibold rounded-xl focus:border-black">
                         Login
                     </button>
@@ -65,7 +65,7 @@
                     <div class="py-1 w-full">
                         <p class="text-gray text-center text-b1">
                             No account?
-                            <a class="text-white" href="">Create One</a>
+                            <a class="text-white" href="{{route('user.create')}}">Create One</a>
                         </p>
                     </div>
                 </div>

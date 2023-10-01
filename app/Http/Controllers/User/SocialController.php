@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Assistant;
+use App\Models\Doctor;
+use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Laravel\Socialite\Facades\Socialite;
 
 class SocialController extends Controller
 {
-    
+
     public function roleSelect($provider)
     {
         $roles = Role::get();
@@ -33,12 +38,9 @@ class SocialController extends Controller
         // $social ="google";
       
         $social =session('selected_social');
-        // dd($social);
         $role =  $request->session()->get('selected_role');
-    //    $role = "Doctor";
      
         $user = Socialite::driver($social)->stateless()->user();
-        // dd($user);
         $doctor = Doctor::where('email', $user->email)->first();
         $assistant = Assistant::where('email', $user->email)->first();
 
@@ -62,4 +64,5 @@ class SocialController extends Controller
         }
 
     }
+
 }

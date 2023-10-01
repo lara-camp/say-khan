@@ -3,21 +3,26 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Assistant;
+use App\Models\Doctor;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
     public function register()
-    {
+    { 
         $roles = Role::all();
-        return view('user.register', compact('roles'));
-    }
+    // dd($roles);
 
+        return view('user.register',compact('roles'));
+    }
     public function create(Request $request)
     {
+        // dd($request->all());
         $this->getValidationData($request);
         $data = $this->getUserData($request);
         $role = Role::find($data['role_id']);
@@ -26,18 +31,18 @@ class RegisterController extends Controller
 
         if ($roleName == "Doctor") {
             $doctor = Doctor::create($data);
-            if (isset($doctor)) {
+            if ($doctor!=null) {
                 $doctor->image = $fileName;
                 $doctor->save();
             }
         } elseif ($roleName == "Assistant") {
             $assistant = Assistant::create($data);
-            if (isset($assistant)) {
+            if ($assistant!=null) {
                 $assistant->image = $fileName;
                 $assistant->save();
             }
         } else {
-            return redirect()->route('user#register')->with(['error' => "Oops Something was not right."]);
+            return redirect()->route('user#register', compact('roleName'))->with(['error' => "Oops Something was not right."]);
         }
 
         return back()->with(['success' => 'Account was created.']);
@@ -74,7 +79,7 @@ class RegisterController extends Controller
             'password_confirmation' => 'required|min:6|same:password',
         ];
         $customMessage = [
-            'password.required' => "Passsword must be Filled.",
+            'password.required' => "Password must be Filled.",
             'password.min' => 'The password must be at least :min characters long and must contain at least one letter, one number, one capitalized letter, and one special character.',
             'password_confirmation.required' => "Password Confirmation must be Filled.",
         ];
