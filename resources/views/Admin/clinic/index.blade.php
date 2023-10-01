@@ -10,8 +10,6 @@
         <strong>{{ session('success') }}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-
-
     @endif
     <div class="pb-3">
         <a href="{{ route('admin.clinicCreate') }}"><button class="btn btn-primary">Create Clinic</button></a>

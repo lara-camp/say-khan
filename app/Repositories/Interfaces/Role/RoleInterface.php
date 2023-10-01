@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Repositories\Interfaces\Clinic;
+
+namespace App\Repositories\Interfaces\Role;
 
 use Illuminate\Http\Request;
 
-interface ClinicInterface
+interface RoleInterface
 {
     public function all();
 
@@ -12,7 +13,7 @@ interface ClinicInterface
 
     public function edit($id);
 
-    public function update($id, Request $request);
+    public function update(Request $request, $id);
 
     public function delete($id);
 }

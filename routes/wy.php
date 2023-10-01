@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ClinicController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ClinicController;
 
 Route::prefix('admin')->group(function () {
 
@@ -15,5 +16,17 @@ Route::prefix('admin')->group(function () {
 
         // Post Method Clinic
         Route::post('create', [ClinicController::class, 'store'])->name('admin.clinicStore');
+        Route::post('update/{id}', [ClinicController::class, 'update'])->name('admin.clinicUpdate');
+    });
+
+    Route::prefix('role')->group(function () {
+        // get method role
+        Route::get('/', [RoleController::class, 'index'])->name('role.index');
+        Route::get('create', [RoleController::class, 'create'])->name('role.create');
+        Route::get('edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
+        Route::post('update/{id}', [RoleController::class, 'update'])->name('role.update');
+        // post method role
+        Route::post('create', [RoleController::class, 'store'])->name('role.store');
+        Route::delete('delete/{id}', [RoleController::class, 'destroy'])->name('role.destroy');
     });
 });
