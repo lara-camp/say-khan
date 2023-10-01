@@ -28,7 +28,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Subscription</a>
+                        <a class="nav-link" href="{{ route('admin.subIndex') }}">Subscription</a>
                     </li>
                 </ul>
             </div>

@@ -31,45 +31,6 @@
         </tr>
     </thead>
     <tbody>
-
-        @if ($doctors->count() > 0)
-        @foreach ($doctors as $doctor)
-        <tr>
-            <td class="align-items-center">{{ $loop->iteration }}</td>
-            <td class="align-items-center">{{ $doctor->name }}</td>
-            <td class="align-items-center">{{ $doctor->speciality }}</td>
-            <td class="align-items-center">{{ $doctor->phone }}</td>
-            <td class="align-items-center">{{ $doctor->email }}</td>
-            {{-- <td class="align-items-center">{{ $doctor->password }}</td> --}}
-            <td class="align-items-center">{{ $doctor->address }}</td>
-            <td class="align-items-center">
-                <div class="btn-group" doctor="group">
-                    <a href="{{ route('doctor.show',encrypt($doctor->id)) }}" type="button" class="btn btn-warning">Details</a>
-                    <a href="{{ route('doctor.edit', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Edit</a>
-
-                    <form method="post" action="{{ route('doctor.destroy',encrypt($doctor->id)) }}">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn btn-success" onclick="return confirm('i want to delete this')" alt="">Delete</button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        @endforeach
-        @else
-        <tr>
-            <td class="text-center" colspan="2">
-                There is no doctors
-            </td>
-        </tr>
-        @endif
-        @if (auth()->guard('doctor')->check())
-        <form action="{{ route('user.logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="btn btn-link">Logout</button>
-        </form>
-        @endif
-
     </tbody>
 </table>
 
