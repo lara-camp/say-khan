@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ClinicController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\RolePermissionController;
 
 Route::prefix('admin')->group(function () {
 
@@ -41,5 +43,25 @@ Route::prefix('admin')->group(function () {
         // POST method Subscription
         Route::post('create', [SubscriptionController::class, 'store'])->name('admin.subStore');
         Route::post('update/{id}', [SubscriptionController::class, 'update'])->name('admin.subUpate');
+    });
+
+    Route::prefix('permission')->group(function () {
+        Route::get('/', [PermissionController::class, 'index'])->name('admin.PermissionIndex');
+        Route::get('create', [PermissionController::class, 'create'])->name('admin.PermissionCreate');
+        Route::get('edit/{id}', [PermissionController::class, 'edit'])->name('admin.PermissionEdit');
+        Route::get('delete/{id}', [PermissionController::class, 'delete'])->name('admin.PermissionDelete');
+        Route::post('create', [PermissionController::class, 'store'])->name('admin.PermissionStore');
+        Route::post('update/{id}', [PermissionController::class, 'update'])->name('admin.PermissionUpdate');
+    });
+
+    Route::prefix('role-permission')->group(function () {
+        // Get Method
+        Route::get('list', [RolePermissionController::class, 'list'])->name('rolePermission.list');
+        Route::get('create', [RolePermissionController::class, 'create'])->name('rolePermission.create');
+        Route::get('edit/{id}', [RolePermissionController::class, 'edit'])->name('rolePermission.edit');
+        Route::get('delete/{id}', [RolePermissionController::class, 'delete'])->name('rolePermission.delete');
+        // Post Method
+        Route::post('create', [RolePermissionController::class, 'store'])->name('rolePermission.store');
+        Route::post('update/{id}', [RolePermissionController::class, 'update'])->name('rolePermission.update');
     });
 });
