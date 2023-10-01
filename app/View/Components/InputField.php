@@ -9,11 +9,25 @@ class InputField extends Component
     /**
      * Create a new component instance.
      *
+     * @param string $id
+     * @param string $name
+     * @param string $placeholder
+     * @param string $color
+     *
      * @return void
      */
-    public function __construct()
+
+    public $id;
+    public $name;
+    public $placeholder;
+    public $color;
+
+    public function __construct($id, $name, $placeholder, $color)
     {
-        //
+        $this->id = $id;
+        $this->name = $name;
+        $this->placeholder = $placeholder;
+        $this->color = $color;
     }
 
     /**
