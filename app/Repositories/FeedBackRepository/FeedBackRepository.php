@@ -1,19 +1,16 @@
 <?php
 
-
 namespace App\Repositories\FeedBackRepository;
 
-use App\Models\Clinic;
+use App\Models\ClinicDoctor;
 use App\Models\Doctor;
 use App\Models\FeedBack;
-use App\Models\ClinicDoctor;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Validation\Rules\Password;
 use App\Repositories\Interfaces\FeedBack\FeedBackInterface;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
-class FeedBackRepository implements FeedBackInterface{
+class FeedBackRepository implements FeedBackInterface
+{
     // To pass all clinic doctor data
     public function all()
     {
@@ -37,8 +34,7 @@ class FeedBackRepository implements FeedBackInterface{
         try {
             $id = Crypt::decrypt($id);
             return Doctor::find($id);
-        }
-        catch (DecryptException $de){
+        } catch (DecryptException $de) {
             abort(404);
         }
     }
@@ -58,5 +54,11 @@ class FeedBackRepository implements FeedBackInterface{
             'doctor_id' => 'required',
             'doctor_id' => 'nullable',
         ]);
+    }
+
+    public function delete($id)
+    {
+        $decryptId = decrypt($id);
+        return FeedBack::find($decryptId)->delete();
     }
 }

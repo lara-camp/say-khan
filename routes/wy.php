@@ -1,11 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\SubscriptionController;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
 
@@ -64,4 +65,6 @@ Route::prefix('admin')->group(function () {
         Route::post('create', [RolePermissionController::class, 'store'])->name('rolePermission.store');
         Route::post('update/{id}', [RolePermissionController::class, 'update'])->name('rolePermission.update');
     });
+
+    Route::get('report', [AdminController::class, 'report'])->name('admin.report');
 });

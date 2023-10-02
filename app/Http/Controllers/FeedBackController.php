@@ -3,39 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Models\FeedBack;
-use Illuminate\Http\Request;
 use App\Repositories\Interfaces\Feedback\FeedBackInterface;
+use Illuminate\Http\Request;
 
 class FeedBackController extends Controller
 {
     public $feedback;
-    public function __construct(FeedBackInterface $feedback) {
+    public function __construct(FeedBackInterface $feedback)
+    {
         $this->feedback = $feedback;
     }
- 
-     // Show feedback create page
-     public function create($id)
-     {
+
+    // Show feedback create page
+    public function create($id)
+    {
         $id = $this->feedback->decrypt($id);
         $feedbacks = $this->feedback->doctor_all($id);
-        return view('feedback.create', compact('id','feedbacks'));
-     }
+        return view('feedback.create', compact('id', 'feedbacks'));
+    }
 
     // Registering feedback
     public function feedback_register(Request $request)
     {
         $data = $this->feedback->store($request);
-        if($data){
+        if ($data) {
             return redirect()->route('doctor.index')->with('success', 'Feedback has been saved');
-        }
-        else{
+        } else {
             return redirect()->route('feedback_create')->with('error', 'All the fields have not been inputted!');
         }
     }
 
     // Show Feedback
-    public function show_feedback(){
+    public function show_feedback()
+    {
         $feedbacks = $this->feedback->all();
         return view('feedback.show', compact('feedbacks'));
     }
+
+    public function delete($id)
+    {
+        $this->feedback->delete($id);
+        return redirect()->route('feedback_show')->with(['success' => 'Feedback was deleted.']);
+    }
+
 }

@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\FeedBackController;
 use App\Http\Controllers\AssistantController;
 use App\Http\Controllers\ClinicDoctorController;
-
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\FeedBackController;
+use Illuminate\Support\Facades\Route;
 
 // Start of Doctor routes
 Route::get('/doctor', [DoctorController::class, 'index'])->name('doctor.index');
@@ -42,5 +41,6 @@ Route::delete('/admin/clinic-doctor/{id}', [ClinicDoctorController::class, 'dele
 Route::get('/feedback/create/{id}', [FeedBackController::class, 'create'])->name('feedback_create');
 Route::post('/feedback/create', [FeedBackController::class, 'feedback_register'])->name('feedback_register');
 Route::get('/feedback/show', [FeedBackController::class, 'show_feedback'])->name('feedback_show');
+Route::get('delete/{id}', [FeedBackController::class, 'delete'])->name('feedback_delete');
 
 // End of Feedback routes
