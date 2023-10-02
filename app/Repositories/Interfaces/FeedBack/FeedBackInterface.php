@@ -12,6 +12,6 @@ interface FeedBackInterface
 
     public function decrypt($id);
 
-    public function validate_feedback(Request $request);
+    public function validateFeedback(Request $request);
 
 }
