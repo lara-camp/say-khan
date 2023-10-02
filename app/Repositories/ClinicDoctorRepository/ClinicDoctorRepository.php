@@ -24,12 +24,12 @@ class ClinicDoctorRepository implements ClinicDoctorInterface
     // Storing the Clinic Doctor data
     public function store(Request $request)
     {
-        $data = $this->validate_clinic_doctor($request);
+        $data = $this->validateClinicDoctor($request);
         return ClinicDoctor::create($data);
     }
 
     // Decrypting and Finding the passed ID
-    public function get_id($id)
+    public function decryptID($id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -43,7 +43,7 @@ class ClinicDoctorRepository implements ClinicDoctorInterface
     // Update the data
     public function update($id, Request $request)
     {
-        $data = $this->validate_clinic_doctor($request);
+        $data = $this->validateClinicDoctor($request);
         $id->update($data);
     }
 
@@ -55,7 +55,7 @@ class ClinicDoctorRepository implements ClinicDoctorInterface
     }
 
     // Validating and stripping tags out of the data
-    public function validate_clinic_doctor(Request $request)
+    public function validateClinicDoctor(Request $request)
     {
         $request['clinic_id'] = strip_tags($request['clinic_id']);
         $request['doctor_id'] = strip_tags($request['doctor_id']);
@@ -69,7 +69,7 @@ class ClinicDoctorRepository implements ClinicDoctorInterface
     }
 
      // Checking data duplication
-    public function check_duplication(Request $request)
+    public function checkDuplication(Request $request)
     {
         return ClinicDoctor::where('clinic_id', $request['clinic_id'])
         ->where('doctor_id', $request['doctor_id'])

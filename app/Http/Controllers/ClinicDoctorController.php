@@ -30,8 +30,8 @@ class ClinicDoctorController extends Controller
     }
 
     // Registering Clinic Doctor
-    public function clinic_doctor_register(ClinicDoctor $id, Request $request){
-        $checkDupe = $this->clinicdoctor->check_duplication($request);
+    public function store(ClinicDoctor $id, Request $request){
+        $checkDupe = $this->clinicdoctor->checkDuplication($request);
         if (!$checkDupe) {
             $this->clinicdoctor->store($request);
             return redirect()->route('clinic_doctor_create')->with('success', 'It has been saved');
@@ -39,24 +39,23 @@ class ClinicDoctorController extends Controller
         else{
             return redirect()->route('clinic_doctor_create')->with('error', 'There is already a record of the same clinic and doctor');
         }
-
     }
 
     //Show Clinic Doctor edit page
-    public function show_edit_clinic_doctor($id){
+    public function edit($id){
         $clinicdoctors = $this->clinicdoctor->all();
-        $id = $this->clinicdoctor->get_id($id);
+        $id = $this->clinicdoctor->decryptId($id);
         return view('Admin.clinicDoctor.edit', compact('clinicdoctors', 'id'));
     }
     //Update Clinic Doctor data
-    public function update_clinic_doctor(ClinicDoctor $id, Request $request){
+    public function update(ClinicDoctor $id, Request $request){
         
         $this->clinicdoctor->update($id, $request);
         return redirect()->route('clinic_doctor_index');
 
     }
     //Delete Clinic Doctor data
-    public function delete_clinic_doctor($id){
+    public function delete($id){
         
         $this->clinicdoctor->delete($id);
         return redirect()->route('clinic_doctor_index');

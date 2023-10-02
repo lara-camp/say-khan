@@ -18,38 +18,23 @@ class DoctorRepository implements DoctorInterface{
     // }
     // Store doctor data 
     public function store(Request $request){
-        $data = $this->register_validation($request);
+        $data = $this->validateRegister($request);
         return  Doctor::create($data);
     }
 
     // Update Doctor data
     public function update($id, Request $request){
-        $data = $this->update_validation($request);
+        $data = $this->validateUpdate($request);
         Doctor::where('id',$id)->update($data);
     }
     // Delete Doctor data
     Public function delete($id){
-        $data = $this->decrypt_doctor_id($id);
+        $data = $this->decryptId($id);
         return Doctor::find($data)->first()->delete();
     }
-    // Retrieve data neccessary to buy subscription
-    public function get_buy_subscription_data($id){
-        $decryptId = $this->decrypt_doctor_id($id);
-        $doctor = Doctor::where('id', $decryptId)->first();
-        $clinicdoctor = ClinicDoctor::where('doctor_id', $decryptId)->first();
-        $clinic = Clinic::where('id',$clinicdoctor->clinic_id);
-        $subscription = Subscription::all();
-        return compact('doctor', 'clinicdoctor', 'clinic', 'subscription');
-    }
-    // Retrieve data neccessary to buy subscription
-    public function buy_subscription($id){
-        $data = $request->validate([
-            'subscription_id' => 'required'
-        ]);
-        return  Clinic::where('id',$id)->update($data);
-    }
+
     // Decrypt doctor id
-    public function decrypt_doctor_id($id)
+    public function decryptId($id)
     {
         try {
             $id = Crypt::decrypt($id);
@@ -60,7 +45,7 @@ class DoctorRepository implements DoctorInterface{
         }
     }
     // Retrieve data neccessary to buy subscription
-    public function register_validation(Request $request){
+    public function validateRegister(Request $request){
         $data = $request->validate([
             'name' => 'required',
             'speciality' => 'required',
@@ -81,7 +66,7 @@ class DoctorRepository implements DoctorInterface{
         return $data;
     }
 
-    public function update_validation(Request $request)
+    public function validateUpdate(Request $request)
     {
         $data= $request->validate([
             'name' => 'required',

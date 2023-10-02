@@ -31,7 +31,7 @@ class DoctorController extends Controller
     }
     // edit
     public function edit($id){
-        $doctor = $this->doctor->decrypt_doctor_id($id);
+        $doctor = $this->doctor->decryptId($id);
         return view('doctor.edit',compact('doctor'));
     }
     // Update
@@ -44,15 +44,5 @@ class DoctorController extends Controller
     public function destroy($id){
         $this->doctor->delete($id);
         return redirect()->route('doctor.index')->with('success','Delete  Successfully');
-    }
-
-    //read
-    public function show_buy_subscription($id){
-        $buysub= $this->doctor->get_buy_subscription_data($id);
-        return view('doctor.show',compact('buysub'));
-    }
-    public function buy_subscription($id){
-        $this->doctor->buy_subscription($id);
-        return redirect()->route('doctor.index')->with('success','The subscription has been bought for the clinic');
     }
 }

@@ -18,12 +18,12 @@ class FeedBackController extends Controller
     public function create($id)
     {
         $id = $this->feedback->decrypt($id);
-        $feedbacks = $this->feedback->doctor_all($id);
+        $feedbacks = $this->feedback->doctorAll($id);
         return view('feedback.create', compact('id', 'feedbacks'));
     }
 
     // Registering feedback
-    public function feedback_register(Request $request)
+    public function store(Request $request)
     {
         $data = $this->feedback->store($request);
         if ($data) {
@@ -34,7 +34,7 @@ class FeedBackController extends Controller
     }
 
     // Show Feedback
-    public function show_feedback()
+    public function show()
     {
         $feedbacks = $this->feedback->all();
         return view('feedback.show', compact('feedbacks'));

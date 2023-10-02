@@ -11,7 +11,11 @@
     {{ Session::get('success') }}
 </div>
 @endif
-
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 @auth
 <h2>Welcome {{ Auth::user()->name }}</h2>
 <a href="{{ route('logout') }}">Logout</a>
@@ -45,7 +49,7 @@
                 <div class="btn-group" doctor="group">
                     <a href="{{ route('doctor.edit', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Edit</a>
                     <a href="{{ route('feedback_create', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Give Feedback</a>
-
+                    <a href="{{ route('clinic_subscription_create', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Buy Subscription</a>
                     <form method="post" action="{{ route('doctor.destroy',encrypt($doctor->id)) }}">
                         @csrf
                         @method('delete')

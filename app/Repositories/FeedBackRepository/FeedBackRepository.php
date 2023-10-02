@@ -17,7 +17,7 @@ class FeedBackRepository implements FeedBackInterface
         return $feedback = FeedBack::all();
     }
     // Pass doctor related data
-    public function doctor_all($id)
+    public function doctorAll($id)
     {
         $clinicdoctor = ClinicDoctor::where('doctor_id', $id->id)->get();
         return compact('clinicdoctor');
@@ -25,7 +25,7 @@ class FeedBackRepository implements FeedBackInterface
     // Storing the Clinic Doctor data
     public function store(Request $request)
     {
-        $data = $this->validate_feedback($request);
+        $data = $this->validateFeedback($request);
         return FeedBack::create($data);
     }
     // Decrypting and Finding the passed ID
@@ -39,7 +39,7 @@ class FeedBackRepository implements FeedBackInterface
         }
     }
     // Validating and stripping tags out of the data
-    public function validate_feedback(Request $request)
+    public function validateFeedback(Request $request)
     {
         $request['remark'] = strip_tags($request['remark']);
         $request['description'] = strip_tags($request['description']);
@@ -52,7 +52,7 @@ class FeedBackRepository implements FeedBackInterface
             'description' => 'required',
             'status' => 'required',
             'doctor_id' => 'required',
-            'doctor_id' => 'nullable',
+            'clinic_id' => 'nullable',
         ]);
     }
 
