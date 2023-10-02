@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 
 Interface DoctorInterface{
     
-    public function store();
+    public function store(Request $request);
 
-    public function edit($id);
-
-    public function update($data, $id);
+    public function update($id, Request $request);
 
     Public function delete($id);
 
@@ -19,7 +17,7 @@ Interface DoctorInterface{
 
     public function decrypt_doctor_id($id);
 
-    public function register_validation($id);
+    public function register_validation(Request $request);
 
     public function update_validation(Request $request);
 }

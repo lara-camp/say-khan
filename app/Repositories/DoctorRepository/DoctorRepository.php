@@ -6,7 +6,9 @@ namespace App\Repositories\DoctorRepository;
 use App\Models\Doctor;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Validation\Rules\Password;
 use App\Repositories\Interfaces\Doctor\DoctorInterface;
 
 class DoctorRepository implements DoctorInterface{
@@ -15,26 +17,20 @@ class DoctorRepository implements DoctorInterface{
         
     // }
     // Store doctor data 
-    public function store(){
+    public function store(Request $request){
         $data = $this->register_validation($request);
         return  Doctor::create($data);
     }
 
-    // Fetch Doctor data to edit
-    public function edit($id){
-        $decryptId = $this->decrypt_doctor_id($id);
-        $doctor = Doctor::where('id', $decryptId)->first();
-        return  compact('doctor');
-    } 
     // Update Doctor data
-    public function update($data, $id){
+    public function update($id, Request $request){
         $data = $this->update_validation($request);
-        return  Doctor::where('id',$id)->update($data);
+        Doctor::where('id',$id)->update($data);
     }
     // Delete Doctor data
     Public function delete($id){
-        $decryptId = $this->decrypt_doctor_id($id);
-        return Doctor::where('id',$decryptId)->delete();
+        $data = $this->decrypt_doctor_id($id);
+        return Doctor::find($data)->first()->delete();
     }
     // Retrieve data neccessary to buy subscription
     public function get_buy_subscription_data($id){
@@ -64,11 +60,12 @@ class DoctorRepository implements DoctorInterface{
         }
     }
     // Retrieve data neccessary to buy subscription
-    public function register_validation($id){
+    public function register_validation(Request $request){
         $data = $request->validate([
             'name' => 'required',
             'speciality' => 'required',
             'phone' => 'required|min:9|max:11',
+            'address' => 'required',
             'email' =>'required',
             'password'=>[
                 'required',
@@ -79,19 +76,20 @@ class DoctorRepository implements DoctorInterface{
                     ->symbols(),
             ],
             'password_confirmation' => 'required|same:password',
-            'address' => 'required',
         ]);
         $data['password'] = Hash::make($data['password']);
+        return $data;
     }
 
     public function update_validation(Request $request)
     {
-        $cleanData= $request->validate([
+        $data= $request->validate([
             'name' => 'required',
             'speciality' => 'required',
             'phone' => 'required|min:9|max:11',
             'email' => 'required',
             'address' => 'required',
         ]);
+        return $data;
     }
 }
