@@ -48,22 +48,28 @@ php artisan key:generate
 6. Link Storage to Public Directory:
 
 ```bash
-php artian storage:link
+php artisan storage:link
 ```
 
-7. Install Node.js dependencies:
+7. Run migration file and seeder
+
+```bash
+php artisan migrate --seed
+```
+
+9. Install Node.js dependencies:
 
 ```bash
 npm install
 ```
 
-8. Compile the assets:
+10. Compile the assets:
 
 ```bash
 npm run dev
 ```
 
-9. Start laravel Server:
+11. Start laravel Server:
 
 ```bash
 php artisan serve

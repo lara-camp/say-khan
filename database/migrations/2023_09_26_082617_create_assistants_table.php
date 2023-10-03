@@ -20,9 +20,10 @@ return new class extends Migration
             $table->string('address');
             $table->string('email')->unique();
             $table->string('password');
-            $table->foreignId('role_id')->default(1);
-            $table->foreignId('clinic_id')->default(1);
-            $table->string('status')->nullable();
+            $table->string('image')->nullable();
+            $table->foreignId('role_id')->nullable();
+            $table->foreignId('clinic_id')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

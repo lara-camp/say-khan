@@ -6,6 +6,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('user.login');
 // });
 
-Route::get('/register', function () {
-    return view('user.register');
-});
+// Route::get('/register', function () {
+//     return view('user.register');
+// });

@@ -28,7 +28,7 @@
                           file:text-b1 file:font-semibold
                           file:bg-gray file:text-violet-700
                           hover:file:bg-violet-100"
-                            accept="image/*" />
+                            accept="image/*" name="image" />
                     </label>
                     @error('image')
                         <small style="color: red">{{ $message }}</small>
@@ -75,15 +75,18 @@
 
 
                         <div class=" w-1/2 flex flex-col py-5 px-4">
-                            <select name="role_id" id="roles" class="bg-white  border-2 border-purple mb-5 px-6 h-12 text-gray-900  rounded-lg focus:ring-purple focus:border-purple text-b1 tracking-widest font-thin ">
-                        <option value="">Choose One Role</option>
-                        @foreach ($roles as $role)
-                            <option value="{{ $role->id }}" @if (old('role_id') == $role->id) selected @endif>
-                                {{ $role->name }}</option>
-                        @endforeach
-                    </select>
+                            <select name="role_id" id="roles"
+                                class="bg-white  border-2 border-purple mb-5 px-6 h-12 text-gray-900  rounded-lg focus:ring-purple focus:border-purple text-b1 tracking-widest font-thin ">
+                                <option value="">Choose One Role</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}" @if (old('role_id') == $role->id) selected @endif>
+                                        {{ $role->name }}</option>
+                                @endforeach
+                            </select>
                             {{-- <input type="text" class=" bg-white bg-transparent  border-2 border-purple mb-5 px-6 rounded-lg h-12 text-b1 tracking-widest font-thin " value="Active" placeholder="Status" disabled> --}}
-                            <textarea id="address" rows="4" class="block py-4  px-6  w-full text-b1 bg-white rounded-lg border-2 border-purple tracking-widest focus:ring-purple focus:border-purple " name="address" placeholder="Enter Address ..">{{old('address') }}</textarea>
+                            <textarea id="address" rows="4"
+                                class="block py-4  px-6  w-full text-b1 bg-white rounded-lg border-2 border-purple tracking-widest focus:ring-purple focus:border-purple "
+                                name="address" placeholder="Enter Address ..">{{ old('address') }}</textarea>
                         </div>
                         {{-- <div class=" w-1/2 flex flex-col py-5 px-4">
 
@@ -94,7 +97,7 @@
                             {{ $role->name }}</option>
                     @endforeach
                 </select>
-                          
+
                             <textarea id="address" rows="4"
                                 class="block py-4  px-6  w-full text-b1 bg-white rounded-lg border-2 border-purple tracking-widest focus:ring-purple focus:border-purple "
                                 name="address" placeholder="Enter Address ..">{{ old('address') }}</textarea>
@@ -103,7 +106,8 @@
                     </div>
                     <div class="px-14 ">
 
-                        <span class=" px-2 text-gray "><a href="{{route('user.create')}}" class=" px-2 text-gray ">Sign In Here</a></span>
+                        <span class=" px-2 text-gray "><a href="{{ route('user.create') }}" class=" px-2 text-gray ">Sign
+                                In Here</a></span>
                     </div>
 
                     <div class="px-10 py-5">
