@@ -6,6 +6,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\User\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function () {
@@ -68,3 +69,5 @@ Route::prefix('admin')->group(function () {
 
     Route::get('report', [AdminController::class, 'report'])->name('admin.report');
 });
+
+Route::get('pending', [RegisterController::class, 'pending'])->name('user.pending');

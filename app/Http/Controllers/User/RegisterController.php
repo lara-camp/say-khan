@@ -56,6 +56,11 @@ class RegisterController extends Controller
         }
     }
 
+    public function pending()
+    {
+        return view('user.pending');
+    }
+
     private function storeImage(Request $request, $roleName)
     {
         $fileName = uniqid() . "_" . $request->file('image')->getClientOriginalName();
