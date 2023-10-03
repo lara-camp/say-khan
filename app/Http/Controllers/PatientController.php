@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Admin;
+use App\Models\RolePermission;
 use App\Repositories\Interfaces\Patient\PatientInterface;
+use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
@@ -21,6 +23,9 @@ class PatientController extends Controller
 
     public function createPage()
     {
+        // $userId = Admin::find(1);
+        // $data = RolePermission::where('role_id', $userId->role->id)->first();
+        // dd($data->permission->key == 'R');
         return view('patient.create');
     }
 

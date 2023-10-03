@@ -19,4 +19,9 @@ class Assistant extends Model
         'timestamp',
         'clinic_id',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

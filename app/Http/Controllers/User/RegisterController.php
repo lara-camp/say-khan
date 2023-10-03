@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Models\Assistant;
 use App\Models\Doctor;
 use App\Models\Role;
@@ -14,15 +15,15 @@ use Illuminate\Validation\Rules\Password;
 class RegisterController extends Controller
 {
     public function register()
-    { 
+    {
         $roles = Role::all();
-    // dd($roles);
+        // dd($roles);
 
-        return view('user.register',compact('roles'));
+        return view('user.register', compact('roles'));
     }
+
     public function create(Request $request)
     {
-        // dd($request->all());
         $this->getValidationData($request);
         $data = $this->getUserData($request);
         $role = Role::find($data['role_id']);
@@ -31,21 +32,28 @@ class RegisterController extends Controller
 
         if ($roleName == "Doctor") {
             $doctor = Doctor::create($data);
-            if ($doctor!=null) {
+            if ($doctor != null) {
                 $doctor->image = $fileName;
                 $doctor->save();
             }
+            return redirect()->route('doctor.index')->with(['success' => 'Doctor acc was successfully update.']);
         } elseif ($roleName == "Assistant") {
             $assistant = Assistant::create($data);
-            if ($assistant!=null) {
+            if ($assistant != null) {
                 $assistant->image = $fileName;
                 $assistant->save();
             }
+            return redirect()->route('assistant.index')->with(['success' => 'Assistant acc was successfully update.']);
+        } elseif ($roleName == "Admin") {
+            $admin = Admin::create($data);
+            if ($admin != null) {
+                $admin->image = $fileName;
+                $admin->save();
+            }
+            return redirect()->route('admin.clinicList')->with(['success' => 'Admin acc was successfully update.']);
         } else {
             return redirect()->route('user#register', compact('roleName'))->with(['error' => "Oops Something was not right."]);
         }
-
-        return back()->with(['success' => 'Account was created.']);
     }
 
     private function storeImage(Request $request, $roleName)
@@ -67,7 +75,7 @@ class RegisterController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:doctors,email|unique:assistants,email',
             'address' => 'required',
-            'phone' => 'required|digits_between:1,11',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'role_id' => 'required',
             'image' => 'required|mimes:png,jpg,jpeg,svg,gif|file|image',
             'password' => ['required',
@@ -79,6 +87,7 @@ class RegisterController extends Controller
             'password_confirmation' => 'required|min:6|same:password',
         ];
         $customMessage = [
+            'phone.regex' => 'Phone number must be digits.',
             'password.required' => "Password must be Filled.",
             'password.min' => 'The password must be at least :min characters long and must contain at least one letter, one number, one capitalized letter, and one special character.',
             'password_confirmation.required' => "Password Confirmation must be Filled.",
