@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\Interfaces\Patient\PatientDetailInterface;
 use App\Repositories\Interfaces\Patient\PatientInterface;
+use App\Repositories\Interfaces\PatientDetail\PatientDetailInterface;
+
 
 class PatientDetailController extends Controller
 {

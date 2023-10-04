@@ -4,9 +4,10 @@
     <div class="container-fluid">
         {{-- @dd($patients) --}}
         <h2>Patient Details</h2>
-        <button type="button" class="btn-create"><a href="{{ route('patient#createPage') }}">Create Patient</a></button>
-        <button type="button" class="btn-create"><a href="{{ route('patientDetails#createPage') }}">Create
-                Details</a></button>
+        <button type="button" class="btn-create"><a href="{{ route('patient#home') }}">Patient</a></button>
+        <button type="button" class="btn-create"><a href="{{ route('patientDetails#list') }}">Patients Detail</a></button>
+        <button type="button" class="btn-create"><a href="{{ route('patientRecords#list') }}">Patients Record</a></button>
+        <button type="button" class="btn-create"><a href="{{ route('patientDetails#createPage') }}">Create Details</a></button>
         @if ($patients->isEmpty())
             <div class="record">No records found.</div>
         @else
@@ -31,12 +32,12 @@
                             <td>{{ $p->medical_history }}</td>
                             <td>
                                 <button type="button" class="action-btn">
-                                    <a href="{{ route('patientDetails#edit', encrypt($p->id)) }}">
+                                    <a href="{{ route('patientDetails#edit', encrypt($p->id)) }}">Edit
                                         <img src="{{ asset('assets/img/edit.png') }}" alt=""></a>
                                 </button>
                                 <button type="button" class="action-btn"
                                     onclick="return confirm('are you sure want to delete this items.')">
-                                    <a href="{{ route('patientDetail#delete', encrypt($p->id)) }}">
+                                    <a href="{{ route('patientDetail#delete', encrypt($p->id)) }}">Delete
                                         <img src="{{ asset('assets/img/delete.png') }}" alt=""></a>
                                 </button>
                             </td>

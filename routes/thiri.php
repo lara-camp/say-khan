@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\PatientController;
-use App\Http\Controllers\PatientDetailController;
-use App\Http\Controllers\User\LoginController;
-use App\Http\Controllers\User\RegisterController;
-use App\Http\Controllers\User\SocialController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\User\LoginController;
+use App\Http\Controllers\User\SocialController;
+use App\Http\Controllers\PatientDetailController;
+use App\Http\Controllers\PatientRecordController;
+use App\Http\Controllers\User\RegisterController;
 
 //login
 
@@ -33,8 +34,15 @@ Route::prefix('patient')->group(function () {
     Route::get('detail/edit/{id}', [PatientDetailController::class, 'edit'])->name('patientDetails#edit');
     Route::get('detail/delete/{id}', [PatientDetailController::class, 'delete'])->name('patientDetail#delete');
 
+    Route::get('record/create', [PatientRecordController::class, 'createPage'])->name('patientRecords#createPage');
+    Route::get('record/list', [PatientRecordController::class, 'list'])->name('patientRecords#list');
+    Route::get('record/edit/{id}', [PatientRecordController::class, 'edit'])->name('patientRecords#edit');
+    Route::get('record/delete/{id}', [PatientRecordController::class, 'delete'])->name('patientRecords#delete');
+
     Route::post('create', [PatientController::class, 'create'])->name('patient#create');
     Route::post('update/{id}', [PatientController::class, 'update'])->name('patient#update');
     Route::post('detail/create', [PatientDetailController::class, 'create'])->name('patientDetails#create');
     Route::post('detail/update/{id}', [PatientDetailController::class, 'update'])->name('patientDetails#update');
+    Route::post('record/create', [PatientRecordController::class, 'create'])->name('patientRecords#create');
+    Route::post('record/update/{id}', [PatientRecordController::class, 'update'])->name('patientRecords#update');
 });

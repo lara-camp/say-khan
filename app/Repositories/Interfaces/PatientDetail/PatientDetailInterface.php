@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Interfaces\Patient;
+namespace App\Repositories\Interfaces\PatientDetail;
 
 use Illuminate\Http\Request;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repositories\Patient;
+namespace App\Repositories\PatientDetailRepository;
 
 use App\Models\PatientDetail;
-use App\Repositories\Interfaces\Patient\PatientDetailInterface;
+use App\Repositories\Interfaces\PatientDetail\PatientDetailInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 

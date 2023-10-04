@@ -17,7 +17,6 @@
 
                 <label for="clinic_id">Is this about a Clinic?</label>
                 <select name="clinic_id" id="">
-                    <option  value="">None</option>
                     @foreach($feedbacks['clinicdoctor'] as $clinicdoctor)
                     <option  value="{{$clinicdoctor->clinic_id}}">{{$clinicdoctor->clinic->name}}</option>
                     @endforeach
@@ -29,11 +28,9 @@
                 <label for="description">Description</label>
                 <textarea name="description" id="" cols="30" rows="10" placeholder="Enter the full Feedback"></textarea>
 
-                <input name="status" type="text" value="1" hidden>
             </div>
             <button>Submit Feedback</button>
         </form>
     </div>
-
 </body>
 </html>

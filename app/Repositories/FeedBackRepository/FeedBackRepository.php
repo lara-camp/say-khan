@@ -43,14 +43,12 @@ class FeedBackRepository implements FeedBackInterface
     {
         $request['remark'] = strip_tags($request['remark']);
         $request['description'] = strip_tags($request['description']);
-        $request['status'] = strip_tags($request['status']);
         $request['doctor_id'] = strip_tags($request['doctor_id']);
         $request['clinic_id'] = strip_tags($request['clinic_id']);
 
         return $request->validate([
             'remark' => 'required',
             'description' => 'required',
-            'status' => 'required',
             'doctor_id' => 'required',
             'clinic_id' => 'nullable',
         ]);

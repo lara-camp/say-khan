@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use Illuminate\Http\Request;
+
 use App\Models\RolePermission;
 use App\Repositories\Interfaces\Patient\PatientInterface;
-use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {

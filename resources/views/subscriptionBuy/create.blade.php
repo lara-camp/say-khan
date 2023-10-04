@@ -16,7 +16,6 @@
                 <input name="name" type="text" placeholder="Enter name" value='{{$id->name}}' readonly>
 
                 <label for="clinic_id">Choose a Clinic to buy for: </label>
-
                 <select name="clinic_id" id="">
                     @forelse($clinicsubscriptions['clinicdoctor'] as $clinicdoctor)
                         <option value="{{$clinicdoctor->clinic->id}}">{{$clinicdoctor->clinic->name}}</option>
@@ -36,6 +35,18 @@
             @enderror
         </form>
     </div>
+
+    <table border='1'>
+        <tr>
+            <th>Doctor Name</th>
+            <th>Clinic Name</th>
+            <th>Subscription Plan</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </table>
+
 
     @if(session('error'))
         <div class="alert alert-danger">
