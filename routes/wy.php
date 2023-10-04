@@ -9,7 +9,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\User\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['checkAuth:admin']], function () {
 
     // To view clinic route
     Route::prefix('clinic')->group(function () {

@@ -10,7 +10,7 @@
         <p style="color:green">{{ session('success') }}</p>
     @endif
 
-    <form class="login-form" action="{{ route('user.create') }}" method="POST">
+    <form class="login-form" action="{{ route('users.create') }}" method="POST">
         @csrf
         <div class="flex w-full h-screen justify-center bg-purple flex-col items-center">
             <div class=" max-w-md w-auto min-w-fit">
@@ -65,7 +65,7 @@
                     <div class="py-1 w-full">
                         <p class="text-gray text-center text-b1">
                             No account?
-                            <a class="text-white" href="{{route('user.create')}}">Create One</a>
+                            <a class="text-white" href="{{ route('user.create') }}">Create One</a>
                         </p>
                     </div>
                 </div>
