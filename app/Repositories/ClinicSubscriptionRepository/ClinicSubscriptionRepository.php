@@ -17,8 +17,9 @@ class ClinicSubscriptionRepository implements ClinicSubscriptionInterface
     // To pass all clinic doctor data
     public function all()
     {
+        $subscription = Subscription::all();
         $clinicsubscription = ClinicSubscription::orderBy('created_at', 'desc')->get();
-        return compact('clinicsubscription');
+        return compact('clinicsubscription', 'subscription');
     }
     // To pass neccessary data to buy subscription
     public function subData($id)
@@ -47,11 +48,14 @@ class ClinicSubscriptionRepository implements ClinicSubscriptionInterface
     }
     
     // Update the data
-    public function accept($id)
+    public function update($id, $request)
     {
+        $status = $request->validate([
+            'status' => 'required'
+        ]);
         $decryptId = Crypt::decrypt($id);
         $data = ClinicSubscription::find($decryptId);
-        $data->update(['status' => 2]);
+        $data->update($status);
     }
 
     // Delete the data

@@ -47,7 +47,7 @@
             <td class="align-items-center">{{ $doctor->address }}</td>
             <td class="align-items-center">
                 <div class="btn-group" doctor="group">
-                    <a href="{{ route('doctor.edit', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Edit</a>
+                    <a href="{{ route('doctor.edit', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Edit {{ $doctor->id }}</a>
                     <a href="{{ route('feedback_create', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Give Feedback</a>
                     <a href="{{ route('clinic_subscription_create', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Buy Subscription</a>
                     <form method="post" action="{{ route('doctor.destroy',encrypt($doctor->id)) }}">

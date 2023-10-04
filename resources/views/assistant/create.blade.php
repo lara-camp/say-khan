@@ -2,7 +2,7 @@
 @section('title', 'assistant')
 @section('content')
 <h1 class="mb-0">Adding</h1>
-<h2>{{ auth()->guard('assistant')->user()->name }}</h2>
+<!-- <h2>{{ auth()->guard('assistant')->user()->name }}</h2> -->
 
 <hr />
 <form action="{{ route('assistant.store')}}" method="POST">
@@ -56,6 +56,5 @@
         <button type="submit" class="btn btn-link">Logout</button>
     </form>
     @endif
-
 </form>
 @endsection

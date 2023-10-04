@@ -18,7 +18,7 @@ Route::delete('/doctor/{id}', [DoctorController::class, 'destroy'])->name('docto
 
 // Start of Assistant routes
 Route::get('/assistant', [AssistantController::class, 'index'])->name('assistant.index');
-Route::get('/assistant/create', [AssistantController::class, 'create'])->name('assistant.create')->middleware('assistant.auth');
+Route::get('/assistant/create', [AssistantController::class, 'create'])->name('assistant.create');
 Route::post('/assistant', [AssistantController::class, 'store'])->name('assistant.store');
 Route::get('/assistant/{id}', [AssistantController::class, 'show'])->name('assistant.show');
 Route::get('/assistant/{id}/edit', [AssistantController::class, 'edit'])->name('assistant.edit');
@@ -52,7 +52,7 @@ Route::get('/subscription-buy', [ClinicSubscriptionController::class, 'index'])-
 Route::get('/subscription-buy/create/{id}', [ClinicSubscriptionController::class, 'create'])->name('clinic_subscription_create');
 Route::post('/subscription-buy/create', [ClinicSubscriptionController::class, 'store'])->name('clinic_subscription_register');
 // Route::get('/subscription-buy/edit/{id}', [ClinicSubscriptionController::class, 'edit'])->name('clinic_subscription_edit');
-Route::put('/subscription-buy/{id}', [ClinicSubscriptionController::class, 'accept'])->name('clinic_subscription_accept');
+Route::put('/subscription-buy/{id}', [ClinicSubscriptionController::class, 'update'])->name('clinic_subscription_update');
 Route::delete('/subscription-buy/{id}', [ClinicSubscriptionController::class, 'delete'])->name('clinic_subscription_delete');
 
 // End of ClinicSubscription routes

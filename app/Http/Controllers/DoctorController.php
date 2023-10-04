@@ -31,6 +31,7 @@ class DoctorController extends Controller
     }
     // edit
     public function edit($id){
+        dd($id);
         $doctor = $this->doctor->decryptId($id);
         return view('doctor.edit',compact('doctor'));
     }

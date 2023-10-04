@@ -14,7 +14,7 @@ interface ClinicSubscriptionInterface
 
     public function decryptDoctorId($id);
 
-    public function accept($id);
+    public function update($id, Request $request);
 
     public function delete($id);
 

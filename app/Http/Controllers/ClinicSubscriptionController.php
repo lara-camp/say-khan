@@ -46,8 +46,8 @@ class ClinicSubscriptionController extends Controller
         return view('Admin.clinicDoctor.edit', compact('clinicsubscriptions', 'id'));
     }
     //Update Clinic Doctor data
-    public function accept($id){
-        $this->clinicsubscription->accept($id);
+    public function update($id, Request $request){
+        $this->clinicsubscription->update($id, $request);
         return redirect()->route('clinic_subscription_index');
     }
     //Delete Clinic Doctor data
