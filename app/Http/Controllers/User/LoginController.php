@@ -1,27 +1,26 @@
 <?php
 
 namespace App\Http\Controllers\User;
-use App\Models\User;
+
 use App\Http\Controllers\Controller;
-use App\Models\Assistant;
-use App\Models\Doctor;
-use App\Models\Role;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class loginController extends Controller
 {
-    public function login(){
+    public function login()
+    {
         // $roles = Role::all();
-        return view('user.login' );
+        return view('user.login');
+
     }
 
-    public function create(Request $request){
+    public function create(Request $request)
+    {
         // dd($request->all());
         $data = $request->validate([
-            'email' => ['required','email'],
+            'email' => ['required', 'email'],
             'password' => [
                 'required',
                 Password::min(6)
@@ -31,25 +30,47 @@ class loginController extends Controller
                     ->symbols(),
             ],
         ]);
+        // if (Auth::guard('doctor')->attempt($data)) {
+        //     return redirect()->route('doctor.index');
+        // } else if (Auth::guard('assistant')->attempt($data)) {
+        //     return redirect()->route('doctor.index');
+        // } else if (Auth::guard('admin')->attempt($data)) {
+        //     dd('hit');
+        //     return redirect()->route('doctor.index');
+        // } else {
+        //     return back();
+        // }
+        $guard = null;
 
-        $doctor = Doctor::all();
-        $assistant = Assistant::all();
-       
-        $doctor = Doctor::where('email', $data['email'])->first();
-        $assistant = Assistant::where('email', $data['email'])->first();
-        // dd($doctor);
-        if ($doctor && Hash::check($data['password'],$doctor->password)) {
-            return redirect()->route('doctor.create')->with('success', 'You have Successfully logged in');
-        }elseif ($assistant && Hash::check($data['password'],$assistant->password)) {
-            return redirect()->route('assistant.create')->with('success', 'You have Successfully logged in');
-        }else{
-            return back()->with(['error' =>'Wrong password']);
+        switch (true) {
+            case Auth::guard('doctor')->attempt($data):
+                $guard = 'doctor';
+                break;
+            case Auth::guard('assistant')->attempt($data):
+                $guard = 'assistant';
+                break;
+            case Auth::guard('admin')->attempt($data):
+                $guard = 'admin';
+                break;
         }
-    }
-      
-        public function logout()
-        { 
-            Auth::logout();
-            return redirect()->route('user.login')->with('success', 'You have been logged out.');
+
+        if ($guard) {
+            return redirect()->route($guard . '.index');
+        } else {
+            return back();
         }
+
     }
+
+    public function logout()
+    {
+        if (auth()->guard('doctor')->check()) {
+            Auth::guard('doctor')->logout();
+        } else if (auth()->guard('assistant')->check()) {
+            Auth::guard('assistant')->logout();
+        } else if (auth()->guard('admin')->check()) {
+            Auth::guard('admin')->logout();
+        }
+        return redirect()->route('user.login')->with('success', 'You have been logged out.');
+    }
+}

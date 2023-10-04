@@ -5,7 +5,11 @@
 
 
     {{-- <h3>Welcome,{{ auth()->guard('assistant')->user()->name }}</h3> --}}
-
+    <h2>Welcome {{ Auth::guard('assistant')->user()->name }}</h2>
+    <form action="{{ route('user.logout') }}" method="post">
+        @csrf
+        <button>Logout</button>
+    </form>
 
     <div class="d-flex align-items-center justify-content-between">
         <h1 class="mb-0 ">Assistant</h1>
