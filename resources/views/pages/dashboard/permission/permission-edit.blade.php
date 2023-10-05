@@ -7,13 +7,14 @@
             <h1>Permission</h1>
         </div>
         <div class="col-span-2 col-start-4 self-center bg-gray flex flex-col items-center px-10 py-20 rounded-3xl">
-            <h1 class="text-h0 text-purple text-center font-semibold tracking-widest">Permission Register</h1>
-            <h2 class="text-b2 text-purple my-5">fill this form to register permission</h2>
+            <h1 class="text-h0 text-purple text-center font-semibold tracking-widest">Permission Edit</h1>
+            <h2 class="text-b2 text-purple my-5">edit {{ $data->value }} permission</h2>
             <form action="{{ route('admin.PermissionEdit', $data->id) }}" method="GET" class="w-full flex flex-col gap-3">
-                {{-- value should be the data of desired edit id --}}
-                <x-input-field id="key" name="key" :value="$data->key" placeholder="" color="red" />
-                <x-input-field id="value" name="value" :value="$data->value" placeholder="" color="red" />
-                <x-input-field id="status" name="status" :value="$data->status" placeholder="" color="red" />
+                <x-input-field id="key" name="key" :value="$data->key" placeholder="Permission Key" color="red" />
+                <x-input-field id="value" name="value" :value="$data->value" placeholder="Permission Value"
+                    color="red" />
+                <x-input-field id="status" name="status" :value="$data->status" placeholder="Permission Status"
+                    color="red" />
                 <x-button bgColor="purple" textColor="white" text="Save" />
             </form>
 
