@@ -10,9 +10,11 @@
             <h1 class="text-h0 text-purple text-center font-semibold tracking-widest">Role Edit</h1>
             <h2 class="text-b2 text-purple my-5">edit {{ $role->name }} role</h2>
             <form action="{{ route('role.update', $role->id) }}" method="POST" class="w-full flex flex-col gap-3">
-                <x-input-field id="name" name="name" :value="$role->name" placeholder="Role Name" color="red" />
-                <x-input-field id="type" name="type" :value="$role->type" placeholder="Role Type" color="red" />
-                <x-input-field id="status" name="status" :value="$role->status" placeholder="Role Status" color="red" />
+                @csrf
+                <x-input-field id="role-name" name="role-name" :value="$role->name" placeholder="Role Name" color="red" />
+                <x-input-field id="role-type" name="role-type" :value="$role->type" placeholder="Role Type" color="red" />
+                <x-input-field id="role-status" name="role-status" :value="$role->status" placeholder="Role Status"
+                    color="red" />
                 <x-button bgColor="purple" textColor="white" text="Save" />
             </form>
 

@@ -10,8 +10,11 @@
             <h1 class="text-h0 text-purple text-center font-semibold tracking-widest">Permission Register</h1>
             <h2 class="text-b2 text-purple my-5">fill this form to register permission</h2>
             <form action="{{ route('role.store') }}" method="POST" class="w-full flex flex-col gap-3">
-                <x-input-field id="role-name" name="role-name" value="" placeholder="Enter Permission Name" color="red" />
-                <x-input-field id="role - type" name="role - type" value="" placeholder="Enter Type" color="red" />
+                @csrf
+                <x-input-field id="permission-key" name="permission-key" value="" placeholder="Enter Permission Key"
+                    color="red" />
+                <x-input-field id="permission-value" name="permission-value" value=""
+                    placeholder="Enter Permission Value" color="red" />
                 <x-button bgColor="purple" textColor="white" text="Register" />
             </form>
             <a href="{{ url('/admin/permission') }}" class="w-full underline text-blue text-right pt-5">view permission</a>

@@ -10,11 +10,13 @@
             <h1 class="text-h0 text-purple text-center font-semibold tracking-widest">Permission Edit</h1>
             <h2 class="text-b2 text-purple my-5">edit {{ $data->value }} permission</h2>
             <form action="{{ route('admin.PermissionUpdate', $data->id) }}" method="POST" class="w-full flex flex-col gap-3">
-                <x-input-field id="key" name="key" :value="$data->key" placeholder="Permission Key" color="red" />
-                <x-input-field id="value" name="value" :value="$data->value" placeholder="Permission Value"
+                @csrf
+                <x-input-field id="permission-key" name="permission-key" :value="$data->key" placeholder="Permission Key"
                     color="red" />
-                <x-input-field id="status" name="status" :value="$data->status" placeholder="Permission Status"
-                    color="red" />
+                <x-input-field id="permission-value" name="permission-value" :value="$data->value"
+                    placeholder="Permission Value" color="red" />
+                <x-input-field id="permission-status" name="permission-status" :value="$data->status"
+                    placeholder="Permission Status" color="red" />
                 <x-button bgColor="purple" textColor="white" text="Save" />
             </form>
 
