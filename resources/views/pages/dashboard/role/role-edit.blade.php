@@ -9,7 +9,7 @@
         <div class="col-span-2 col-start-4 self-center bg-gray flex flex-col items-center px-10 py-20 rounded-3xl">
             <h1 class="text-h0 text-purple text-center font-semibold tracking-widest">Role Edit</h1>
             <h2 class="text-b2 text-purple my-5">edit {{ $role->name }} role</h2>
-            <form action="{{ route('role.edit', $role->id) }}" method="GET" class="w-full flex flex-col gap-3">
+            <form action="{{ route('role.update', $role->id) }}" method="POST" class="w-full flex flex-col gap-3">
                 <x-input-field id="name" name="name" :value="$role->name" placeholder="Role Name" color="red" />
                 <x-input-field id="type" name="type" :value="$role->type" placeholder="Role Type" color="red" />
                 <x-input-field id="status" name="status" :value="$role->status" placeholder="Role Status" color="red" />

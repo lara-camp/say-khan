@@ -9,7 +9,7 @@
         <div class="col-span-2 col-start-4 self-center bg-gray flex flex-col items-center px-10 py-20 rounded-3xl">
             <h1 class="text-h0 text-purple text-center font-semibold tracking-widest">Permission Edit</h1>
             <h2 class="text-b2 text-purple my-5">edit {{ $data->value }} permission</h2>
-            <form action="{{ route('admin.PermissionEdit', $data->id) }}" method="GET" class="w-full flex flex-col gap-3">
+            <form action="{{ route('admin.PermissionUpdate', $data->id) }}" method="POST" class="w-full flex flex-col gap-3">
                 <x-input-field id="key" name="key" :value="$data->key" placeholder="Permission Key" color="red" />
                 <x-input-field id="value" name="value" :value="$data->value" placeholder="Permission Value"
                     color="red" />
