@@ -14,15 +14,16 @@ class AssistantController extends Controller
     {
         $this->assistant = $assistant;
     }
+    // View Assistant Index Page
     public function index(){
         $assistants =$this->assistant->all();
         return view('assistant.index',compact('assistants'));
     }
-    // create 
+    // View Assistant Create Page 
     public function create(){
         return view('assistant.create');
     }
-    // store the data
+    // Store Assistant Data
     public function store(Request $request)
         {
         {
@@ -46,18 +47,17 @@ class AssistantController extends Controller
         return redirect()->route('assistant.index')->with('success','successfully create ');
         }
     }
-    //read
+    // View Assistant ## 
     public function show(string $id){
       $assistant =  $this->assistant->show($id);
         return view('assistant.show',compact('assistant'));
     }
-    // edit
-
+    // View Assistant Edit Page 
     public function edit(string $id){
         $assistant =$this->assistant->edit($id);
         return view('assistant.edit',compact('assistant'));
     }
-    // Update
+    // Update Assistant Data
     public function update(string $id,Request $request){
         $cleanData = $request->validate([
             'name' => 'required',
@@ -74,7 +74,7 @@ class AssistantController extends Controller
         $this->assistant->update($data,$id);
         return redirect()->route('assistant.index')->with('success','Update  Successfully');
     }
-    // destroy 
+    // Delete Assistant Data
     public function destroy(string $id){
         $this->assistant->delete($id);
         return redirect()->route('assistant.index')->with('success','Delete  Successfully');

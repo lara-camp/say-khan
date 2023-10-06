@@ -20,7 +20,9 @@ use App\Repositories\Interfaces\Assistant\AssistantInterface;
 use App\Repositories\Interfaces\Permission\PermissionInterface;
 use App\Repositories\PermissionRepository\PermissionRepository;
 use App\Repositories\ClinicDoctorRepository\ClinicDoctorRepository;
+use App\Repositories\DoctorReportRepository\DoctorReportRepository;
 use App\Repositories\Interfaces\ClinicDoctor\ClinicDoctorInterface;
+use App\Repositories\Interfaces\DoctorReport\DoctorReportInterface;
 use App\Repositories\Interfaces\Subscription\SubscriptionInterface;
 use App\Repositories\SubscriptionRepository\SubscriptionRepository;
 use App\Repositories\Interfaces\PatientDetail\PatientDetailInterface;
@@ -55,6 +57,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(FeedBackInterface::class, FeedBackRepository::class);
         $this->app->bind(ClinicSubscriptionInterface::class, ClinicSubscriptionRepository::class);
         $this->app->bind(PatientRecordInterface::class, PatientRecordRepository::class);
+        $this->app->bind(DoctorReportInterface::class, DoctorReportRepository::class);
     }
 
     /**

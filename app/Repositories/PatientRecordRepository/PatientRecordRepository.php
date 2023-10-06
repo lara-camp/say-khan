@@ -10,11 +10,12 @@ use App\Repositories\Interfaces\PatientRecord\PatientRecordInterface;
 
 class PatientRecordRepository implements PatientRecordInterface
 {
+    // Return all Patient Record Data
     public function all()
     {
         return PatientRecord::orderBy('created_at', 'desc')->get();
     }
-
+    // Store Patient Record
     public function store(Request $request)
     {
         $this->getPatientRecordValidationData($request);
@@ -22,13 +23,13 @@ class PatientRecordRepository implements PatientRecordInterface
         $data = $this->getPatientRecordData($request, $images);
         return PatientRecord::create($data);
     }
-
+    // Decrypt and Find Patient Record ID
     public function edit($id)
     {
         $decryptId = decrypt($id);
         return PatientRecord::find($decryptId);
     }
-
+    // Update Patient Record Data
     public function update($id, Request $request)
     {
         $this->getPatientRecordValidationData($request);
@@ -37,25 +38,31 @@ class PatientRecordRepository implements PatientRecordInterface
 
         return PatientRecord::find($id)->update($data);
     }
-
+    // Delete Patient Record Data
     public function delete($id)
     {
         $decryptId = decrypt($id);
         return PatientRecord::find($decryptId)->delete();
     }
-
+    // Store Patient Record Images
     private function storeImage(Request $request)
     {
-        $fileName1 = uniqid() . "_" . $request->file('medicalimage1')->getClientOriginalName();
-        $fileName2 = uniqid() . "_" . $request->file('medicalimage2')->getClientOriginalName();
-        $folderName = "patientRecord";
+        $image1 =$request->file('medicalimage1');
+        $image2 =$request->file('medicalimage2');
+        
+            if ($image1 != null || $image2 != null){ 
+            $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
+            $new_name2 = rand() . '.' . $image2->getClientOriginalExtension();
+           
+            $image1->move(public_path('medicalimage1'), $new_name1);
+            $image2->move(public_path('medicalimage2'), $new_name2);
+            $image_file1 = "/medicalimage1/" . $new_name1;
+            $image_file2 = "/medicalimage2/" . $new_name2;
 
-        $filePath1 = $request->file('medicalimage1')->storeAs($folderName, $fileName1);
-        $filePath2 = $request->file('medicalimage2')->storeAs($folderName, $fileName2);
-        return compact('filePath1', 'filePath2');
+            return compact('image_file1', 'image_file2');
+            }
     }
-
-    // export same code into function
+    // Validate Patient Record Data
     protected function getPatientRecordValidationData($request)
     {
         Validator::make($request->all(), [
@@ -74,7 +81,7 @@ class PatientRecordRepository implements PatientRecordInterface
             'status' => 'required'
         ])->validate();
     }
-
+    // Fetch Patient Record Data
     protected function getPatientRecordData($request, $images)
     {
         return [
@@ -89,8 +96,8 @@ class PatientRecordRepository implements PatientRecordInterface
             'patient_id' => $request->patient_id,
             'assistant_id' => $request->assistant_id,
             'status' => $request->status,
-            'medicalimage1' => $images['filePath1'],
-            'medicalimage2' => $images['filePath2'],
+            'medicalimage1' => $images['image_file1'],
+            'medicalimage2' => $images['image_file2'],
         ];
     }
 }

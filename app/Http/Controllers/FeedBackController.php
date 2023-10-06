@@ -13,37 +13,34 @@ class FeedBackController extends Controller
     {
         $this->feedback = $feedback;
     }
-
-    // Show feedback create page
+    // View Feedback Create Page
     public function create($id)
     {
         $id = $this->feedback->decrypt($id);
         $feedbacks = $this->feedback->doctorAll($id);
         return view('feedback.create', compact('id', 'feedbacks'));
     }
-
-    // Registering feedback
+    // Store feedback
     public function store(Request $request)
     {
         $data = $this->feedback->store($request);
         if ($data) {
             return redirect()->route('doctor.index')->with('success', 'Feedback has been saved');
         } else {
-            return redirect()->route('feedback_create')->with('error', 'All the fields have not been inputted!');
+            return redirect()->route('feedback.create')->with('error', 'All the fields have not been inputted!');
         }
     }
-
-    // Show Feedback
-    public function show()
+    // View Feedback List
+    public function list()
     {
         $feedbacks = $this->feedback->all();
-        return view('feedback.show', compact('feedbacks'));
+        return view('feedback.list', compact('feedbacks'));
     }
-
+    // Delete Feedback
     public function delete($id)
     {
         $this->feedback->delete($id);
-        return redirect()->route('feedback_show')->with(['success' => 'Feedback was deleted.']);
+        return redirect()->route('feedback.list')->with(['success' => 'Feedback was deleted.']);
     }
 
 }

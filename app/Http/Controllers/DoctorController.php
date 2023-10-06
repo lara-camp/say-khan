@@ -15,33 +15,37 @@ class DoctorController extends Controller
     {
         $this->doctor = $doctor;
     }
+    // View Doctor index
     public function index(){
+        return view('doctor.index');
+    }
+    // View Doctor List
+    public function list(){
         $doctors = Doctor::all();
         return view('doctor.index', compact('doctors'));
     }
-    // create a new 
+    // View Doctor Create Page 
     public function create(){
         return view('doctor.create');
     }
-    // store the 
+    // Store Doctor data
     public function store(Request $request)
     {
         $this->doctor->store($request);
         return redirect()->route('doctor.index')->with('success','successfully create ');
     }
-    // edit
+    // View Doctor Edit Page
     public function edit($id){
         dd($id);
         $doctor = $this->doctor->decryptId($id);
         return view('doctor.edit',compact('doctor'));
     }
-    // Update
+    // Update Doctor Data
     public function update($id, Request $request){
         $this->doctor->update($id, $request);
         return redirect()->route('doctor.index')->with('success','Update  Successfully');
     }
-
-    // destroy 
+    // Destroy Doctor Data
     public function destroy($id){
         $this->doctor->delete($id);
         return redirect()->route('doctor.index')->with('success','Delete  Successfully');

@@ -27,6 +27,7 @@
             <td class="align-items-center">
                 <div class="btn-group" doctor="group">
                     <a href="{{ route('feedback_create', encrypt(auth()->guard('doctor')->user()->id)) }}" type="button" class="btn btn-danger">Give Feedback</a>
+                    <a href="{{ route('doctor.report.income', encrypt(auth()->guard('doctor')->user()->id)) }}" type="button" class="btn btn-danger">Income Report</a>
                     <a href="{{ route('doctor.edit', encrypt(auth()->guard('doctor')->user()->id)) }}" type="button" class="btn btn-danger">Edit</a>
                     <a href="{{ route('clinic_subscription_create', encrypt(auth()->guard('doctor')->user()->id)) }}" type="button" class="btn btn-danger">Buy Subscription</a>
                 </div>

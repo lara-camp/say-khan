@@ -8,7 +8,7 @@
 
     <h1>This is clinic doctor page</h1>
     <div class="formsection" stlye="border: 1px solid black;">
-        <form action="{{ route('clinic_doctor_register') }}" method="POST">
+        <form action="{{ route('clinicDoctor.store') }}" method="POST">
             @csrf
             <h1>Clinic Doctor register</h1>
             <div class="row">

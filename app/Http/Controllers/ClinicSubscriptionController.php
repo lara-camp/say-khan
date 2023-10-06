@@ -12,22 +12,20 @@ class ClinicSubscriptionController extends Controller
     public function __construct(ClinicSubscriptionInterface $clinicsubscription) {
         $this->clinicsubscription = $clinicsubscription;
     }
-    // Show Clinic Doctor doctor home page
+    // View Clinic Subscription Index Page
     public function index()
     {
         $clinicsubscriptions = $this->clinicsubscription->all();
         return view('subscriptionBuy.index', compact('clinicsubscriptions'));
     }
-
-    // Show Clinic Doctor create page
+    // View Clinic Subscription Create Page
     public function create($id)
     {
         $id = $this->clinicsubscription->decryptDoctorId($id);
         $clinicsubscriptions = $this->clinicsubscription->subData($id);
         return view('subscriptionBuy.create', compact('id','clinicsubscriptions'));
     }
-
-    // Registering Clinic Doctor
+    // Store Clinic Subscription Data
     public function store(Request $request){
         $checkDupe = $this->clinicsubscription->checkDuplication($request);
         if (!$checkDupe) {
@@ -38,21 +36,20 @@ class ClinicSubscriptionController extends Controller
             return redirect()->route('doctor.index')->with('error', 'The clinic is already on a subscription');
         }
     }
-
-    //Show Clinic Doctor edit page
+    // View Clinic Subscription Edit Page
     public function edit($id){
         $clinicsubscriptions = $this->clinicsubscription->all();
         $id = $this->clinicsubscription->decryptClinicSubscriptionId($id);
         return view('Admin.clinicDoctor.edit', compact('clinicsubscriptions', 'id'));
     }
-    //Update Clinic Doctor data
+    //Update Clinic Subscription Data
     public function update($id, Request $request){
         $this->clinicsubscription->update($id, $request);
-        return redirect()->route('clinic_subscription_index');
+        return redirect()->route('clinicSubscription.index');
     }
-    //Delete Clinic Doctor data
+    //Delete Clinic Subscription Data
     public function delete($id){
         $this->clinicsubscription->delete($id);
-        return redirect()->route('clinic_subscription_index');
+        return redirect()->route('clinicSubscription.index');
     }  
 }
