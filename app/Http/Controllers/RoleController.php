@@ -35,7 +35,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = $this->role->edit($id);
-        return view('Admin.role.edit', compact('role'));
+        return view('pages.dashboard.role.role-edit', compact('role'));
     }
     // Update
     public function update($id, Request $request)

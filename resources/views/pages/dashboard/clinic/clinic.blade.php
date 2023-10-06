@@ -3,10 +3,10 @@
 @section('page')
     <div class="h-full flex flex-col justify-start items-center gap-10 m-10 overflow-hidden">
         <div class="w-full mx-10 flex flex-row justify-between">
-            <h1 class="text-h0">Role Form</h1>
-            <a href="{{ url('/admin/role/create') }}"><button
+            <h1 class="text-h0">Clinic Form</h1>
+            <a href="{{ url('/admin/clinic/create') }}"><button
                     class="bg-purple text-white rounded-xl p-3 hover:bg-green">Register
-                    role</button></a>
+                    clinic</button></a>
         </div>
 
         <div class="flex flex-col w-full">
@@ -21,7 +21,7 @@
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Address
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status
@@ -33,36 +33,36 @@
                                 </thead>
 
                                 <tbody class="divide-y divide-gray">
-                                    @if ($roles->count() > 0)
-                                        @foreach ($roles as $role)
+                                    @if ($clinics->count() > 0)
+                                        @foreach ($clinics as $clinic)
                                             <tr>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                                    {{ $role->name }}</td>
+                                                    {{ $clinic->name }}</td>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                    {{ $role->type }}
+                                                    {{ $clinic->address }}
                                                 </td>
-                                                @if ($role->status == null)
+                                                @if ($clinic->status == null)
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                         -</td>
                                                 @else
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                        {{ $role->status }}</td>
+                                                        {{ $clinic->status }}</td>
                                                 @endif
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
                                                     <a class="border rounded-lg p-2"
-                                                        href="{{ route('role.edit', encrypt($role->id)) }}">Edit</a>
+                                                        href="{{ route('admin.clinicEdit', encrypt($clinic->id)) }}">Edit</a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     @else
                                         <tr>
                                             <td class="text-center" colspan="3">
-                                                There is no role
+                                                There is no clinic
                                             </td>
                                         </tr>
                                     @endif
