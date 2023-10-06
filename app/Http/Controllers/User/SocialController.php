@@ -36,10 +36,10 @@ class SocialController extends Controller
     public function socialCallBack(Request $request)
     {
         // $social ="google";
-      
-        $social =session('selected_social');
-        $role =  $request->session()->get('selected_role');
-     
+
+        $social = session('selected_social');
+        $role = $request->session()->get('selected_role');
+
         $user = Socialite::driver($social)->stateless()->user();
         $doctor = Doctor::where('email', $user->email)->first();
         $assistant = Assistant::where('email', $user->email)->first();
@@ -55,13 +55,12 @@ class SocialController extends Controller
         if (!$doctor && !$assistant) {
             if ($role == "Doctor") {
                 $doctor = Doctor::create($data);
-                return redirect()->route('doctor.index');
 
             } elseif ($role == "Assistant") {
                 $assistant = Assistant::create($data);
-                return redirect()->route('assistant.index');
             }
         }
+        return redirect()->route('user.pending');
 
     }
 

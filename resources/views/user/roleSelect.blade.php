@@ -11,8 +11,10 @@
                 <select name="role_id" id="roles">
                     <option value="">Choose One Role</option>
                     @foreach ($roles as $role)
-                        <option value="{{ $role->id }}" @if (old('role_id') == $role->id) selected @endif>
-                            {{ $role->name }}</option>
+                        @if ($role->name !== 'Admin')
+                            <option value="{{ $role->id }}" @if (old('role_id') == $role->id) selected @endif>
+                                {{ $role->name }}</option>
+                        @endif
                     @endforeach
                 </select>
                 @error('role_id')
