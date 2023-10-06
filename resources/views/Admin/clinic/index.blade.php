@@ -3,12 +3,13 @@
 @section('title', 'View')
 
 @section('content')
-    <h2>Welcome {{ Auth::guard('admin')->user()->name }}</h2>
-    <form action="{{ route('user.logout') }}" method="post">
-        @csrf
-        <button>Logout</button>
-    </form>
     <div class="container ">
+        <h2>Welcome {{ Auth::guard('admin')->user()->name }}</h2>
+        <form action="{{ route('user.logout') }}" method="post">
+            @csrf
+            <button class="btn btn-danger">Logout</button>
+        </form>
+
         <h1 class="text-center mt-2">Clinic Lists</h1>
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Repositories\Interfaces\Clinic\ClinicInterface;
-
+use Illuminate\Http\Request;
 
 class ClinicController extends Controller
 {
@@ -17,25 +16,25 @@ class ClinicController extends Controller
     public function index()
     {
         $clinics = $this->clinic->all();
-        return view('Admin.clinic.index', compact('clinics'));
+        return view('pages.dashboard.clinic.clinic', compact('clinics'));
     }
 
     public function create()
     {
-        return view("Admin.clinic.create");
+        return view("pages.dashboard.clinic.clinic-register");
     }
 
     public function store(Request $request)
     {
         $this->clinic->store($request);
 
-        return redirect()->route('admin.clinicList')->with(['success' => 'Clinic Was Successfully Created.']);
+        return redirect()->route('admin.index')->with(['success' => 'Clinic Was Successfully Created.']);
     }
 
     public function edit($id)
     {
         $data = $this->clinic->edit($id);
-        return view('Admin.clinic.edit', compact('data'));
+        return view('pages.dashboard.clinic.clinic-edit', compact('data'));
     }
 
     public function delete($id)

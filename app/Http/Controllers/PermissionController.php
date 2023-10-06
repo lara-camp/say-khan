@@ -16,12 +16,12 @@ class PermissionController extends Controller
     public function index()
     {
         $permissions = $this->permission->all();
-        return view('Admin.permission.index', compact('permissions'));
+        return view('pages.dashboard.permission.permission', compact('permissions'));
     }
 
     public function create()
     {
-        return view('Admin.permission.create');
+        return view('pages.dashboard.permission.permission-register');
     }
 
     public function store(Request $request)
@@ -33,7 +33,7 @@ class PermissionController extends Controller
     public function edit($id)
     {
         $data = $this->permission->edit($id);
-        return view('Admin.permission.edit', compact('data'));
+        return view('pages.dashboard.permission.permission-edit', compact('data'));
     }
 
     public function update($id, Request $request)
