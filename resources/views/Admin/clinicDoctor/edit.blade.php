@@ -17,7 +17,6 @@
                 <input name="doctor_name_display" type="text" value="{{$id->doctor->name}}" readonly>
                 <label for="">Current status: </label>
                 <input name="status_display" type="text" value="{{$id->status}}" readonly>
-
             </div>
             <br>
             <div class="row">

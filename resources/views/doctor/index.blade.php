@@ -15,7 +15,6 @@
 
 <h2>Welcome {{ Auth::guard('doctor')->user()->name }}</h2>
 
-{{-- table --}}
 <table class="table table-hover">
     <thead class="table-primary">
         <tr>

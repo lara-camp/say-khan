@@ -40,7 +40,6 @@ class ClinicDoctorController extends Controller
             return redirect()->route('clinicDoctor.create')->with('error', 'There is already a record of the same clinic and doctor');
         }
     }
-
     //Show Clinic Doctor edit page
     public function edit($id){
         $clinicdoctors = $this->clinicdoctor->all();

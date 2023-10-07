@@ -4,7 +4,7 @@
 <div class="container">
     <h1 class="mb-0">Adding</h1>
     <hr />
-    <form action="{{ route('doctor.store')}}" method="POST" enctype='multipart/form-data'>
+    <form action="{{ route('doctor.store')}}" method="POST">
         @csrf
         <div class="row ">
             <div class="col-6 offset-1 mb-2">

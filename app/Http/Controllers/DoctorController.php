@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 use App\Repositories\Interfaces\Doctor\DoctorInterface;
+use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
@@ -16,37 +14,42 @@ class DoctorController extends Controller
         $this->doctor = $doctor;
     }
     // View Doctor index
-    public function index(){
+    public function index()
+    {
         return view('doctor.index');
     }
     // View Doctor List
-    public function list(){
+    public function list()
+    {
         $doctors = Doctor::all();
         return view('doctor.index', compact('doctors'));
     }
-    // View Doctor Create Page 
-    public function create(){
+    // View Doctor Create Page
+    public function create()
+    {
         return view('doctor.create');
     }
     // Store Doctor data
     public function store(Request $request)
     {
         $this->doctor->store($request);
-        return redirect()->route('doctor.index')->with('success','successfully create ');
+        return redirect()->route('doctor.index')->with('success', 'successfully create ');
     }
     // View Doctor Edit Page
     public function edit($id){
         $doctor = $this->doctor->decryptId($id);
-        return view('doctor.edit',compact('doctor'));
+        return view('doctor.edit', compact('doctor'));
     }
     // Update Doctor Data
-    public function update($id, Request $request){
+    public function update($id, Request $request)
+    {
         $this->doctor->update($id, $request);
-        return redirect()->route('doctor.index')->with('success','Update  Successfully');
+        return redirect()->route('doctor.index')->with('success', 'Update  Successfully');
     }
     // Destroy Doctor Data
-    public function destroy($id){
+    public function destroy($id)
+    {
         $this->doctor->delete($id);
-        return redirect()->route('doctor.index')->with('success','Delete  Successfully');
+        return redirect()->route('doctor.index')->with('success', 'Delete  Successfully');
     }
 }
