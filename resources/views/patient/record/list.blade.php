@@ -42,8 +42,8 @@
                 <td>{{ $patientrecord->height }}</td>
                 <td>{{ $patientrecord->totalfee }}</td>
                 <td>{{ $patientrecord->status }}</td>
-                <td><img src="{{ asset('public/storage/'.$patientrecord->medicalimage1) }}" alt="Medical Image 1"></td>
-                <td><img src="{{ asset('public/storage/'.$patientrecord->medicalimage2) }}" alt="Medical Image 2"></td>
+                <td><img src="{{ asset($patientrecord->medicalimage1) }}" alt="Medical Image 1" style='width:100px; height:100px'></td>
+                <td><img src="{{ asset($patientrecord->medicalimage2) }}" alt="Medical Image 2"style='width:100px; height:100px'></td>
                 <td>
                     <button type="button" class="action-btn">
                         <a href="{{ route('patientRecords#edit',encrypt($patientrecord->id)) }}">Edit

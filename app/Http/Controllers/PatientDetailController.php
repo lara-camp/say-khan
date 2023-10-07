@@ -16,36 +16,37 @@ class PatientDetailController extends Controller
         $this->patientDetail = $patientDetail;
         $this->patient = $patient;
     }
+    // View Patient Detail List
     public function list()
     {
         $patients = $this->patientDetail->all();
         return view('patient.details.list', compact('patients'));
     }
-
+    // View Patient Detail Create Page
     public function createPage()
     {
         $patients = $this->patient->all();
         return view('patient.details.create', compact('patients'));
     }
-
+    // Store Patient Detail Data
     public function create(Request $request)
     {
         $this->patientDetail->store($request);
         return redirect()->route('patientDetails#list');
     }
-
+    // View Patient Detail Edit Page
     public function edit($id)
     {
         $patient = $this->patientDetail->edit($id);
         return view('patient.details.edit', compact('patient'));
     }
-
+    // Update Patient Detail Data
     public function update($id, Request $request)
     {
         $this->patientDetail->update($id, $request);
         return redirect()->route('patientDetails#list');
     }
-
+    // Delete Patient Detail Data
     public function delete($id)
     {
         $this->patientDetail->delete($id);

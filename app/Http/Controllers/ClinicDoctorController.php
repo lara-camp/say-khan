@@ -34,10 +34,10 @@ class ClinicDoctorController extends Controller
         $checkDupe = $this->clinicdoctor->checkDuplication($request);
         if (!$checkDupe) {
             $this->clinicdoctor->store($request);
-            return redirect()->route('clinic_doctor_create')->with('success', 'It has been saved');
+            return redirect()->route('clinicDoctor.create')->with('success', 'It has been saved');
         }
         else{
-            return redirect()->route('clinic_doctor_create')->with('error', 'There is already a record of the same clinic and doctor');
+            return redirect()->route('clinicDoctor.create')->with('error', 'There is already a record of the same clinic and doctor');
         }
     }
 
@@ -51,13 +51,13 @@ class ClinicDoctorController extends Controller
     public function update(ClinicDoctor $id, Request $request){
         
         $this->clinicdoctor->update($id, $request);
-        return redirect()->route('clinic_doctor_index');
+        return redirect()->route('clinicDoctor.index');
 
     }
     //Delete Clinic Doctor data
     public function delete($id){
         
         $this->clinicdoctor->delete($id);
-        return redirect()->route('clinic_doctor_index');
+        return redirect()->route('clinicDoctor.index');
     }    
 }

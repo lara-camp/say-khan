@@ -7,6 +7,7 @@
     >
     @csrf
       @method('PUT')
+      
       <div class="row mb-1">
         <div class="col-6 offset-1 mb-2">
           <input type="text" name="name" class="form-control" placeholder="Name" value="{{old('name',$doctor->name)}}">

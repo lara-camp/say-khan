@@ -7,14 +7,12 @@
 <body>
     <h1>Give Feedback</h1>
     <div class="formSection" stlye="border: 1px solid black;">
-        <form action="{{ route('feedback_register') }}" method="POST">
+        <form action="{{ route('feedback.store') }}" method="POST">
             @csrf
             <input name="doctor_id" type="text" value="{{$id->id}}" hidden>
             <input type="text" value="{{$id->name}}" readonly>
             <h1>What's on your mind?</h1>
-            
             <div class="row" style="padding-left: 50px; ">
-
                 <label for="clinic_id">Is this about a Clinic?</label>
                 <select name="clinic_id" id="">
                     @foreach($feedbacks['clinicdoctor'] as $clinicdoctor)
@@ -27,7 +25,6 @@
 
                 <label for="description">Description</label>
                 <textarea name="description" id="" cols="30" rows="10" placeholder="Enter the full Feedback"></textarea>
-
             </div>
             <button>Submit Feedback</button>
         </form>

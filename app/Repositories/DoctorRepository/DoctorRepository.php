@@ -12,39 +12,33 @@ use Illuminate\Validation\Rules\Password;
 use App\Repositories\Interfaces\Doctor\DoctorInterface;
 
 class DoctorRepository implements DoctorInterface{
-    // Retrieve all doctor data in a descending order of creation
-    // public function all($id){
-        
-    // }
-    // Store doctor data 
+    // Store Doctor Data 
     public function store(Request $request){
         $data = $this->validateRegister($request);
         return  Doctor::create($data);
     }
-
-    // Update Doctor data
+    // Update Doctor Data
     public function update($id, Request $request){
         $data = $this->validateUpdate($request);
         Doctor::where('id',$id)->update($data);
     }
-    // Delete Doctor data
+    // Delete Doctor Data
     Public function delete($id){
         $data = $this->decryptId($id);
         return Doctor::find($data)->first()->delete();
     }
-
-    // Decrypt doctor id
+    // Decrypt Doctor ID
     public function decryptId($id)
     {
         try {
             $id = Crypt::decrypt($id);
-            return Doctor::find($id)->first();
+            return Doctor::find($id);
         }
         catch (DecryptException $de){
             abort(404);
         }
     }
-    // Retrieve data neccessary to buy subscription
+    // Validate Data to Store
     public function validateRegister(Request $request){
         $data = $request->validate([
             'name' => 'required',
@@ -65,7 +59,7 @@ class DoctorRepository implements DoctorInterface{
         $data['password'] = Hash::make($data['password']);
         return $data;
     }
-
+    // Validate Data to Update
     public function validateUpdate(Request $request)
     {
         $data= $request->validate([

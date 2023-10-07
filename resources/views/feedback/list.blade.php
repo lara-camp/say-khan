@@ -1,18 +1,15 @@
 @extends('Admin.layouts.master')
-@section('title', 'FeedBack Show')
+@section('title', 'FeedBack List')
 @section('content')
     <div class="container">
         <div class="d-flex align-items-center justify-content-between">
             <h1 class="mb-0 ">Role</h1>
         </div>
-
         @if (Session::has('success'))
             <div class="alter alert-warning" role="alert">
                 {{ Session::get('success') }}
             </div>
         @endif
-
-        {{-- table --}}
         <table class="table table-hover">
             <thead class="table-primary">
                 <tr>
@@ -23,7 +20,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 @if ($feedbacks->count() > 0)
                     @foreach ($feedbacks as $feedback)
                         <tr>
@@ -32,9 +28,10 @@
                             <td class="align-items-center">{{ $feedback->description }}</td>
                             <td class="align-items-center">
                                 <button class="btn btn-danger"
-                                    onclick="return confirm('Are you sure you want to delete this item?')"><a
-                                        href="{{ route('feedback_delete', encrypt($feedback->id)) }}"
-                                        class="text-white text-decoration-none">Delete</a></button>
+                                    onclick="return confirm('Are you sure you want to delete this item?')">
+                                    <a href="{{ route('feedback.delete', encrypt($feedback->id)) }}"
+                                    class="text-white text-decoration-none">Delete</a>
+                                </button>
                             </td>
                         </tr>
                     @endforeach
@@ -45,9 +42,7 @@
                         </td>
                     </tr>
                 @endif
-
             </tbody>
         </table>
-
     </div>
 @endsection

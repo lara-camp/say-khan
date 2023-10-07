@@ -9,24 +9,25 @@ use Illuminate\Support\Facades\Validator;
 
 class PatientDetailRepository implements PatientDetailInterface
 {
+    // Return All Patient Details Data
     public function all()
     {
         return PatientDetail::orderBy('created_at', 'desc')->get();
     }
-
+    // Store Patient Details Data
     public function store(Request $request)
     {
         $this->getPatientDetailValidation($request);
         $data = $this->getPatientDetailData($request);
         return PatientDetail::create($data);
     }
-
+    // Decrypt and Find Patient Details ID
     public function edit($id)
     {
         $decryptId = decrypt($id);
         return PatientDetail::find($decryptId);
     }
-
+    // Update Patient Details Data
     public function update($id, Request $request)
     {
         $validated = $request->validate([
@@ -42,13 +43,13 @@ class PatientDetailRepository implements PatientDetailInterface
 
         return PatientDetail::findOrFail($id)->update($data);
     }
-
+    // Delete Patient Details Data
     public function delete($id)
     {
         $decryptId = decrypt($id);
         return PatientDetail::find($decryptId)->delete();
     }
-
+    // Validate Patient Details Data
     protected function getPatientDetailValidation($request)
     {
         $customMessage = [
@@ -62,7 +63,7 @@ class PatientDetailRepository implements PatientDetailInterface
             'medical_history' => 'required|max:255',
         ], $customMessage)->validate();
     }
-
+    // Fetch Patient Details Data
     protected function getPatientDetailData($request)
     {
         return [
