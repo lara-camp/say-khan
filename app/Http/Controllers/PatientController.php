@@ -22,7 +22,7 @@ class PatientController extends Controller
         return view('patient.index', compact('patients'));
     }
      // View Patient Create Page
-    public function createPage()
+    public function create()
     {
         // $userId = Admin::find(1);
         // $data = RolePermission::where('role_id', $userId->role->id)->first();
@@ -30,10 +30,10 @@ class PatientController extends Controller
         return view('patient.create');
     }
      // Store Patient Data
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $this->patient->store($request);
-        return redirect()->route('patient#home');
+        return redirect()->route('patient.home');
     }
     // View Patient Edit Page
     public function edit($id)
@@ -45,7 +45,7 @@ class PatientController extends Controller
     public function update($id, Request $request)
     {
         $this->patient->update($id, $request);
-        return redirect()->route('patient#home');
+        return redirect()->route('patient.home');
     }
     // Delete Patient Data
     public function delete($id)

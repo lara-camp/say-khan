@@ -12,7 +12,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('patientRecords#update',$patientrecord->id) }}" method="POST" enctype='multipart/form-data'>
+        <form action="{{ route('patientRecords.update',$patientrecord->id) }}" method="POST" enctype='multipart/form-data'>
             @csrf
             <!-- demo data -->
             <div class="form-group">

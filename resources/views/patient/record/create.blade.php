@@ -12,12 +12,16 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('patientRecords#create') }}" method="POST" enctype='multipart/form-data'>
+        @if (Session::has('success'))
+        <div class="alter alert-warning" doctor="alert">
+            {{ Session::get('success') }}
+        </div>
+        @endif
+        <form action="{{ route('patientRecords.store', encrypt(auth()->guard('assistant')->user()->id)) }}" method="POST" enctype='multipart/form-data'>
             @csrf
             <!-- demo data -->
             <div class="form-group">
-                <label for="assistant_id">Assistant id:</label>
-                <input type="number" id="assistant_id" name="assistant_id" >
+                <input type="number" id="assistant_id" name="assistant_id"  value="{{ auth()->guard('assistant')->user()->id }}" readonly hidden>
             </div>
             <div class="form-group">
                 <label for="patient_id">Patient id:</label>
@@ -80,6 +84,7 @@
                 </select>
             </div>
             <button type="submit">Register</button>
+            <button type="button"><a href="{{ route('patientRecords.list', encrypt(auth()->guard('assistant')->user()->id)) }}">Back</a></button>
         </form>
     </div>
 @endsection

@@ -14,22 +14,22 @@ class PatientRecordController extends Controller
         $this->patientrecord = $patientrecord;
     }
     // View Patient Record List
-    public function list()
+    public function list($id)
     {
-        $patientrecords = $this->patientrecord->all();
+        $patientrecords = $this->patientrecord->all($id);
         return view('patient.record.list', compact('patientrecords'));
     }
     // View Patient Record Create Page
-    public function createPage()
+    public function create()
     {
         $patients = Patient::all();
         return view('patient.record.create', compact('patients'));
     }
     // Store Patient Record Data
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $this->patientrecord->store($request);
-        return redirect()->route('patientRecords#list');
+        return redirect()->route('patientRecords.create');
     }
     // View Patient Record Edit Page
     public function edit($id)
@@ -41,7 +41,7 @@ class PatientRecordController extends Controller
     public function update($id, Request $request)
     {
         $this->patientrecord->update($id, $request);
-        return redirect()->route('patientRecords#list');
+        return redirect()->route('patientRecords.list');
     }
     // Delete Patient Record Data
     public function delete($id)

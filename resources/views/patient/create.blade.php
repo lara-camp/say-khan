@@ -12,7 +12,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('patient#create') }}" method="POST">
+        <form action="{{ route('patient.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="name">Patient Name:</label>

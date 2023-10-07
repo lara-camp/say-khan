@@ -3,17 +3,30 @@
 namespace App\Repositories\PatientRecordRepository;
 
 
-use App\Models\PatientRecord;
+use App\Models\Assistant;
 use Illuminate\Http\Request;
+use App\Models\PatientRecord;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\Interfaces\PatientRecord\PatientRecordInterface;
 
 class PatientRecordRepository implements PatientRecordInterface
 {
     // Return all Patient Record Data
-    public function all()
+    public function all($id)
     {
-        return PatientRecord::orderBy('created_at', 'desc')->get();
+        $decryptId = decrypt($id);
+        $assistant = Assistant::find($decryptId);
+        if ($assistant) {
+            $clinicId = $assistant->clinic_id;
+            $patientRecords = PatientRecord::join('assistants', 'patient_records.assistant_id', '=', 'assistants.id')
+                ->where('assistants.clinic_id', '=', $clinicId)
+                ->select('patient_records.*')
+                ->get();
+            return $patientRecords;
+        } else {
+
+        }
+        
     }
     // Store Patient Record
     public function store(Request $request)
@@ -54,10 +67,10 @@ class PatientRecordRepository implements PatientRecordInterface
             $new_name1 = rand() . '.' . $image1->getClientOriginalExtension();
             $new_name2 = rand() . '.' . $image2->getClientOriginalExtension();
            
-            $image1->move(public_path('medicalimage1'), $new_name1);
-            $image2->move(public_path('medicalimage2'), $new_name2);
-            $image_file1 = "/medicalimage1/" . $new_name1;
-            $image_file2 = "/medicalimage2/" . $new_name2;
+            $image1->move(public_path('storage/medicalimage1'), $new_name1);
+            $image2->move(public_path('storage/medicalimage2'), $new_name2);
+            $image_file1 = "/storage/medicalimage1/" . $new_name1;
+            $image_file2 = "/storage/medicalimage2/" . $new_name2;
 
             return compact('image_file1', 'image_file2');
             }

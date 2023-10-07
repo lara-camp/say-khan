@@ -19,7 +19,10 @@ class DoctorRepository implements DoctorInterface{
     }
     // Update Doctor Data
     public function update($id, Request $request){
-        $data = $this->validateUpdate($request);
+        $id = $this->decryptId($id);
+        $this->validateUpdate($request);
+        $image = $this->storeImage($request);
+        $data = $this->getDoctorData($request, $image);
         Doctor::where('id',$id)->update($data);
     }
     // Delete Doctor Data
@@ -36,6 +39,17 @@ class DoctorRepository implements DoctorInterface{
         }
         catch (DecryptException $de){
             abort(404);
+        }
+    }
+    // Store Doctor Images
+    private function storeImage(Request $request)
+    {
+        $image =$request->file('image');
+        if ($image != null){ 
+            $new_name = rand() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('storage/Doctor'), $new_name);
+            $image_file = "/storage/Doctor/" . $new_name;
+            return compact('image_file');
         }
     }
     // Validate Data to Store
@@ -70,5 +84,21 @@ class DoctorRepository implements DoctorInterface{
             'address' => 'required',
         ]);
         return $data;
+    }
+    // Fetch Doctor  Data
+    protected function getDoctorData($request, $image)
+    {
+        $data = [
+            'name' => $request->name,
+            'speciality' => $request->speciality,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'address' => $request->address,
+            'image' => $image['image_file'] ?? null,
+        ];
+        $filteredData = array_filter($data, function ($value) {
+            return $value !== null;
+        });
+        return $filteredData;
     }
 }

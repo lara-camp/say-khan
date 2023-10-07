@@ -28,7 +28,7 @@ Route::group(['prefix' => 'assistant', 'middleware' => ['checkAuth:assistant']],
     Route::get('/', [AssistantController::class, 'index'])->name('assistant.index');
     Route::get('create', [AssistantController::class, 'create'])->name('assistant.create');
     Route::post('/', [AssistantController::class, 'store'])->name('assistant.store');
-    Route::get('{id}', [AssistantController::class, 'show'])->name('assistant.show');
+    Route::get('{id}', [AssistantController::class, 'list'])->name('assistant.list');
     Route::get('{id}/edit', [AssistantController::class, 'edit'])->name('assistant.edit');
     Route::put('{id}', [AssistantController::class, 'update'])->name('assistant.update');
     Route::delete('{id}', [AssistantController::class, 'destroy'])->name('assistant.destroy');
@@ -60,7 +60,7 @@ Route::get('delete/{id}', [FeedBackController::class, 'delete'])->name('feedback
 
 Route::get('/subscription-buy', [ClinicSubscriptionController::class, 'index'])->name('clinicSubscription.index');
 Route::get('/subscription-buy/create/{id}', [ClinicSubscriptionController::class, 'create'])->name('clinicSubscription.create');
-Route::post('/subscription-buy/create', [ClinicSubscriptionController::class, 'store'])->name('clinicSubscription.register');
+Route::post('/subscription-buy/create', [ClinicSubscriptionController::class, 'store'])->name('clinicSubscription.store');
 // Route::get('/subscription-buy/edit/{id}', [ClinicSubscriptionController::class, 'edit'])->name('clinicSubscription.edit');
 Route::put('/subscription-buy/{id}', [ClinicSubscriptionController::class, 'update'])->name('clinicSubscription.update');
 Route::delete('/subscription-buy/{id}', [ClinicSubscriptionController::class, 'delete'])->name('clinicSubscription.delete');

@@ -25,8 +25,7 @@ class AssistantController extends Controller
     }
     // Store Assistant Data
     public function store(Request $request)
-        {
-        {
+    {
             $data = $request->validate([
                 'name' => 'required',
                 'phone' =>  'required|min:9|max:11',
@@ -45,12 +44,11 @@ class AssistantController extends Controller
             $data['password'] = Hash::make($data['password']);
         $this->assistant->store($data);
         return redirect()->route('assistant.index')->with('success','successfully create ');
-        }
     }
     // View Assistant ## 
-    public function show(string $id){
+    public function list(string $id){
       $assistant =  $this->assistant->show($id);
-        return view('assistant.show',compact('assistant'));
+        return view('assistant.list',compact('assistant'));
     }
     // View Assistant Edit Page 
     public function edit(string $id){
