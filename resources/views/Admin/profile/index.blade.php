@@ -113,17 +113,20 @@
             function previewImage(event) {
                 const imageInput = event.target;
                 const previewImg = document.getElementById('myImg');
+                const img = imageInput.files[0];
+                if (img.size <= 2000000) {
+                    if (imageInput.files && img) {
+                        const reader = new FileReader();
 
-                if (imageInput.files && imageInput.files[0]) {
-                    const reader = new FileReader();
-
-                    reader.onload = function(e) {
-                        previewImg.src = e.target.result;
-                    };
-
-                    reader.readAsDataURL(imageInput.files[0]);
+                        reader.onload = function(image) {
+                            previewImg.src = image.target.result;
+                        };
+                        reader.readAsDataURL(img);
+                    } else {
+                        previewImg.src = "{{ asset('image/default_user.jpg') }}";
+                    }
                 } else {
-                    previewImg.src = "{{ asset('image/default_user.jpg') }}";
+                    window.alert("Image size more than 2MB.");
                 }
             }
         </script>
