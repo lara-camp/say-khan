@@ -50,7 +50,7 @@ class RegisterController extends Controller
                 $admin->image = $fileName;
                 $admin->save();
             }
-            return redirect()->route('admin.clinicList')->with(['success' => 'Admin acc was successfully update.']);
+            return redirect()->route('admin.index')->with(['success' => 'Admin acc was successfully update.']);
         } else {
             return redirect()->route('user#register', compact('roleName'))->with(['error' => "Oops Something was not right."]);
         }
@@ -66,7 +66,7 @@ class RegisterController extends Controller
         $fileName = uniqid() . "_" . $request->file('image')->getClientOriginalName();
         $folderName = "public/$roleName";
 
-        if ($roleName == "Doctor" || $roleName == "Assistant") {
+        if ($roleName == "Doctor" || $roleName == "Assistant" || $roleName == "Admin") {
             $request->file('image')->storeAs($folderName, $fileName);
             return $fileName;
         }
