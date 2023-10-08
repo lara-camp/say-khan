@@ -3,6 +3,7 @@
 namespace App\Repositories\AdminRepository;
 
 use App\Models\Admin;
+use App\Models\ClinicSubscription;
 use App\Repositories\Interfaces\Admin\AdminInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +50,18 @@ class AdminRepository implements AdminInterface
         }
         return back()->withErrors(['oldPassword' => 'Current Password is not incorrect.']);
 
+    }
+
+    // Subscription Report
+    public function report()
+    {
+        return ClinicSubscription::all();
+    }
+
+    public function reportSearch(Request $request)
+    {
+        $dataSearch = $request->dataSearch;
+        return ClinicSubscription::whereDate('created_at', $dataSearch)->get();
     }
 
     protected function accountValidationCheck($request)

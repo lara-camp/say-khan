@@ -37,6 +37,21 @@ class AdminController extends Controller
 
     public function report()
     {
-        return view('Admin.report.index');
+        $datas = $this->admin->report();
+        $totalFee = 0;
+        foreach ($datas as $data) {
+            $totalFee += $data->subscription->fee;
+        }
+        return view('Admin.report.index', compact('datas', 'totalFee'));
+    }
+
+    public function reportSearch(Request $request)
+    {
+        $datas = $this->admin->reportSearch($request);
+        $totalFee = 0;
+        foreach ($datas as $data) {
+            $totalFee += $data->subscription->fee;
+        }
+        return view('Admin.report.index', compact('datas', 'totalFee'));
     }
 }

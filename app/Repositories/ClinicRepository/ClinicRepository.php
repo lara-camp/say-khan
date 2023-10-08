@@ -3,10 +3,10 @@
 namespace App\Repositories\ClinicRepository;
 
 use App\Models\Clinic;
-
+use App\Repositories\Interfaces\Clinic\ClinicInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Repositories\Interfaces\Clinic\ClinicInterface;
+use Illuminate\Validation\Rule;
 
 class ClinicRepository implements ClinicInterface
 {
@@ -19,7 +19,7 @@ class ClinicRepository implements ClinicInterface
     // Creating Clinic Data
     public function store(Request $request)
     {
-        $this->validateCreateData($request);
+        $this->validateCreateData($request, null);
         $data = $this->getCreateData($request);
         return Clinic::create($data);
     }
@@ -39,17 +39,17 @@ class ClinicRepository implements ClinicInterface
     public function update($id, Request $request)
     {
         $decryptId = decrypt($id);
-        $this->validateCreateData($request);
+        $this->validateCreateData($request, $decryptId);
         $data = $this->getCreateData($request);
         return Clinic::find($decryptId)->update($data);
     }
 
     // exported function
-    protected function validateCreateData($request)
+    protected function validateCreateData($request, $clinicId)
     {
         Validator::make($request->all(), [
-            'name' => 'required|unique:clinics,name',
-            'address' => 'required'
+            'name' => ['required', Rule::unique('clinics', 'name')->ignore($clinicId)],
+            'address' => 'required',
         ])->validate();
     }
 
@@ -57,7 +57,7 @@ class ClinicRepository implements ClinicInterface
     {
         return [
             'name' => $request->name,
-            'address' => $request->address
+            'address' => $request->address,
         ];
     }
 }

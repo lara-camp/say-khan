@@ -9,11 +9,11 @@
         <div class="col-span-2 col-start-4 self-center bg-gray flex flex-col items-center px-10 py-20 rounded-3xl">
             <h1 class="text-h0 text-purple text-center font-semibold tracking-widest">Clinic Edit</h1>
             <h2 class="text-b2 text-purple my-5">edit {{ $data->value }}</h2>
-            <form action="{{ route('admin.clinicUpdate', $data->id) }}" method="POST" class="w-full flex flex-col gap-3">
+            <form action="{{ route('admin.clinicUpdate', encrypt($data->id)) }}" method="POST"
+                class="w-full flex flex-col gap-3">
                 @csrf
-                <x-input-field id="clinic-name" name="clinic-name" :value="$data->name" placeholder="Clinic Name"
-                    color="red" />
-                <x-input-field id="clinic-address" name="clinic-address" :value="$data->address" placeholder="Clinic Address"
+                <x-input-field id="clinic-name" name="name" :value="$data->name" placeholder="Clinic Name" color="red" />
+                <x-input-field id="clinic-address" name="address" :value="$data->address" placeholder="Clinic Address"
                     color="red" />
                 {{-- <x-input-field id="clinic-status" name="clinic-status" :value="$data->status" placeholder="Clinic Status"
                     color="red" /> --}}

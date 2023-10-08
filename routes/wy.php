@@ -73,6 +73,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['checkAuth:admin']], functio
     });
 
     Route::get('report', [AdminController::class, 'report'])->name('admin.report');
+    Route::post('report', [AdminController::class, 'reportSearch'])->name('admin.reportSearch');
 });
 
 Route::get('pending', [RegisterController::class, 'pending'])->name('user.pending');
