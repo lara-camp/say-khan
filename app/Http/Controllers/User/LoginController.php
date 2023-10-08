@@ -12,7 +12,7 @@ class loginController extends Controller
     public function login()
     {
         // $roles = Role::all();
-        return view('user.login');
+        return view('pages.authentication.login');
 
     }
 
