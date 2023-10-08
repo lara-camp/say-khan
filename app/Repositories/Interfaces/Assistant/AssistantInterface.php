@@ -3,6 +3,8 @@
 
 namespace App\Repositories\Interfaces\Assistant;
 
+use Illuminate\Http\Request;
+
 Interface AssistantInterface{
     public function all();
     
@@ -15,4 +17,6 @@ Interface AssistantInterface{
     public function update($data,$id);
     
     public function delete($id);
+
+    public function changePassword(Request $request);
 }

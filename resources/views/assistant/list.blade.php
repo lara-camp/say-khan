@@ -32,20 +32,6 @@
                     <td class="align-items-center">{{ $assistant->phone }}</td>
                     <td class="align-items-center">{{ $assistant->email }}</td>
                     <td class="align-items-center">{{ $assistant->address }}</td>
-                    <td class="align-items-center">
-                        <div class="btn-group" assistant="group">
-                            <a href="{{ route('assistant.show', encrypt($assistant->id)) }}" type="button"
-                                class="btn btn-warning">Details</a>
-                            <a href="{{ route('assistant.edit', encrypt($assistant->id)) }}" type="button"
-                                class="btn btn-danger">Edit</a>
-                            <form method="post" action="{{ route('assistant.destroy', encrypt($assistant->id)) }}">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-success"
-                                    onclick="return confirm('i want to delete this ')" alt="">Delete</button>
-                            </form>
-                        </div>
-                    </td>
                 </tr>
             @endforeach
         @else

@@ -21,11 +21,12 @@
         <tr>
             <td class="align-items-center">
                 <div class="btn-group" assistant="group">
-                    <a href="{{ route('assistant.edit', encrypt(auth()->guard('assistant')->user()->id)) }}" type="button" class="btn btn-danger">Edit</a>
-                    <a href="{{ route('patient.home', encrypt(auth()->guard('assistant')->user()->id)) }}"  type="button" class="btn btn-danger">Patient</a>
-                    <a href="{{ route('patientDetails.list' , encrypt(auth()->guard('assistant')->user()->id))}}"  type="button" class="btn btn-danger">Patients Detail</a>
-                    <a href="{{ route('patientRecords.list' , encrypt(auth()->guard('assistant')->user()->id))}}"  type="button" class="btn btn-danger">Patients Record</a>
-                    <a href="{{ route('patient.create' , encrypt(auth()->guard('assistant')->user()->id))}}"  type="button" class="btn btn-danger">Create Patient</a>
+                    <a href="{{ route('assistant.edit', encrypt($assistant->id)) }}" type="button" class="btn btn-danger">Profile</a>
+                    <a href="{{ route('assistant.changePasswordPage') }}" type="button" class="btn btn-danger">Change Password</a>
+                    <a href="{{ route('patient.list', encrypt($assistant->id)) }}"  type="button" class="btn btn-danger">Patient</a>
+                    <a href="{{ route('patientDetails.list' , encrypt($assistant->id))}}"  type="button" class="btn btn-danger">Patients Detail</a>
+                    <a href="{{ route('patientRecords.list' , encrypt($assistant->id))}}"  type="button" class="btn btn-danger">Patients Record</a>
+                    <a href="{{ route('patient.create')}}"  type="button" class="btn btn-danger">Create Patient</a>
                 </div>
             </td>
         </tr>

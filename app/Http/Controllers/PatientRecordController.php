@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\Interfaces\PatientRecord\PatientRecordInterface;
 
 class PatientRecordController extends Controller
@@ -16,20 +17,23 @@ class PatientRecordController extends Controller
     // View Patient Record List
     public function list($id)
     {
+        $assistant = Auth::guard('assistant')->user();
         $patientrecords = $this->patientrecord->all($id);
-        return view('patient.record.list', compact('patientrecords'));
+        return view('patient.record.list', compact('patientrecords', 'assistant'));
     }
     // View Patient Record Create Page
     public function create()
     {
-        $patients = Patient::all();
+        $userId = Auth::guard('assistant')->user()->id;
+        $patients = $this->patientrecord->getPatient($userId);
         return view('patient.record.create', compact('patients'));
     }
     // Store Patient Record Data
     public function store(Request $request)
     {
         $this->patientrecord->store($request);
-        return redirect()->route('patientRecords.create');
+        $assistant = Auth::guard('assistant')->user()->id;
+        return redirect()->route('patientRecords.list', encrypt($assistant));
     }
     // View Patient Record Edit Page
     public function edit($id)
@@ -41,7 +45,8 @@ class PatientRecordController extends Controller
     public function update($id, Request $request)
     {
         $this->patientrecord->update($id, $request);
-        return redirect()->route('patientRecords.list');
+        $assistant = Auth::guard('assistant')->user()->id;
+        return redirect()->route('patientRecords.list', encrypt($assistant));
     }
     // Delete Patient Record Data
     public function delete($id)

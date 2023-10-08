@@ -2,36 +2,37 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\ServiceProvider;
+use App\Repositories\Interfaces\Role\RoleInterface;
+use App\Repositories\RoleRepository\RoleRepository;
 use App\Repositories\AdminRepository\AdminRepository;
-use App\Repositories\AssistantRepository\AssistantRepository;
-use App\Repositories\ClinicDoctorRepository\ClinicDoctorRepository;
-use App\Repositories\ClinicRepository\ClinicRepository;
-use App\Repositories\ClinicSubscriptionRepository\ClinicSubscriptionRepository;
-use App\Repositories\DoctorReportRepository\DoctorReportRepository;
-use App\Repositories\DoctorRepository\DoctorRepository;
-use App\Repositories\FeedBackRepository\FeedBackRepository;
 use App\Repositories\Interfaces\Admin\AdminInterface;
-use App\Repositories\Interfaces\Assistant\AssistantInterface;
-use App\Repositories\Interfaces\ClinicDoctor\ClinicDoctorInterface;
-use App\Repositories\Interfaces\ClinicSubscription\ClinicSubscriptionInterface;
+use App\Repositories\ClinicRepository\ClinicRepository;
+use App\Repositories\DoctorRepository\DoctorRepository;
 use App\Repositories\Interfaces\Clinic\ClinicInterface;
-use App\Repositories\Interfaces\DoctorReport\DoctorReportInterface;
+use App\Repositories\Interfaces\Doctor\DoctorInterface;
+use App\Repositories\Interfaces\Patient\PatientInterface;
+use App\Repositories\PatientRepository\PatientRepository;
+use App\Repositories\FeedBackRepository\FeedBackRepository;
 use App\Repositories\Interfaces\Feedback\FeedBackInterface;
+use App\Repositories\AssistantRepository\AssistantRepository;
+use App\Repositories\Interfaces\Assistant\AssistantInterface;
+use App\Repositories\Interfaces\Permission\PermissionInterface;
+use App\Repositories\PermissionRepository\PermissionRepository;
+use App\Repositories\ClinicDoctorRepository\ClinicDoctorRepository;
+use App\Repositories\DoctorReportRepository\DoctorReportRepository;
+use App\Repositories\Interfaces\ClinicDoctor\ClinicDoctorInterface;
+use App\Repositories\Interfaces\DoctorReport\DoctorReportInterface;
+use App\Repositories\Interfaces\Subscription\SubscriptionInterface;
+use App\Repositories\SubscriptionRepository\SubscriptionRepository;
 use App\Repositories\Interfaces\PatientDetail\PatientDetailInterface;
 use App\Repositories\Interfaces\PatientRecord\PatientRecordInterface;
-use App\Repositories\Interfaces\Patient\PatientInterface;
-use App\Repositories\Interfaces\Permission\PermissionInterface;
-use App\Repositories\Interfaces\RolePermission\RolePermissionInterface;
-use App\Repositories\Interfaces\Role\RoleInterface;
-use App\Repositories\Interfaces\Subscription\SubscriptionInterface;
 use App\Repositories\PatientDetailRepository\PatientDetailRepository;
 use App\Repositories\PatientRecordRepository\PatientRecordRepository;
-use App\Repositories\PatientRepository\PatientRepository;
-use App\Repositories\PermissionRepository\PermissionRepository;
+use App\Repositories\Interfaces\RolePermission\RolePermissionInterface;
 use App\Repositories\RolePermissionRepository\RolePermissionRepository;
-use App\Repositories\RoleRepository\RoleRepository;
-use App\Repositories\SubscriptionRepository\SubscriptionRepository;
-use Illuminate\Support\ServiceProvider;
+use App\Repositories\ClinicSubscriptionRepository\ClinicSubscriptionRepository;
+use App\Repositories\Interfaces\ClinicSubscription\ClinicSubscriptionInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {

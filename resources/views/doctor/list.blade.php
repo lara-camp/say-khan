@@ -17,7 +17,6 @@
     </div>
 @endif
 
-{{-- table --}}
 <table class="table table-hover">
     <thead class="table-primary">
         <tr>

@@ -3,10 +3,10 @@
 @section('content')
     <div class="container-fluid">
         <h2>Patient Details</h2>
-        <button type="button" class="btn-create"><a href="{{ route('assistant.index') }}">Home</a></button>
-        <button type="button" class="btn-create"><a href="{{ route('patient.home') }}">Patient</a></button>
-        <button type="button" class="btn-create"><a href="{{ route('patientDetails.list') }}">Patients Detail</a></button>
-        <button type="button" class="btn-create"><a href="{{ route('patientRecords.list', encrypt(auth()->guard('assistant')->user()->id)) }}">Patients Record</a></button>
+        <button type="button" class="btn-create"><a href="{{ route('assistant.index', encrypt($assistant->id)) }}">Home</a></button>
+        <button type="button" class="btn-create"><a href="{{ route('patient.list', encrypt($assistant->id)) }}">Patient</a></button>
+        <button type="button" class="btn-create"><a href="{{ route('patientDetails.list', encrypt($assistant->id)) }}">Patients Detail</a></button>
+        <button type="button" class="btn-create"><a href="{{ route('patientRecords.list', encrypt($assistant->id)) }}">Patients Record</a></button>
         <button type="button" class="btn-create"><a href="{{ route('patientDetails.create') }}">Create Details</a></button>
         @if ($patients->isEmpty())
             <div class="record">No records found.</div>

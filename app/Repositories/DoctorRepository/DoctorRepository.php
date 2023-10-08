@@ -3,11 +3,14 @@
 
 namespace App\Repositories\DoctorRepository;
 
+use Carbon\Carbon;
 use App\Models\Doctor;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use App\Repositories\Interfaces\Doctor\DoctorInterface;
 
@@ -23,7 +26,7 @@ class DoctorRepository implements DoctorInterface{
         $this->validateUpdate($request);
         $image = $this->storeImage($request);
         $data = $this->getDoctorData($request, $image);
-        Doctor::where('id',$id)->update($data);
+        Doctor::find($id)->first()->update($data);
     }
     // Delete Doctor Data
     Public function delete($id){
@@ -81,7 +84,7 @@ class DoctorRepository implements DoctorInterface{
             'speciality' => 'required',
             'phone' => 'required|min:9|max:11',
             'email' => 'required',
-            'address' => 'required',
+            'address' => 'required|string|min:5|max:255',
         ]);
         return $data;
     }
@@ -100,5 +103,40 @@ class DoctorRepository implements DoctorInterface{
             return $value !== null;
         });
         return $filteredData;
+    }
+
+    public function changePassword(Request $request)
+    {
+        $this->checkPasswordValidation($request);
+        $currentDoctor = Auth::guard('doctor')->user();
+        $currentId = $currentDoctor->id;
+        $currentDoctorPassword = $currentDoctor->password;
+        if (Hash::check($request->oldPassword, $currentDoctorPassword)) {
+            $data = ['password' => Hash::make($request->newPasswordConfirm)];
+            Doctor::find($currentId)->update($data);
+            return back()->with(['success' => 'Password was updated.']);
+        }
+        return back()->withErrors(['oldPassword' => 'Current Password is not incorrect.']);
+    }
+
+    protected function checkPasswordValidation($request)
+    {
+        $rules = [
+            'oldPassword' => 'required|min:6',
+            'newPassword' => ['required',
+                Password::min(6)
+                    ->letters()
+                    ->numbers()
+                    ->mixedCase()
+                    ->symbols()],
+            'newPasswordConfirm' => 'required|same:newPassword',
+        ];
+        $messages = [
+            'oldPassword.required' => "Old Password must be filled.",
+            'newPassword.required' => "New Password must be Filled.",
+            'newPassword.min' => 'The password must be at least :min characters long and must contain at least one letter, one number, one capitalized letter, and one special character.',
+            'newPasswordConfirm.required' => "New Password Confirmation must be Filled.",
+        ];
+        Validator::make($request->all(), $rules, $messages)->validate();
     }
 }

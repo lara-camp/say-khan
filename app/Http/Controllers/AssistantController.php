@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use App\Repositories\Interfaces\Assistant\AssistantInterface;
@@ -16,8 +17,8 @@ class AssistantController extends Controller
     }
     // View Assistant Index Page
     public function index(){
-        $assistants =$this->assistant->all();
-        return view('assistant.index',compact('assistants'));
+        $assistant = Auth::guard('assistant')->user();
+        return view('assistant.index',compact('assistant'));
     }
     // View Assistant Create Page 
     public function create(){
@@ -45,10 +46,10 @@ class AssistantController extends Controller
         $this->assistant->store($data);
         return redirect()->route('assistant.index')->with('success','successfully create ');
     }
-    // View Assistant ## 
-    public function list(string $id){
-      $assistant =  $this->assistant->show($id);
-        return view('assistant.list',compact('assistant'));
+    // View Assistant list 
+    public function list(){
+        $assistants =$this->assistant->all();
+        return view('assistant.list',compact('assistants'));
     }
     // View Assistant Edit Page 
     public function edit(string $id){
@@ -77,5 +78,15 @@ class AssistantController extends Controller
         $this->assistant->delete($id);
         return redirect()->route('assistant.index')->with('success','Delete  Successfully');
     
-    }   
+    }
+    // View Assistant Change Password Page
+    public function changePasswordPage()
+    {
+        return view('assistant.changePassword');
+    }
+    // Change Assistant Password
+    public function changePassword(Request $request)
+    {
+        return $this->assistant->changePassword($request);
+    }
 }

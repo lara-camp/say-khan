@@ -13,7 +13,7 @@
 @endif
 
 
-<h2>Welcome {{ Auth::guard('doctor')->user()->name }}</h2>
+<h2>Welcome {{ $doctor->name }}</h2>
 
 <table class="table table-hover">
     <thead class="table-primary">
@@ -25,10 +25,11 @@
         <tr>
             <td class="align-items-center">
                 <div class="btn-group" doctor="group">
-                    <a href="{{ route('feedback.create', encrypt(auth()->guard('doctor')->user()->id)) }}" type="button" class="btn btn-danger">Give Feedback</a>
-                    <a href="{{ route('doctor.report.income', encrypt(auth()->guard('doctor')->user()->id)) }}" type="button" class="btn btn-danger">Income Report</a>
-                    <a href="{{ route('doctor.edit', encrypt(auth()->guard('doctor')->user()->id)) }}" type="button" class="btn btn-danger">Edit</a>
-                    <a href="{{ route('clinicSubscription.create', encrypt(auth()->guard('doctor')->user()->id)) }}" type="button" class="btn btn-danger">Buy Subscription</a>
+                    <a href="{{ route('doctor.edit', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Profile</a>
+                    <a href="{{ route('doctor.changePasswordPage') }}" type="button" class="btn btn-danger">Change Password</a>
+                    <a href="{{ route('feedback.create', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Give Feedback</a>
+                    <a href="{{ route('doctor.report.income', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Income Report</a>
+                    <a href="{{ route('clinicSubscription.create', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Buy Subscription</a>
                 </div>
             </td>
         </tr>

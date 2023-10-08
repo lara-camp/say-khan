@@ -24,7 +24,7 @@
                 <input type="number" id="assistant_id" name="assistant_id"  value="{{ auth()->guard('assistant')->user()->id }}" readonly hidden>
             </div>
             <div class="form-group">
-                <label for="patient_id">Patient id:</label>
+                <label for="patient_id">Patient Name:</label>
                 <select name="patient_id" id="patient_id">
                     @foreach($patients as $patient)
                     <option value="{{ $patient->id }}">{{ $patient->name }}</option>
@@ -34,7 +34,7 @@
             <!--  -->
             <div class="form-group">
                 <label for="bodytemp">Body Temp:</label>
-                <input type="text" id="bodytemp" name="bodytemp" value="{{ old('bodytemp') }}">
+                <input type="number" id="bodytemp" name="bodytemp" value="{{ old('bodytemp') }}">
             </div>
             <div class="form-group">
                 <label for="currentsituation">Current Situation:</label>
@@ -54,11 +54,11 @@
             </div>
             <div class="form-group">
                 <label for="weight">Weight:</label>
-                <input type="number" id="weight" name="weight" value="{{ old('heartrate') }}">
+                <input type="number" id="weight" step="0.1" name="weight" value="{{ old('heartrate') }}">
             </div>
             <div class="form-group">
                 <label for="height">Height:</label>
-                <input type="number" id="height" name="height" value="{{ old('heartrate') }}">
+                <input type="number" id="height" step="0.1" name="height" value="{{ old('heartrate') }}">
             </div>
             <div class="form-group">
                 <label for="totalfee">Total Fee:</label>
@@ -66,11 +66,11 @@
             </div>
             <div class="form-group">
                 <label for="medicalimage1">Medical Image 1:</label>
-                <input type="file" id="medicalimage1" name="medicalimage1" value="{{ old('medicalimage1') }}">
+                <input type="file" id="medicalimage1" name="medicalimage1" accept="image/*" value="{{ old('medicalimage1') }}">
             </div>
             <div class="form-group">
                 <label for="medicalimage2">Medical Image 2:</label>
-                <input type="file" id="medicalimage2" name="medicalimage2" value="{{ old('medicalimage2') }}">
+                <input type="file" id="medicalimage2" name="medicalimage2" accept="image/*" value="{{ old('medicalimage2') }}">
             </div>
             <div class="form-group">
                 <label for="status">Status:</label>

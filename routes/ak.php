@@ -19,6 +19,8 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['checkAuth:doctor']], funct
     Route::get('list', [DoctorController::class, 'list'])->name('doctor.list');
     Route::get('report/income/{id}', [DoctorReportController::class, 'showIncomeReport'])->name('doctor.report.income');
     Route::post('report/income/{id}', [DoctorReportController::class, 'fetchIncomeReport'])->name('doctor.report.fetch');
+    Route::get('changePassword', [DoctorController::class, 'changePasswordPage'])->name('doctor.changePasswordPage');
+    Route::post('changePassword', [DoctorController::class, 'changePassword'])->name('doctor.changePassword');
 });
 
 // End of Doctor routes
@@ -28,11 +30,12 @@ Route::group(['prefix' => 'assistant', 'middleware' => ['checkAuth:assistant']],
     Route::get('/', [AssistantController::class, 'index'])->name('assistant.index');
     Route::get('create', [AssistantController::class, 'create'])->name('assistant.create');
     Route::post('/', [AssistantController::class, 'store'])->name('assistant.store');
-    Route::get('{id}', [AssistantController::class, 'list'])->name('assistant.list');
     Route::get('{id}/edit', [AssistantController::class, 'edit'])->name('assistant.edit');
     Route::put('{id}', [AssistantController::class, 'update'])->name('assistant.update');
     Route::delete('{id}', [AssistantController::class, 'destroy'])->name('assistant.destroy');
-
+    Route::get('list', [AssistantController::class, 'list'])->name('assistant.list');
+    Route::get('changePassword', [AssistantController::class, 'changePasswordPage'])->name('assistant.changePasswordPage');
+    Route::post('changePassword', [AssistantController::class, 'changePassword'])->name('assistant.changePassword');
 });
 // End of Assistant routes
 

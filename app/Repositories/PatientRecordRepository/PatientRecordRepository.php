@@ -3,6 +3,7 @@
 namespace App\Repositories\PatientRecordRepository;
 
 
+use App\Models\Patient;
 use App\Models\Assistant;
 use Illuminate\Http\Request;
 use App\Models\PatientRecord;
@@ -21,12 +22,26 @@ class PatientRecordRepository implements PatientRecordInterface
             $patientRecords = PatientRecord::join('assistants', 'patient_records.assistant_id', '=', 'assistants.id')
                 ->where('assistants.clinic_id', '=', $clinicId)
                 ->select('patient_records.*')
+                ->orderBy('created_at', 'desc')
                 ->get();
             return $patientRecords;
         } else {
 
         }
-        
+    }
+    public function getPatient($userId)
+    {
+        $assistant = Assistant::find($userId);
+        if ($assistant) {
+            $clinicId = $assistant->clinic_id;
+            $patients = Patient::where('patients.clinic_id', '=', $clinicId)
+                ->select('patients.*')
+                ->orderBy('created_at', 'desc')
+                ->get();
+            return $patients;
+        } else {
+
+        }
     }
     // Store Patient Record
     public function store(Request $request)
@@ -79,16 +94,16 @@ class PatientRecordRepository implements PatientRecordInterface
     protected function getPatientRecordValidationData($request)
     {
         Validator::make($request->all(), [
-            'bodytemp' => 'required|max:255',
+            'bodytemp' => 'required|numeric|digits_between:1,4',
             'currentsituation' => 'required',
-            'bloodpressure' => 'required',
-            'heartrate' => 'required',
+            'bloodpressure' => 'required|numeric|digits_between:1,4',
+            'heartrate' => 'required|numeric|digits_between:1,3',
             'remark' => 'required',
-            'weight' => 'required',
-            'height' => 'required',
+            'weight' => 'required|numeric|between:0,999.99',
+            'height' => 'required|numeric|between:0,999.99',
             'medicalimage1' => 'image|mimes:jpeg,png,jpg,gif',
             'medicalimage2' => 'image|mimes:jpeg,png,jpg,gif',
-            'totalfee' => 'required',
+            'totalfee' => 'required|numeric|digits_between:1,10',
             'patient_id' => 'required',
             'assistant_id' => 'required',
             'status' => 'required'
@@ -97,7 +112,7 @@ class PatientRecordRepository implements PatientRecordInterface
     // Fetch Patient Record Data
     protected function getPatientRecordData($request, $images)
     {
-        return [
+        $data = [
             'bodytemp' => $request->bodytemp,
             'currentsituation' => $request->currentsituation,
             'bloodpressure' => $request->bloodpressure,
@@ -109,8 +124,12 @@ class PatientRecordRepository implements PatientRecordInterface
             'patient_id' => $request->patient_id,
             'assistant_id' => $request->assistant_id,
             'status' => $request->status,
-            'medicalimage1' => $images['image_file1'],
-            'medicalimage2' => $images['image_file2'],
+            'medicalimage1' => $images['image_file1'] ?? null,
+            'medicalimage2' => $images['image_file2'] ?? null,
         ];
+        $filteredData = array_filter($data, function ($value) {
+            return $value !== null;
+        });
+        return $filteredData;
     }
 }

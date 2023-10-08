@@ -27,13 +27,13 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('user.logout');
 
 Route::prefix('patient')->group(function () {
     //get method
-    Route::get('list', [PatientController::class, 'home'])->name('patient.home');
+    Route::get('list/{id}', [PatientController::class, 'list'])->name('patient.list');
     Route::get('create', [PatientController::class, 'create'])->name('patient.create');
     Route::get('edit/{id}', [PatientController::class, 'edit'])->name('patient.edit');
     Route::get('delete/{id}', [PatientController::class, 'delete'])->name('patient.delete');
     // detail
     Route::get('detail/create', [PatientDetailController::class, 'create'])->name('patientDetails.create');
-    Route::get('detail/list', [PatientDetailController::class, 'list'])->name('patientDetails.list');
+    Route::get('detail/list/{id}', [PatientDetailController::class, 'list'])->name('patientDetails.list');
     Route::get('detail/edit/{id}', [PatientDetailController::class, 'edit'])->name('patientDetails.edit');
     Route::get('detail/delete/{id}', [PatientDetailController::class, 'delete'])->name('patientDetails.delete');
 

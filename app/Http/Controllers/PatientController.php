@@ -6,6 +6,7 @@ use App\Models\Admin;
 use Illuminate\Http\Request;
 
 use App\Models\RolePermission;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\Interfaces\Patient\PatientInterface;
 
 class PatientController extends Controller
@@ -16,24 +17,23 @@ class PatientController extends Controller
         $this->patient = $patient;
     }
     // View Patient Index
-    public function home()
+    public function list($id)
     {
-        $patients = $this->patient->all();
-        return view('patient.index', compact('patients'));
+        $assistant = Auth::guard('assistant')->user();
+        $patients = $this->patient->all($id);
+        return view('patient.index', compact('patients', 'assistant'));
     }
      // View Patient Create Page
     public function create()
     {
-        // $userId = Admin::find(1);
-        // $data = RolePermission::where('role_id', $userId->role->id)->first();
-        // dd($data->permission->key == 'R');
         return view('patient.create');
     }
      // Store Patient Data
     public function store(Request $request)
     {
         $this->patient->store($request);
-        return redirect()->route('patient.home');
+        $assistant = Auth::guard('assistant')->user()->id;
+        return redirect()->route('patient.list', encrypt($assistant));
     }
     // View Patient Edit Page
     public function edit($id)
@@ -45,7 +45,8 @@ class PatientController extends Controller
     public function update($id, Request $request)
     {
         $this->patient->update($id, $request);
-        return redirect()->route('patient.home');
+        $assistant = Auth::guard('assistant')->user()->id;
+        return redirect()->route('patient.list', encrypt($assistant));
     }
     // Delete Patient Data
     public function delete($id)

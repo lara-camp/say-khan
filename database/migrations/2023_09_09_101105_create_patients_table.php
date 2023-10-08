@@ -19,7 +19,7 @@ class CreatePatientsTable extends Migration
             $table->string("phone");
             $table->longText("address");
             $table->string("gender");
-            $table->foreignId("role_id")->default(1);
+            $table->foreignId("clinic_id")->constrainted()->nullable();
             $table->string("status")->nullable();
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\Interfaces\Patient\PatientInterface;
 use App\Repositories\Interfaces\PatientDetail\PatientDetailInterface;
 
@@ -17,22 +18,25 @@ class PatientDetailController extends Controller
         $this->patient = $patient;
     }
     // View Patient Detail List
-    public function list()
+    public function list($id)
     {
-        $patients = $this->patientDetail->all();
-        return view('patient.details.list', compact('patients'));
+        $assistant = Auth::guard('assistant')->user();
+        $patients = $this->patientDetail->all($id);
+        return view('patient.details.list', compact('patients', 'assistant'));
     }
     // View Patient Detail Create Page
     public function create()
     {
-        $patients = $this->patient->all();
+        $userId = Auth::guard('assistant')->user()->id;
+        $patients = $this->patientDetail->getPatient($userId);
         return view('patient.details.create', compact('patients'));
     }
     // Store Patient Detail Data
     public function store(Request $request)
     {
         $this->patientDetail->store($request);
-        return redirect()->route('patientDetails.list');
+        $assistant = Auth::guard('assistant')->user()->id;
+        return redirect()->route('patientDetails.list', encrypt($assistant));
     }
     // View Patient Detail Edit Page
     public function edit($id)
@@ -44,7 +48,8 @@ class PatientDetailController extends Controller
     public function update($id, Request $request)
     {
         $this->patientDetail->update($id, $request);
-        return redirect()->route('patientDetails.list');
+        $assistant = Auth::guard('assistant')->user()->id;
+        return redirect()->route('patientDetails.list', encrypt($assistant));
     }
     // Delete Patient Detail Data
     public function delete($id)

@@ -28,7 +28,7 @@
             <!--  -->
             <div class="form-group">
                 <label for="bodytemp">Body Temp:</label>
-                <input type="text" id="bodytemp" name="bodytemp" value="{{ old('bodytemp', $patientrecord->bodytemp) }}">
+                <input type="number" id="bodytemp" name="bodytemp" value="{{ old('bodytemp', $patientrecord->bodytemp+00) }}">
             </div>
             <div class="form-group">
                 <label for="currentsituation">Current Situation:</label>
@@ -36,11 +36,11 @@
             </div>
             <div class="form-group">
                 <label for="bloodpressure">Blood Pressure:</label>
-                <input type="number" id="bloodpressure" name="bloodpressure" value="{{ old('bloodpressure', $patientrecord->bloodpressure) }}">
+                <input type="number" id="bloodpressure" name="bloodpressure" value="{{ old('bloodpressure', $patientrecord->bloodpressure+00) }}">
             </div>
             <div class="form-group">
                 <label for="heartrate">Heart Rate:</label>
-                <input type="number" id="heartrate" name="heartrate" value="{{ old('heartrate', $patientrecord->heartrate) }}">
+                <input type="number" id="heartrate" name="heartrate" value="{{ old('heartrate', $patientrecord->heartrate+00) }}">
             </div>
             <div class="form-group">
                 <label for="remark">Remark:</label>
@@ -48,23 +48,23 @@
             </div>
             <div class="form-group">
                 <label for="weight">Weight:</label>
-                <input type="number" id="weight" name="weight" value="{{ old('weight', $patientrecord->weight) }}">
+                <input type="number" id="weight" name="weight" step="0.1" value="{{ old('weight', $patientrecord->weight) }}">
             </div>
             <div class="form-group">
                 <label for="height">Height:</label>
-                <input type="number" id="height" name="height" value="{{ old('height', $patientrecord->height) }}">
+                <input type="number" id="height" name="height" step="0.1" value="{{ old('height', $patientrecord->height) }}">
             </div>
             <div class="form-group">
                 <label for="totalfee">Total Fee:</label>
-                <input type="number" id="totalfee" name="totalfee" value="{{ old('totalfee', $patientrecord->totalfee) }}">
+                <input type="number" id="totalfee" name="totalfee" value="{{ old('totalfee', $patientrecord->totalfee+00) }}">
             </div>
             <div class="form-group">
                 <label for="medicalimage1">Medical Image 1:</label>
-                <input type="file" id="medicalimage1" name="medicalimage1">
+                <input type="file" id="medicalimage1" accept="image/*" name="medicalimage1">
             </div>
             <div class="form-group">
                 <label for="medicalimage2">Medical Image 2:</label>
-                <input type="file" id="medicalimage2" name="medicalimage2">
+                <input type="file" id="medicalimage2" accept="image/*" name="medicalimage2">
             </div>
             <div class="form-group">
                 <label for="status">Status:</label>

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
-use App\Repositories\Interfaces\Doctor\DoctorInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Repositories\Interfaces\Doctor\DoctorInterface;
 
 class DoctorController extends Controller
 {
@@ -16,7 +17,8 @@ class DoctorController extends Controller
     // View Doctor index
     public function index()
     {
-        return view('doctor.index');
+        $doctor = Auth::guard('doctor')->user();
+        return view('doctor.index', compact('doctor'));
     }
     // View Doctor List
     public function list()
@@ -51,5 +53,15 @@ class DoctorController extends Controller
     {
         $this->doctor->delete($id);
         return redirect()->route('doctor.index')->with('success', 'Delete  Successfully');
+    }
+    // View Doctor Change Password Page
+    public function changePasswordPage()
+    {
+        return view('doctor.changePassword');
+    }
+    // Change Doctor Password
+    public function changePassword(Request $request)
+    {
+        return $this->doctor->changePassword($request);
     }
 }

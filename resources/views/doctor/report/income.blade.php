@@ -54,7 +54,7 @@
                 <td class="align-items-center">{{ $loop->iteration }}</td>
                 <td class="align-items-center">{{ $data->date }}</td>
                 <td class="align-items-center">{{ $data->clinic_name }}</td>
-                <td class="align-items-center">{{ $data->total_fees }}</td>
+                <td class="align-items-center">{{ $data->total_fees+00 }} kss</td>
             @endforeach
             @else
             <tr>

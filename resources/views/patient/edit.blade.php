@@ -26,6 +26,7 @@
                 <label for="address">Address:</label>
                 <textarea name="address" id="address" cols="30" rows="10">{{ old('address', $patient->address) }}</textarea>
             </div>
+            <input type="text" name="clinic_id" value="{{ auth()->guard('assistant')->user()->clinic_id }}" hidden>
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <select name="gender" id="gender">
