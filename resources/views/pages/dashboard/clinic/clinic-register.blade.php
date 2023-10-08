@@ -11,9 +11,9 @@
             <h2 class="text-b2 text-purple mb-10">fill this form to register Clinic</h2>
             <form action="{{ route('admin.clinicStore') }}" method="POST" class="w-full flex flex-col gap-3">
                 @csrf
-                <x-input-field id="clinic-name" name="clinic-name" value=""placeholder="Enter Clinic Name"
+                <x-input-field id="clinic-name" name="name" value="" placeholder="Enter Clinic Name"
                     color="red" />
-                <x-input-field id="clinic-address" name="clinic-address" value="" placeholder="Enter Clinic Address"
+                <x-input-field id="clinic-address" name="address" value="" placeholder="Enter Clinic Address"
                     color="red" />
                 <x-button bgColor="purple" textColor="white" text="Register" />
             </form>

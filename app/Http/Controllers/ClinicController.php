@@ -28,7 +28,7 @@ class ClinicController extends Controller
     {
         $this->clinic->store($request);
 
-        return redirect()->route('admin.index')->with(['success' => 'Clinic Was Successfully Created.']);
+        return redirect()->route('admin.clinicIndex')->with(['success' => 'Clinic Was Successfully Created.']);
     }
 
     public function edit($id)
@@ -46,6 +46,6 @@ class ClinicController extends Controller
     public function update($id, Request $request)
     {
         $this->clinic->update($id, $request);
-        return redirect()->route('admin.clinicList')->with(['success' => 'Clinic was Sucessfully Updated']);
+        return redirect()->route('admin.clinicIndex')->with(['success' => 'Clinic was Sucessfully Updated']);
     }
 }

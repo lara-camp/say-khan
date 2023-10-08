@@ -11,4 +11,8 @@ interface AdminInterface
     public function update($id, Request $request);
 
     public function changePassword(Request $request);
+
+    public function report();
+
+    public function reportSearch(Request $request);
 }

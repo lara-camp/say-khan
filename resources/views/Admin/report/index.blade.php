@@ -5,6 +5,13 @@
         <div class="d-flex justify-content-between align-items-center mt-5">
             <h1>View Report</h1>
             <div>
+                <form action="{{ route('admin.reportSearch') }}" class="d-flex justify-content-between" method="POST">
+                    @csrf
+                    <input type="date" name="dataSearch" id="" class="form-control">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+            <div>
                 <button class="btn btn-success">PDF View</button>
             </div>
         </div>
@@ -12,21 +19,32 @@
             <table class="table table-primary">
                 <thead>
                     <tr>
-                        <th scope="col">Column 1</th>
-                        <th scope="col">Column 2</th>
-                        <th scope="col">Column 3</th>
+                        <th scope="col">Clinic</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Fee</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="">
-                        <td scope="row">R1C1</td>
-                        <td>R1C2</td>
-                        <td>R1C3</td>
-                    </tr>
-                    <tr class="">
-                        <td scope="row">Item</td>
-                        <td>Item</td>
-                        <td>Item</td>
+                    @foreach ($datas as $data)
+                        <tr class="">
+                            <td scope="row">{{ $data->clinic->name }}</td>
+                            <td scope="row">{{ $data->doctor->name }}</td>
+                            <td>{{ $data->subscription->plan }}
+                                @if ($data->subscription->duration == 3)
+                                    (3 months)
+                                @elseif ($data->subscription->duration == 6)
+                                    (6 months)
+                                @else
+                                    (A year)
+                                @endif
+                            </td>
+                            <td>{{ $data->subscription->fee + 00 }} ks</td>
+                        </tr>
+                    @endforeach
+                    <tr>
+                        <td colspan="3" class="text-center h5">Total</td>
+                        <td>{{ $totalFee }}ks</td>
                     </tr>
                 </tbody>
             </table>
