@@ -15,8 +15,9 @@ class SocialController extends Controller
 
     public function roleSelect($provider)
     {
-        $roles = Role::get();
+        $roles = Role::where('id', '!=' ,'1')->get();
         $social = $provider;
+        // dd($social);
         // Session::put('social_platForm', $provider);
         return view('user.roleSelect', compact('roles', 'social'));
     }
