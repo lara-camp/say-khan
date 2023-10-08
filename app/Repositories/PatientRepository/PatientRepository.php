@@ -4,17 +4,29 @@ namespace App\Repositories\PatientRepository;
 
 
 use App\Models\Patient;
+use App\Models\Assistant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\Interfaces\Patient\PatientInterface;
 
 class PatientRepository implements PatientInterface
 {
-    public function all()
+    public function all($id)
     {
-        return Patient::orderBy('created_at', 'desc')->get();
-    }
+        $decryptId = Crypt::decrypt($id);
+        $assistant = Assistant::find($decryptId);
+        if ($assistant) {
+            $clinicId = $assistant->clinic_id;
+            $patients = Patient::where('patients.clinic_id', '=', $clinicId)
+                ->select('patients.*')
+                ->orderBy('created_at', 'desc')
+                ->get();
+            return $patients;
+        } else {
 
+        }
+    }
     public function store(Request $request)
     {
         $this->getPatientValidationData($request);
@@ -49,6 +61,7 @@ class PatientRepository implements PatientInterface
             'phone' => 'required|numeric|digits_between:1,11',
             'address' => 'required',
             'gender' => 'required',
+            'clinic_id' => 'required',
             'status' => 'required'
         ])->validate();
     }
@@ -60,6 +73,7 @@ class PatientRepository implements PatientInterface
             'phone' => $request->phone,
             'address' => $request->address,
             'gender' => $request->gender,
+            'clinic_id' => $request->clinic_id,
             'status' => $request->status,
         ];
     }

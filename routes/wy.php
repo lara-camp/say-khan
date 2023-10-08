@@ -11,10 +11,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['checkAuth:admin']], function () {
 
+    Route::get('profile', [AdminController::class, 'profile'])->name('admin.index');
+    Route::get('changePassword', [AdminController::class, 'changePasswordPage'])->name('admin.changePasswordPage');
+    Route::post('update/{id}', [AdminController::class, 'update'])->name('admin.Update');
+    Route::post('changePassword', [AdminController::class, 'changePassword'])->name('admin.ChangePassword');
+
     // To view clinic route
     Route::prefix('clinic')->group(function () {
         // Get Method Clinic
-        Route::get('/', [ClinicController::class, 'index'])->name('admin.index');
+        Route::get('/', [ClinicController::class, 'index'])->name('admin.clinicIndex');
         Route::get('create', [ClinicController::class, 'create'])->name('admin.clinicCreate');
         Route::get('edit/{id}', [ClinicController::class, 'edit'])->name('admin.clinicEdit');
         Route::get('delete/{id}', [ClinicController::class, 'delete'])->name('admin.clinicDelete');
@@ -68,6 +73,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['checkAuth:admin']], functio
     });
 
     Route::get('report', [AdminController::class, 'report'])->name('admin.report');
+    Route::post('report', [AdminController::class, 'reportSearch'])->name('admin.reportSearch');
 });
 
 Route::get('pending', [RegisterController::class, 'pending'])->name('user.pending');

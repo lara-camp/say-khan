@@ -3,10 +3,10 @@
 <h1 class="mb-0">Edit</h1>
     <hr/>
     
-    <form action="{{ route('doctor.update',$doctor->id)}}" method="POST"
-    >
+    <form action="{{ route('doctor.update', encrypt($doctor->id))}}" method="POST" enctype='multipart/form-data'>
     @csrf
       @method('PUT')
+      
       <div class="row mb-1">
         <div class="col-6 offset-1 mb-2">
           <input type="text" name="name" class="form-control" placeholder="Name" value="{{old('name',$doctor->name)}}">
@@ -15,14 +15,12 @@
         <div class="text-danger">{{ $message }}</div>
         @enderror
         <div class="col-6 offset-1 mb-2">
-          <input type="text" name="speciality" class="form-control" placeholder="Speciality" value="{{old('speciality', $doctor->speciality)}}">
+          <input type="text" name="speciality" class="form-control" placeholder="speciality" value="{{old('speciality', $doctor->speciality)}}">
         </div>
         </div>
         @error('speciality')
-            <div class="text-danger">{{ $message }}</div>
-            @enderror
-
-      
+        <div class="text-danger">{{ $message }}</div>
+        @enderror
         <div class="col-6 offset-1 mb-2">
           <input type="tel" name="phone" class="form-control" placeholder="phone" value="{{ old('phone',$doctor->phone)}}">
         </div>
@@ -41,16 +39,15 @@
           @error('email')
           <div class="text-danger">{{ $message }}</div>
           @enderror
-          {{-- <div class="col-6 offset-1 mb-2">
-            <input type="password" name="password" class="form-control" placeholder="password" value="{{$doctor->password}}">
+          <div class="col-6 offset-1 mb-2">
+              <input type="file" name="image" class="form-control" placeholder="Name" value="{{old('image')}}">
           </div>
-          @error('password')
+          @error('image')
           <div class="text-danger">{{ $message }}</div>
-          @enderror --}}
+          @enderror
          
         <div class="col-6 offset-1 mb-2">
             <label class="form-control">{{$doctor->created_at->diffForHumans()}}</label>
-           
         </div>
       </div>
         

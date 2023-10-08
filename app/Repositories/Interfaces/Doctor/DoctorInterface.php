@@ -18,4 +18,6 @@ Interface DoctorInterface{
     public function validateRegister(Request $request);
 
     public function validateUpdate(Request $request);
+
+    public function changePassword(Request $request);
 }

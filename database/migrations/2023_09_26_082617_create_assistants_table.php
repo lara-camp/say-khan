@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('assistants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone');
-            $table->string('address');
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('image')->nullable();
             $table->foreignId('role_id')->nullable();
             $table->foreignId('clinic_id')->nullable();
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

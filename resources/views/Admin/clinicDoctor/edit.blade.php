@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="" stlye="border: 1px solid black;">
-        <form id= "update_form" action="{{ route('clinic_doctor_update', $id->id) }}" method="POST">
+        <form id= "update_form" action="{{ route('clinicDoctor.update', $id->id) }}" method="POST">
             @csrf
             @method('PUT')
             <h1>Clinic Doctor Edit</h1>
@@ -17,7 +17,6 @@
                 <input name="doctor_name_display" type="text" value="{{$id->doctor->name}}" readonly>
                 <label for="">Current status: </label>
                 <input name="status_display" type="text" value="{{$id->status}}" readonly>
-
             </div>
             <br>
             <div class="row">
@@ -45,7 +44,7 @@
             </div>
             <button>Save Changes</button>
         </form>
-        <button><a href="{{ route('clinic_doctor_index')}}">Cancel</a>
+        <button><a href="{{ route('clinicDoctor.index')}}">Cancel</a>
     </div>
 </body>
 </html>

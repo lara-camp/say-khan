@@ -12,7 +12,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{ route('patient#create') }}" method="POST">
+        <form action="{{ route('patient.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="name">Patient Name:</label>
@@ -34,6 +34,7 @@
                     <option value="Female" {{ old('gender') === 'Female' ? 'selected' : '' }}>Female</option>
                 </select>
             </div>
+            <input type="text" name="clinic_id" value="{{ auth()->guard('assistant')->user()->clinic_id }}" hidden>
             <div class="form-group">
                 <label for="status">Status:</label>
                 <select name="status" id="status">
@@ -47,6 +48,7 @@
                 </select>
             </div>
             <button type="submit">Register</button>
+            <button type="button"><a href="{{ route('patient.list', encrypt(auth()->guard('assistant')->user()->id)) }}">Back</a></button>
         </form>
     </div>
 @endsection

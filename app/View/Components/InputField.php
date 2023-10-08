@@ -19,13 +19,15 @@ class InputField extends Component
 
     public $id;
     public $name;
+    public $value;
     public $placeholder;
     public $color;
 
-    public function __construct($id, $name, $placeholder, $color)
+    public function __construct($id, $name, $value, $placeholder, $color)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->value = $value;
         $this->placeholder = $placeholder;
         $this->color = $color;
     }
