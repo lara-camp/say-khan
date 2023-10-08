@@ -2,8 +2,11 @@
 
 @section('page')
     <div class="h-full flex flex-col justify-start items-center gap-10 m-10 overflow-hidden">
-        <div class="w-full mx-10 flex flex-row justify-between">
-            <h1 class="text-h0">Clinic Form</h1>
+        <div class="w-full mx-10 flex flex-row justify-between items-baseline">
+            <div>
+                <h1 class="text-h0">Clinic Form</h1>
+                <h2>View and control all clinics here</h2>
+            </div>
             <a href="{{ url('/admin/clinic/create') }}"><button
                     class="bg-purple text-white rounded-xl p-3 hover:bg-green">Register
                     clinic</button></a>
