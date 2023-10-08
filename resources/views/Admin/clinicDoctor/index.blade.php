@@ -7,7 +7,7 @@
 <body>
 <div class="" stlye="border: 1px solid black;">
         <h2>All record of Clinics and Doctors</h2>
-        <a href="{{ route('clinic_doctor_create') }}">Add Clinic Doctor</a>
+        <a href="{{ route('clinicDoctor.create') }}">Add Clinic Doctor</a>
         <table border='1'>
             <tr>
                 <th>ID</th>
@@ -26,8 +26,8 @@
                 <td>{{$id->status}}</td>
                 <td>{{$id->created_at}}</td>
                 <td>{{$id->updated_at}}</td>
-                <td><button><a href="{{ route('clinic_doctor_edit', encrypt($id->id)) }}">Edit</a></button>
-                    <form id="delete_form_{{ $id->id }}" action="{{ route('clinic_doctor_delete', encrypt($id->id)) }}" method="POST">
+                <td><button><a href="{{ route('clinicDoctor.edit', encrypt($id->id)) }}">Edit</a></button>
+                    <form id="delete_form_{{ $id->id }}" action="{{ route('clinicDoctor.delete', encrypt($id->id)) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button>Delete</button>

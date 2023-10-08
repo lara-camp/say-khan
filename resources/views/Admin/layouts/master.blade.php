@@ -28,7 +28,7 @@
                         <a class="nav-link" href="{{ route('admin.index') }}">Clinic</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('feedback_show') }}">FeedBack</a>
+                        <a class="nav-link" href="{{ route('feedback.list') }}">FeedBack</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.report') }}">Report</a>

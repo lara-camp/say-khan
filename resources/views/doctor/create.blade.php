@@ -53,7 +53,7 @@
         </div>
         <div class="row">
             <div class="col-6 offset-1">
-                <button class="btn btn-primary">Submit</button>
+                <butto nclass="btn btn-primary">Submit</button>
             </div>
         </div>
     </form>

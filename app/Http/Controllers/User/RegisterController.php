@@ -8,6 +8,7 @@ use App\Models\Assistant;
 use App\Models\Doctor;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
@@ -36,24 +37,26 @@ class RegisterController extends Controller
                 $doctor->image = $fileName;
                 $doctor->save();
             }
-            return redirect()->route('doctor.index')->with(['success' => 'Doctor acc was successfully update.']);
+            Auth::guard(strtolower($roleName))->login($doctor);
+
         } elseif ($roleName == "Assistant") {
             $assistant = Assistant::create($data);
             if ($assistant != null) {
                 $assistant->image = $fileName;
                 $assistant->save();
             }
-            return redirect()->route('assistant.index')->with(['success' => 'Assistant acc was successfully update.']);
+            Auth::guard(strtolower($roleName))->login($assistant);
         } elseif ($roleName == "Admin") {
             $admin = Admin::create($data);
             if ($admin != null) {
                 $admin->image = $fileName;
                 $admin->save();
             }
-            return redirect()->route('admin.clinicList')->with(['success' => 'Admin acc was successfully update.']);
+            Auth::guard(strtolower($roleName))->login($admin);
         } else {
             return redirect()->route('user#register', compact('roleName'))->with(['error' => "Oops Something was not right."]);
         }
+        return redirect()->route('user.pending');
     }
 
     public function pending()
@@ -66,7 +69,7 @@ class RegisterController extends Controller
         $fileName = uniqid() . "_" . $request->file('image')->getClientOriginalName();
         $folderName = "public/$roleName";
 
-        if ($roleName == "Doctor" || $roleName == "Assistant") {
+        if ($roleName == "Doctor" || $roleName == "Assistant" || $roleName == "Admin") {
             $request->file('image')->storeAs($folderName, $fileName);
             return $fileName;
         }

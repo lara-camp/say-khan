@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="formsection" stlye="border: 1px solid black;">
-        <form action="{{ route('clinic_subscription_register') }}" method="POST">
+        <form action="{{ route('clinicSubscription.store') }}" method="POST">
             @csrf
             <h1>Clinic register</h1>
             <div class="row">

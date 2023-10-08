@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 interface PatientDetailInterface
 {
-    public function all();
+    public function all($id);
 
     public function store(Request $request);
 

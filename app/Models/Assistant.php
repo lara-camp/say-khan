@@ -24,4 +24,8 @@ class Assistant extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+    public function clinic()
+    {
+        return $this->belongsTo(Clinic::class, 'clinic_id');
+    }
 }

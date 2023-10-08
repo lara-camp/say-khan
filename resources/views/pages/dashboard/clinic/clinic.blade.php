@@ -27,9 +27,6 @@
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Address
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status
-                                        </th>
-                                        <th scope="col"
                                             class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Action
                                         </th>
                                     </tr>
@@ -46,15 +43,6 @@
                                                     class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                     {{ $clinic->address }}
                                                 </td>
-                                                @if ($clinic->status == null)
-                                                    <td
-                                                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                        -</td>
-                                                @else
-                                                    <td
-                                                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                        {{ $clinic->status }}</td>
-                                                @endif
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
                                                     <a class="border rounded-lg p-2"

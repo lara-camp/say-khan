@@ -12,7 +12,7 @@
         </ul>
     </div>
     @endif
-    <form action="{{ route('patientDetails#create') }}" method="POST">
+    <form action="{{ route('patientDetails.store') }}" method="POST">
         @csrf
         <div class="form-group">
             <label for="patientId">Select Patient:</label>
@@ -20,7 +20,6 @@
                 <option value="">Choose Patient</option>
                 @foreach ($patients as $patient)
                 <option value="{{ $patient->id }}" @if($patient->id == old('patient_id')) selected @endif>{{ $patient->name }}</option>
-
                 @endforeach
             </select>
         </div>

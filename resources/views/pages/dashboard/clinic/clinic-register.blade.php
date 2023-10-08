@@ -12,10 +12,10 @@
             <form action="{{ route('admin.clinicStore') }}" method="POST" class="w-full flex flex-col gap-3">
                 @csrf
                 <label for="clinic-name">Clinic Name</label>
-                <x-input-field id="clinic-name" name="clinic-name" value="" placeholder="Enter Clinic Name"
+                <x-input-field id="clinic-name" name="name" value="" placeholder="Enter Clinic Name"
                     color="red" />
                 <label for="clinic-address">Clinic Address</label>
-                <x-input-field id="clinic-address" name="clinic-address" value="" placeholder="Enter Clinic Address"
+                <x-input-field id="clinic-address" name="address" value="" placeholder="Enter Clinic Address"
                     color="red" />
                 <x-button bgColor="purple" textColor="white" text="Register" />
             </form>

@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-
 use Illuminate\Support\ServiceProvider;
-
 use App\Repositories\Interfaces\Role\RoleInterface;
 use App\Repositories\RoleRepository\RoleRepository;
+use App\Repositories\AdminRepository\AdminRepository;
+use App\Repositories\Interfaces\Admin\AdminInterface;
 use App\Repositories\ClinicRepository\ClinicRepository;
 use App\Repositories\DoctorRepository\DoctorRepository;
 use App\Repositories\Interfaces\Clinic\ClinicInterface;
@@ -20,7 +20,9 @@ use App\Repositories\Interfaces\Assistant\AssistantInterface;
 use App\Repositories\Interfaces\Permission\PermissionInterface;
 use App\Repositories\PermissionRepository\PermissionRepository;
 use App\Repositories\ClinicDoctorRepository\ClinicDoctorRepository;
+use App\Repositories\DoctorReportRepository\DoctorReportRepository;
 use App\Repositories\Interfaces\ClinicDoctor\ClinicDoctorInterface;
+use App\Repositories\Interfaces\DoctorReport\DoctorReportInterface;
 use App\Repositories\Interfaces\Subscription\SubscriptionInterface;
 use App\Repositories\SubscriptionRepository\SubscriptionRepository;
 use App\Repositories\Interfaces\PatientDetail\PatientDetailInterface;
@@ -47,7 +49,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(RoleInterface::class, RoleRepository::class);
         $this->app->bind(PatientInterface::class, PatientRepository::class);
         $this->app->bind(PatientDetailInterface::class, PatientDetailRepository::class);
-        $this->app->bind(RoleInterface::class, RoleRepository::class);
         $this->app->bind(SubscriptionInterface::class, SubscriptionRepository::class);
         $this->app->bind(PermissionInterface::class, PermissionRepository::class);
         $this->app->bind(RolePermissionInterface::class, RolePermissionRepository::class);
@@ -55,6 +56,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(FeedBackInterface::class, FeedBackRepository::class);
         $this->app->bind(ClinicSubscriptionInterface::class, ClinicSubscriptionRepository::class);
         $this->app->bind(PatientRecordInterface::class, PatientRecordRepository::class);
+        $this->app->bind(AdminInterface::class, AdminRepository::class);
+        $this->app->bind(DoctorReportInterface::class, DoctorReportRepository::class);
     }
 
     /**
