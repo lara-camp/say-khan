@@ -20,7 +20,7 @@ class RegisterController extends Controller
         $roles = Role::all();
         // dd($roles);
 
-        return view('user.register', compact('roles'));
+        return view('pages.authentication.register', compact('roles'));
     }
 
     public function create(Request $request)
@@ -61,7 +61,7 @@ class RegisterController extends Controller
 
     public function pending()
     {
-        return view('user.pending');
+        return view('pages.authentication.pending');
     }
 
     private function storeImage(Request $request, $roleName)

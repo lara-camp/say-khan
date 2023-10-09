@@ -9,7 +9,7 @@
         <div class="col-span-2 col-start-4 self-center bg-gray flex flex-col items-center px-10 py-20 rounded-3xl">
             <h1 class="text-h0 text-purple text-center font-semibold tracking-widest">Role Edit</h1>
             <h2 class="text-b2 text-purple my-5">edit {{ $role->name }} role</h2>
-            <form action="{{ route('role.update', $role->id) }}" method="POST" class="w-full flex flex-col gap-3">
+            <form action="{{ route('role.update', encrypt($role->id)) }}" method="POST" class="w-full flex flex-col gap-3">
                 @csrf
                 <x-input-field id="role-name" name="role-name" :value="$role->name" placeholder="Role Name" color="red" />
                 <x-input-field id="role-type" name="role-type" :value="$role->type" placeholder="Role Type" color="red" />

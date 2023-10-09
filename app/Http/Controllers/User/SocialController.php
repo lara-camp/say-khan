@@ -19,7 +19,7 @@ class SocialController extends Controller
         $social = $provider;
         // dd($social);
         // Session::put('social_platForm', $provider);
-        return view('user.roleSelect', compact('roles', 'social'));
+        return view('pages.authentication.roleSelect', compact('roles', 'social'));
     }
 
     public function socialPage(Request $request)
