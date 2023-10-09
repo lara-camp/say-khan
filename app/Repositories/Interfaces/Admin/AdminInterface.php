@@ -12,7 +12,7 @@ interface AdminInterface
 
     public function changePassword(Request $request);
 
-    // public function report();
+    public function report();
 
-    // public function reportSearch(Request $request);
+    public function reportSearch(Request $request);
 }

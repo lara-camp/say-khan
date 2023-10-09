@@ -3,13 +3,14 @@
 namespace App\Repositories\AdminRepository;
 
 use App\Models\Admin;
-use App\Repositories\Interfaces\Admin\AdminInterface;
 use Illuminate\Http\Request;
+use App\Models\ClinicSubscription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
+use App\Repositories\Interfaces\Admin\AdminInterface;
 
 class AdminRepository implements AdminInterface
 {
@@ -48,6 +49,18 @@ class AdminRepository implements AdminInterface
             return back()->with(['success' => 'Password was updated.']);
         }
         return back()->withErrors(['oldPassword' => 'Current Password is not incorrect.']);
+    }
+
+    // Subscription Report
+    public function report()
+    {
+        return ClinicSubscription::all();
+    }
+
+    public function reportSearch(Request $request)
+    {
+        $dataSearch = $request->dataSearch;
+        return ClinicSubscription::whereDate('created_at', $dataSearch)->get();
     }
 
     protected function accountValidationCheck($request)
