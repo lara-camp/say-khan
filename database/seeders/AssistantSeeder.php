@@ -34,6 +34,15 @@ class AssistantSeeder extends Seeder
                 'role_id' => 3,
                 'clinic_id' => 2,
             ],
+            [
+                'name' => 'Mike',
+                'phone' => '091239927',
+                'address' => 'mdy',
+                'email' => 'mike@gmail.com',
+                'password' => Hash::make('Asd123!'),
+                'role_id' => 3,
+                'clinic_id' => 3,
+            ],
         ];
 
         foreach ($data as $d) {

@@ -48,4 +48,5 @@ Route::prefix('patient')->group(function () {
     Route::post('detail/update/{id}', [PatientDetailController::class, 'update'])->name('patientDetails.update');
     Route::post('record/create/', [PatientRecordController::class, 'store'])->name('patientRecords.store');
     Route::post('record/update/{id}', [PatientRecordController::class, 'update'])->name('patientRecords.update');
+    Route::post('pdf/patientRecord/{id}', [PatientRecordController::class, 'exportPatientRecordPDF'])->name('patientRecords.download.pdf');
 });

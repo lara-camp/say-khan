@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Illuminate\Http\Request;
 use App\Models\PatientRecord;
+use Illuminate\Support\Facades\App;
 use App\Repositories\Interfaces\DoctorReport\DoctorReportInterface;
 
 class DoctorReportController extends Controller
@@ -22,27 +24,41 @@ class DoctorReportController extends Controller
 
     // Display report with filters
     public function fetchIncomeReport($id, Request $request){
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        $clinicId = $request->input('clinic_id');
+        $reportData = $this->doctorreport->fetchIncomeReportdata($id, $request);
         $clinicdoctor = $this->doctorreport->clinicDoctorAll($id);
-        $clinicdoctorarray = $clinicdoctor['clinicdoctor'];
-        $clinicIds = $clinicdoctorarray->pluck('clinic_id')->toArray();
-        // The Query
-        $query = PatientRecord::join('assistants', 'patient_records.assistant_id', '=', 'assistants.id')
-        ->join('clinics', 'assistants.clinic_id', '=', 'clinics.id')
-        ->whereBetween('patient_records.created_at', [$startDate, $endDate])
-        ->selectRaw('DATE(patient_records.created_at) as date, SUM(totalfee) as total_fees, clinics.name as clinic_name')
-        ->groupBy('date', 'clinic_name')
-        ->orderBy('date');
-        // show report data for selected clinic
-        if($startDate && $endDate && $clinicId){
-            $reportData = $query->where('assistants.clinic_id', $clinicId)->get();
-        }
-        // show report data for all clinic
-        else if($startDate && $endDate && !$clinicId){
-            $reportData = $query->whereIn('assistants.clinic_id', $clinicIds)->get();
-        }
         return view('doctor.report.income', compact('id', 'reportData', 'clinicdoctor'));
+    }
+    // Show Assistant List
+    public function showAssistantList($id){
+        $clinicdoctors = $this->doctorreport->clinicDoctorAll($id);
+        $clinicdoctorarray = $clinicdoctors['clinicdoctor'];
+        $clinicIds = $clinicdoctorarray->pluck('clinic_id')->toArray();
+        $assistants = $this->doctorreport->assistantAll($clinicIds);
+        
+        return view('doctor.report.assistantList', compact('clinicdoctors', 'assistants'));
+    }
+    
+    // Display report with filters
+    public function fetchAssistantList($id, Request $request){
+        $clinicdoctors = $this->doctorreport->clinicDoctorAll($id);
+        $clinicIds = $request->input('clinic_id');
+        // Show for Selected Clinic
+        if($clinicIds){
+            $assistants = $this->doctorreport->assistantSelect($clinicIds);
+        }
+        // Show for All clinics
+        else if(!$clinicIds){
+            $clinicdoctorarray = $clinicdoctors['clinicdoctor'];
+            $clinicIds = $clinicdoctorarray->pluck('clinic_id')->toArray();
+            $assistants = $this->doctorreport->assistantAll($clinicIds);
+        }
+        return view('doctor.report.assistantList', compact('id', 'assistants', 'clinicdoctors'));
+    }
+    // Exporting Income PDF
+    public function exportIncomePDF($id, Request $request)
+    {
+        $reportData = $this->doctorreport->fetchIncomeReportdata($id, $request);
+        $pdf = PDF::loadView('doctor.report.pdf.income', compact('reportData'));
+        return $pdf->stream('income_report.pdf');
     }
 }

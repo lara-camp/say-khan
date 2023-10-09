@@ -19,6 +19,9 @@ Route::group(['prefix' => 'doctor', 'middleware' => ['checkAuth:doctor']], funct
     Route::get('list', [DoctorController::class, 'list'])->name('doctor.list');
     Route::get('report/income/{id}', [DoctorReportController::class, 'showIncomeReport'])->name('doctor.report.income');
     Route::post('report/income/{id}', [DoctorReportController::class, 'fetchIncomeReport'])->name('doctor.report.fetch');
+    Route::post('report/pdf/income/{id}', [DoctorReportController::class, 'exportIncomePDF'])->name('doctor.report.download.pdf');
+    Route::get('report/assistantList/{id}', [DoctorReportController::class, 'showAssistantList'])->name('doctor.report.assistant.list');
+    Route::post('report/assistantList/{id}', [DoctorReportController::class, 'fetchAssistantList'])->name('doctor.report.assistant.fetch');
     Route::get('changePassword', [DoctorController::class, 'changePasswordPage'])->name('doctor.changePasswordPage');
     Route::post('changePassword', [DoctorController::class, 'changePassword'])->name('doctor.changePassword');
 });
@@ -67,5 +70,13 @@ Route::post('/subscription-buy/create', [ClinicSubscriptionController::class, 's
 // Route::get('/subscription-buy/edit/{id}', [ClinicSubscriptionController::class, 'edit'])->name('clinicSubscription.edit');
 Route::put('/subscription-buy/{id}', [ClinicSubscriptionController::class, 'update'])->name('clinicSubscription.update');
 Route::delete('/subscription-buy/{id}', [ClinicSubscriptionController::class, 'delete'])->name('clinicSubscription.delete');
+
+// End of ClinicSubscription routes
+
+// Start of Export Routes
+Route::get('/download', function ()
+{
+    return (new IncomeExport)->download('income.xlsx');
+});
 
 // End of ClinicSubscription routes

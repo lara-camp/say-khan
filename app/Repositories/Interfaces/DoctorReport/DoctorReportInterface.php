@@ -9,4 +9,9 @@ interface DoctorReportInterface
 
     public function decrypt($id);
 
+    public function fetchIncomeReportData($id, Request $request);
+
+    public function assistantAll($clinicIds);
+
+    public function assistantSelect($clinicIds);
 }

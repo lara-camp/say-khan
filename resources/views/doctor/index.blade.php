@@ -29,6 +29,7 @@
                     <a href="{{ route('doctor.changePasswordPage') }}" type="button" class="btn btn-danger">Change Password</a>
                     <a href="{{ route('feedback.create', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Give Feedback</a>
                     <a href="{{ route('doctor.report.income', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Income Report</a>
+                    <a href="{{ route('doctor.report.assistant.list', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Assistant List</a>
                     <a href="{{ route('clinicSubscription.create', encrypt($doctor->id)) }}" type="button" class="btn btn-danger">Buy Subscription</a>
                 </div>
             </td>

@@ -16,12 +16,17 @@
                 <input name="name" type="text" placeholder="Enter name" value='{{$id->name}}' readonly>
 
                 <label for="clinic_id">Choose a Clinic to buy for: </label>
+                @if ($clinicsubscriptions['clinicdoctor']->count() > 0)
                 <select name="clinic_id" id="">
-                    @forelse($clinicsubscriptions['clinicdoctor'] as $clinicdoctor)
+                    @foreach($clinicsubscriptions['clinicdoctor'] as $clinicdoctor)
                         <option value="{{$clinicdoctor->clinic->id}}">{{$clinicdoctor->clinic->name}}</option>
-                    @empty
-                    @endforelse
+                    @endforeach
                 </select>
+                @else
+                <select readonly>
+                    <option>None</option>
+                </select>
+                @endif
                 <label for="subscription_id">Choose Subscription: </label>
                 <select name="subscription_id" id="">
                     @foreach($clinicsubscriptions['subscription'] as $subscription)

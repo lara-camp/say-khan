@@ -23,7 +23,7 @@ class DoctorController extends Controller
     // View Doctor List
     public function list()
     {
-        $doctors = Doctor::all();
+        $doctors = Doctor::all()->paginate(10);
         return view('doctor.index', compact('doctors'));
     }
     // View Doctor Create Page
