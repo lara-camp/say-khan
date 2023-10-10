@@ -21,7 +21,8 @@ class PatientRepository implements PatientInterface
             $patients = Patient::where('patients.clinic_id', '=', $clinicId)
                 ->select('patients.*')
                 ->orderBy('created_at', 'desc')
-                ->get();
+                ->get()
+                ->paginate(10);
             return $patients;
         } else {
 

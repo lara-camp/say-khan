@@ -11,18 +11,23 @@
         {{ session('error') }}
     </div>
 @endif
+
+
 <form action="{{ route('doctor.report.fetch', encrypt(auth()->guard('doctor')->user()->id))}}" method="POST">
     @csrf
     <div class="row ">
         <div class="col-6 offset-1 mb-2">
-            <input type="date" name="start_date" class="form-control" value="{{old('start_date')}}" required >
+            <input type="date" name="start_date" placeholder="start_date" class="form-control" value="{{ old('start_date') }}" required>
         </div>
-        @error('name')
+        @error('start_date')
         <div class="text-danger">{{ $message }}</div>
         @enderror
         <div class="col-6 offset-1 mb-2">
-            <input type="date" name="end_date" class="form-control" value="{{old('end_date')}}" required>
+            <input type="date" name="end_date" placeholder="end_date" class="form-control" value="{{ old('end_date') }}" required>
         </div>
+        @error('end_date')
+        <div class="text-danger">{{ $message }}</div>
+        @enderror
         <div class="col-6 offset-1 mb-2">
             <select name="clinic_id" id="clinic_id">
                 <option value="">All clinic</option>
@@ -35,6 +40,32 @@
     <button>Search</button>
     <a href="{{ route('doctor.index')}}" type="button" class="btn btn-danger">Return</a>
 </form>
+<form action="{{ route('doctor.report.download.pdf', encrypt(auth()->guard('doctor')->user()->id))}}" method="POST">
+        @csrf
+        <div class="row ">
+            <div class="col-6 offset-1 mb-2">
+                <input type="date" name="start_date" placeholder="start_date" class="form-control" value="{{ old('start_date') }}" required>
+            </div>
+            @error('start_date')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
+            <div class="col-6 offset-1 mb-2">
+                <input type="date" name="end_date" placeholder="end_date" class="form-control" value="{{ old('end_date') }}" required>
+            </div>
+            @error('end_date')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
+            <div class="col-6 offset-1 mb-2">
+                <select name="clinic_id" id="clinic_id">
+                    <option value="">All clinic</option>
+                    @foreach($clinicdoctor['clinicdoctor'] as $clinicdoctors)
+                    <option value="{{$clinicdoctors->clinic_id}}">{{$clinicdoctors->clinic->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <button type="submit">Download PDF</button>
+    </form>
 
 
 <table class="table table-hover">
@@ -62,6 +93,7 @@
                     no record
                 </td>
             </tr>
+            {{ $reportData->links() }}
             @endif
         @else
         <tr>Blank</tr>

@@ -8,6 +8,8 @@ module.exports = {
     ],
     theme: {
         colors: {
+            transparent: "transparent",
+            current: "currentColor",
             purple: "#5b2a86",
             blue: "#6184d8",
             green: "#85cb33",

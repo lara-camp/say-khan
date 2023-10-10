@@ -14,7 +14,7 @@ class FeedBackRepository implements FeedBackInterface
     // To pass all clinic doctor data
     public function all()
     {
-        return $feedback = FeedBack::all();
+        return $feedback = FeedBack::all()->paginate(10);
     }
     // Pass doctor related data
     public function doctorAll($id)
