@@ -16,12 +16,18 @@ class ClinicController extends Controller
     public function index()
     {
         $clinics = $this->clinic->all();
-        return view('pages.dashboard.clinic.clinic', compact('clinics'));
+        return view('pages.admin-dashboard.clinic.clinic', compact('clinics'));
+    }
+    public function clinicDetail(){
+        return view('pages.admin-dashboard.clinic.clinic-detail');
+    }
+    public function assignDoctor(){
+        return view('pages.admin-dashboard.clinic.assign-doctor');
     }
 
     public function create()
     {
-        return view("pages.dashboard.clinic.clinic-register");
+        return view("pages.admin-dashboard.clinic.clinic-register");
     }
 
     public function store(Request $request)
@@ -34,7 +40,7 @@ class ClinicController extends Controller
     public function edit($id)
     {
         $data = $this->clinic->edit($id);
-        return view('pages.dashboard.clinic.clinic-edit', compact('data'));
+        return view('pages.admin-dashboard.clinic.clinic-edit', compact('data'));
     }
 
     public function delete($id)

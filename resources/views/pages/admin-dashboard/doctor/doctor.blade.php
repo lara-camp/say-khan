@@ -1,4 +1,4 @@
-@extends('layouts.dashboard-page')
+@extends('pages.admin-dashboard.layout')
 
 @section('page')
     <div class="h-full flex flex-col justify-start items-center gap-10 m-10 overflow-hidden">
@@ -7,9 +7,9 @@
                 <h1 class="text-h0">Clinic Form</h1>
                 <h2>View and control all clinics here</h2>
             </div>
-            <a href="{{ url('/admin/clinic/create') }}"><button
+            {{-- <a href="{{ route('doctor.create') }}"><button
                     class="bg-purple text-white rounded-xl p-3 hover:bg-green">Register
-                    clinic</button></a>
+                    clinic</button></a> --}}
         </div>
 
         <div class="flex flex-col w-full">
@@ -21,10 +21,17 @@
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Doctor
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Address
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                                            Speciality
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Action
@@ -36,11 +43,10 @@
                                     @if ($clinics->count() > 0)
                                         @foreach ($clinics as $clinic)
                                             <tr>
-                                                <td
-                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                                    {{ $clinic->name }}</td>
-                                                <td
-                                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                                    <div></div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                                     {{ $clinic->address }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

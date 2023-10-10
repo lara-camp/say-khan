@@ -20,6 +20,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['checkAuth:admin']], functio
     Route::prefix('clinic')->group(function () {
         // Get Method Clinic
         Route::get('/', [ClinicController::class, 'index'])->name('admin.clinicIndex');
+        Route::get('/clinic_detail', [ClinicController::class, 'clinicDetail'])->name('admin.clinicDetail');
+        Route::get('/assign_doctor', [ClinicController::class, 'assignDoctor'])->name('admin.assignDoctor');
         Route::get('create', [ClinicController::class, 'create'])->name('admin.clinicCreate');
         Route::get('edit/{id}', [ClinicController::class, 'edit'])->name('admin.clinicEdit');
         Route::get('delete/{id}', [ClinicController::class, 'delete'])->name('admin.clinicDelete');

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard-page')
+@extends('pages.admin-dashboard.layout')
 
 @section('page')
     <div class="w-full h-full grid grid-cols-6">

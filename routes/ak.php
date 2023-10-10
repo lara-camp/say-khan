@@ -9,7 +9,7 @@ use App\Http\Controllers\DoctorReportController;
 use App\Http\Controllers\ClinicSubscriptionController;
 
 // Start of Doctor routes
-    Route::group(['prefix' => 'doctor', 'middleware' => ['checkAuth:doctor']], function () {
+Route::group(['prefix' => 'doctor', 'middleware' => ['checkAuth:doctor']], function () {
     Route::get('/', [DoctorController::class, 'index'])->name('doctor.index');
     Route::get('create', [DoctorController::class, 'create'])->name('doctor.create');
     Route::post('/', [DoctorController::class, 'store'])->name('doctor.store');

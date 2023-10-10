@@ -16,13 +16,13 @@ class RoleController extends Controller
     public function index()
     {
         $roles = $this->role->all();
-        return view('pages.dashboard.role.role', compact('roles'));
+        return view('pages.admin-dashboard.role.role', compact('roles'));
     }
 
     // create a new role
     public function create()
     {
-        return view('pages.dashboard.role.role-register');
+        return view('pages.admin-dashboard.role.role-register');
     }
 
     // store the role
@@ -35,7 +35,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role = $this->role->edit($id);
-        return view('pages.dashboard.role.role-edit', compact('role'));
+        return view('pages.admin-dashboard.role.role-edit', compact('role'));
     }
     // Update
     public function update($id, Request $request)

@@ -1,12 +1,12 @@
-@extends('layouts.dashboard-page')
+@extends('pages.admin-dashboard.layout')
 
 @section('page')
     <div class="h-full flex flex-col justify-start items-center gap-10 m-10 overflow-hidden">
         <div class="w-full mx-10 flex flex-row justify-between">
-            <h1 class="text-h0">Permission Form</h1>
-            <a href="{{ url('/admin/permission/create') }}"><button
+            <h1 class="text-h0">Role Form</h1>
+            <a href="{{ url('/admin/role/create') }}"><button
                     class="bg-purple text-white rounded-xl p-3 hover:bg-green">Register
-                    Permission</button></a>
+                    role</button></a>
         </div>
 
         <div class="flex flex-col w-full">
@@ -18,10 +18,10 @@
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Key
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name
                                         </th>
                                         <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Value
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type
                                         </th>
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status
@@ -33,36 +33,36 @@
                                 </thead>
 
                                 <tbody class="divide-y divide-gray">
-                                    @if ($permissions->count() > 0)
-                                        @foreach ($permissions as $permission)
+                                    @if ($roles->count() > 0)
+                                        @foreach ($roles as $role)
                                             <tr>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200">
-                                                    {{ $permission->key }}</td>
+                                                    {{ $role->name }}</td>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                    {{ $permission->value }}
+                                                    {{ $role->type }}
                                                 </td>
-                                                @if ($permission->status == null)
+                                                @if ($role->status == null)
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
                                                         -</td>
                                                 @else
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                        {{ $permission->status }}</td>
+                                                        {{ $role->status }}</td>
                                                 @endif
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
                                                     <a class="border rounded-lg p-2"
-                                                        href="{{ route('admin.PermissionEdit', encrypt($permission->id)) }}">Edit</a>
+                                                        href="{{ route('role.edit', encrypt($role->id)) }}">Edit</a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     @else
                                         <tr>
                                             <td class="text-center" colspan="3">
-                                                There is no permission
+                                                There is no role
                                             </td>
                                         </tr>
                                     @endif

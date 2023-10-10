@@ -18,7 +18,7 @@ class DoctorController extends Controller
     public function index()
     {
         $doctor = Auth::guard('doctor')->user();
-        return view('doctor.index', compact('doctor'));
+        return view('pages.admin-dashboard.doctor.doctor', compact('doctor'));
     }
     // View Doctor List
     public function list()
