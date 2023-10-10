@@ -48,7 +48,7 @@ class AssistantController extends Controller
     }
     // View Assistant list 
     public function list(){
-        $assistants =$this->assistant->all();
+        $assistants =$this->assistant->all()->paginate(10);
         return view('assistant.list',compact('assistants'));
     }
     // View Assistant Edit Page 

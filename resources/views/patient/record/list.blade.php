@@ -46,6 +46,10 @@
                 <td><img src="{{ asset($patientrecord->medicalimage1) }}" alt="Medical Image 1" style='width:100px; height:100px'></td>
                 <td><img src="{{ asset($patientrecord->medicalimage2) }}" alt="Medical Image 2"style='width:100px; height:100px'></td>
                 <td>
+                    <form action="{{ route('patientRecords.download.pdf',encrypt($patientrecord->id)) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="action-btn">Download PDF</button>
+                    </form>
                     <button type="button" class="action-btn">
                         <a href="{{ route('patientRecords.edit',encrypt($patientrecord->id)) }}">Edit
                             <img src="{{ asset('assets/img/edit.png') }}" alt=""></a>

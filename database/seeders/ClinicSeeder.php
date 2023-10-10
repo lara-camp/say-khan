@@ -16,16 +16,16 @@ class ClinicSeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'GG',
+                'name' => 'Wonder',
                 'address' => 'yangon',
             ],
             [
-                'name' => 'DD',
+                'name' => 'HP+',
                 'address' => 'mandalay',
             ],
             [
-                'name' => 'BB',
-                'address' => 'sydney',
+                'name' => 'Muteki',
+                'address' => 'Japan',
             ],
         ];
 

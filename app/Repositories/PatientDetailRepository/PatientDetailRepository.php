@@ -22,7 +22,8 @@ class PatientDetailRepository implements PatientDetailInterface
                 ->where('patients.clinic_id', '=', $clinicId)
                 ->select('patient_details.*')
                 ->orderBy('created_at', 'desc')
-                ->get();
+                ->get()
+                ->paginate(10);
             return $patientDetails;
         } else {
 
@@ -36,7 +37,8 @@ class PatientDetailRepository implements PatientDetailInterface
             $patients = Patient::where('patients.clinic_id', '=', $clinicId)
                 ->select('patients.*')
                 ->orderBy('created_at', 'desc')
-                ->get();
+                ->get()
+                ->paginate(10);
             return $patients;
         } else {
 

@@ -23,7 +23,8 @@ class PatientRecordRepository implements PatientRecordInterface
                 ->where('assistants.clinic_id', '=', $clinicId)
                 ->select('patient_records.*')
                 ->orderBy('created_at', 'desc')
-                ->get();
+                ->get()
+                ->paginate(10);
             return $patientRecords;
         } else {
 
@@ -37,7 +38,8 @@ class PatientRecordRepository implements PatientRecordInterface
             $patients = Patient::where('patients.clinic_id', '=', $clinicId)
                 ->select('patients.*')
                 ->orderBy('created_at', 'desc')
-                ->get();
+                ->get()
+                ->paginate(10);
             return $patients;
         } else {
 

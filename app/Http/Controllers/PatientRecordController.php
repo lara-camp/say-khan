@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use App\Models\PatientRecord;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use App\Repositories\Interfaces\PatientRecord\PatientRecordInterface;
 
 class PatientRecordController extends Controller
@@ -53,5 +56,12 @@ class PatientRecordController extends Controller
     {
         $this->patientrecord->delete($id);
         return back();
+    }
+    public function exportPatientRecordPDF($id)
+    {
+        $id = Crypt::decrypt($id);
+        $patients = PatientRecord::where('id', $id)->get();
+        $pdf = PDF::loadView('patient.pdf.patientRecord', compact('patients'));
+        return $pdf->stream('patient_record.pdf');
     }
 }
