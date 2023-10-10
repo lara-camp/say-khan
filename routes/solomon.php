@@ -24,10 +24,7 @@ Route::group(['middleware' => ['checkGuest']], function () {
     Route::get('login/{provider}/callback', [SocialController::class, 'socialCallBack'])->name('user#socialCallBack');
 });
 
-
-Route::group(['middleware' => 'prevent-back-history'], function () {
-    Route::post('/logout', [LoginController::class, 'logout'])->name('user.logout');
-});
+Route::post('/logout', [LoginController::class, 'logout'])->name('user.logout');
 
 Route::prefix('patient')->group(function () {
     //get method

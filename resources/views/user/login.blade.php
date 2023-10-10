@@ -57,15 +57,15 @@
                 </div>
                 <div class=" my-1">
                     <a href="{{ route('user#roleSelect', ['provider' => 'google']) }}">
-                        <x-icon-button action="{{ route('user#roleSelect', ['provider' => 'google']) }}"
-                            icon="{{ url('/assets/icons/Google.svg') }}" text="Sign In With Google" bgColor="purple"
-                            textColor="white" />
+                    <x-icon-button action="{{ route('user#roleSelect', ['provider' => 'google']) }}"
+                        icon="{{ url('/assets/icons/Google.svg') }}" text="Sign In With Google" bgColor="purple"
+                        textColor="white" />
                     </a>
                     <a href="{{ route('user#roleSelect', ['provider' => 'facebook']) }}">
-                        <x-icon-button action="{{ route('user#roleSelect', ['provider' => 'facebook']) }}"
-                            icon="{{ url('/assets/icons/Facebook.svg') }}" text="Sign In With Facebook" bgColor="purple"
-                            textColor="white" />
-                    </a>
+                    <x-icon-button action="{{ route('user#roleSelect', ['provider' => 'facebook']) }}"
+                        icon="{{ url('/assets/icons/Facebook.svg') }}" text="Sign In With Facebook" bgColor="purple"
+                        textColor="white" />
+                    </a>    
                     <div class="py-1 w-full">
                         <p class="text-gray text-center text-b1">
                             No account?
@@ -77,11 +77,4 @@
             </div>
     </form>
     </div>
-    <Script type="text/javascript">
-        function preventBack(){window.history.forward()};
-        setTimeout("preventBack()",0)
-        window.onunload = function(){null;}
-    </Script>
 @endsection
-
-
