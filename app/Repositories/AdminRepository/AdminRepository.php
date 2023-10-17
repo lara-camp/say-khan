@@ -3,14 +3,15 @@
 namespace App\Repositories\AdminRepository;
 
 use App\Models\Admin;
-use Illuminate\Http\Request;
+use App\Models\Assistant;
 use App\Models\ClinicSubscription;
+use App\Repositories\Interfaces\Admin\AdminInterface;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
-use App\Repositories\Interfaces\Admin\AdminInterface;
 
 class AdminRepository implements AdminInterface
 {
@@ -63,6 +64,11 @@ class AdminRepository implements AdminInterface
         return ClinicSubscription::whereDate('created_at', $dataSearch)->get();
     }
 
+    // assistant
+    public function all()
+    {
+        return Assistant::orderBy('created_at', 'desc')->paginate(4);
+    }
     protected function accountValidationCheck($request)
     {
         Validator::make($request->all(), [

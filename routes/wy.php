@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['checkAuth:admin']], function () {
 
-    Route::get('profile', [AdminController::class, 'profile'])->name('admin.index');
+    Route::get('profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::get('changePassword', [AdminController::class, 'changePasswordPage'])->name('admin.changePasswordPage');
     Route::post('update/{id}', [AdminController::class, 'update'])->name('admin.Update');
     Route::post('changePassword', [AdminController::class, 'changePassword'])->name('admin.ChangePassword');
@@ -19,7 +19,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['checkAuth:admin']], functio
     // To view clinic route
     Route::prefix('clinic')->group(function () {
         // Get Method Clinic
-        Route::get('/', [ClinicController::class, 'index'])->name('admin.clinicIndex');
+        Route::get('/', [ClinicController::class, 'index'])->name('admin.index');
         Route::get('/clinic_detail', [ClinicController::class, 'clinicDetail'])->name('admin.clinicDetail');
         Route::get('/assign_doctor', [ClinicController::class, 'assignDoctor'])->name('admin.assignDoctor');
         Route::get('create', [ClinicController::class, 'create'])->name('admin.clinicCreate');
@@ -76,6 +76,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['checkAuth:admin']], functio
 
     Route::get('report', [AdminController::class, 'report'])->name('admin.report');
     Route::post('report', [AdminController::class, 'reportSearch'])->name('admin.reportSearch');
+
+    Route::prefix('assistants')->group(function () {
+        Route::get('/', [AdminController::class, 'all'])->name('admin.assistantList');
+
+    });
 });
 
 Route::get('pending', [RegisterController::class, 'pending'])->name('user.pending');

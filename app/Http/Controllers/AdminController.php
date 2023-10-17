@@ -13,6 +13,7 @@ class AdminController extends Controller
         $this->admin = $adminInterface;
     }
 
+    // admin profile page
     public function profile()
     {
         $admin = $this->admin->profile();
@@ -35,6 +36,7 @@ class AdminController extends Controller
         return $this->admin->changePassword($request);
     }
 
+    // report
     public function report()
     {
         $datas = $this->admin->report();
@@ -53,5 +55,11 @@ class AdminController extends Controller
             $totalFee += $data->subscription->fee;
         }
         return view('Admin.report.index', compact('datas', 'totalFee'));
+    }
+
+    public function all()
+    {
+        $assistants = $this->admin->all();
+        return view('Admin.assistants.index', compact('assistants'));
     }
 }

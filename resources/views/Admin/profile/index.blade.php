@@ -1,4 +1,4 @@
-@extends('layouts.dashboard-page')
+@extends('pages.admin-dashboard.layout')
 @section('page')
     <div class="flex bg-white h-screen flex-col justify-center items-center w-full ">
         @if (session('success'))
